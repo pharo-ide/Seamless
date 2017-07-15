@@ -15,8 +15,8 @@ remotePeer evaluate: [Object inform: 'message from remote side']
 ```
 ## Installation
 ```Smalltalk
-Gofer it 
-  smalltalkhubUser: 'Pharo' project: 'Seamless';
-  configuration;
-  loadStable.
+Metacello new
+  baseline: 'Seamless';
+  repository: 'github://dionisiydk/Seamless';
+  load
 ```
