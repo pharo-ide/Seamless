@@ -1,0 +1,1 @@
+I am error for case when client send message to object which is not anymore exists on server

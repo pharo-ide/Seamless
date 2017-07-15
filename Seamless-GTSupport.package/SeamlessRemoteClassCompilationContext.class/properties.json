@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "CompilationContext",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRemoteClassCompilationContext",
+	"type" : "normal"
+}

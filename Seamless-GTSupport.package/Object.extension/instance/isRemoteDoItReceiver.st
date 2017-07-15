@@ -1,0 +1,3 @@
+*Seamless-GTSupport
+isRemoteDoItReceiver
+	^false

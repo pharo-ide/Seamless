@@ -1,0 +1,4 @@
+accessing
+prepareValueTransferBy: aSeamlessObjectTransporter
+
+	aSeamlessObjectTransporter transferByValue: valuable

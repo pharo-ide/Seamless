@@ -1,0 +1,4 @@
+tests
+testShouldBePassedByValue
+
+	request seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue 

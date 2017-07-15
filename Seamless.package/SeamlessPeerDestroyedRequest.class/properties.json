@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "DenisKudryashov 6/13/2016 13:53",
+	"super" : "SeamlessRequest",
+	"category" : "Seamless-Requests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessPeerDestroyedRequest",
+	"type" : "normal"
+}

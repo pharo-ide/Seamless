@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "DenisKudryashov 7/8/2016 16:41",
+	"super" : "SeamlessTransferObject",
+	"category" : "Seamless-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"id",
+		"messagesCache",
+		"ownerPeerId",
+		"senderPeer"
+	],
+	"name" : "SeamlessObjectReference",
+	"type" : "normal"
+}

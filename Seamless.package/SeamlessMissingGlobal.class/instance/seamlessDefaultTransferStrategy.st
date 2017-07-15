@@ -1,0 +1,4 @@
+transfer strategies
+seamlessDefaultTransferStrategy 
+
+	^SeamlessTransferStrategy defaultByGlobalName 

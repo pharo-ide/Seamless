@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GTDebuggerVariablesBrowser",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessDebuggerVariablesBrowser",
+	"type" : "normal"
+}

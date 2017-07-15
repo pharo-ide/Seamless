@@ -1,0 +1,3 @@
+transfer
+asTransferredByValue 
+	^self

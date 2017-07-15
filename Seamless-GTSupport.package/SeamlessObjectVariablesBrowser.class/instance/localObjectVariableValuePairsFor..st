@@ -1,0 +1,4 @@
+private-building
+localObjectVariableValuePairsFor: anObject
+
+	^ anObject gtInspectorVariableValuePairs asOrderedCollection 

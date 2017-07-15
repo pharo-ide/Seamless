@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BasysConnectionTests",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessConnectionTests",
+	"type" : "normal"
+}

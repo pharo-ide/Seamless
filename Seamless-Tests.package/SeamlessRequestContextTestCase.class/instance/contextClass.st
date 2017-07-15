@@ -1,0 +1,3 @@
+running
+contextClass
+	self subclassResponsibility 

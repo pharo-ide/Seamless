@@ -1,0 +1,4 @@
+tests
+testShouldAllowOnlyDefaultTransferStrategy
+
+	request should be isOnlyDefaultTransferStrategyAllowed

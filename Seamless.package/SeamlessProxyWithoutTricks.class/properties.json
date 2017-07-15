@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "DenisKudryashov 2/19/2016 11:04",
+	"super" : "Object",
+	"category" : "Seamless-Proxy",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"reference"
+	],
+	"name" : "SeamlessProxyWithoutTricks",
+	"type" : "normal"
+}

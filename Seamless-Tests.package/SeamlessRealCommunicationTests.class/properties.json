@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "BasysRealCommunicationTestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRealCommunicationTests",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+*Seamless
+asLocalDeepCopy
+	^self

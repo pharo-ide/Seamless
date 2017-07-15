@@ -1,0 +1,3 @@
+*Seamless
+definesWellKnownSeamlessClassHierarchy
+	^true

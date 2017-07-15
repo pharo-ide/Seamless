@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "DenisKudryashov 2/11/2016 10:42",
+	"super" : "SeamlessRequestContext",
+	"category" : "Seamless-Requests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRemoteContext",
+	"type" : "normal"
+}

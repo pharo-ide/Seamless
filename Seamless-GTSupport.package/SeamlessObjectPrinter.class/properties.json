@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "GTObjectPrinter",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessObjectPrinter",
+	"type" : "normal"
+}

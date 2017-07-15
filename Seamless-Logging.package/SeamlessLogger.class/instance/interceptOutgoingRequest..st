@@ -1,0 +1,4 @@
+logging
+interceptOutgoingRequest: requestAndConnection
+
+	self logOutgoingRequest: requestAndConnection first

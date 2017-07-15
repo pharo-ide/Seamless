@@ -1,0 +1,4 @@
+*Seamless
+createSyncRequestContext
+
+	^BasysRemotePeerClosed signal

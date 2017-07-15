@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "SeamlessRequestResultTestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessThrowExceptionResultTests",
+	"type" : "normal"
+}

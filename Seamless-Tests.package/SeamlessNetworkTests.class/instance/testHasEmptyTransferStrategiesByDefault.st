@@ -1,0 +1,4 @@
+tests
+testHasEmptyTransferStrategiesByDefault
+
+	network transferStrategies should be isEmpty

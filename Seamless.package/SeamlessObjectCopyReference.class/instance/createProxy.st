@@ -1,0 +1,3 @@
+proxy creation
+createProxy
+	^objectCopy

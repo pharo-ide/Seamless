@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GLMPharoScriptPresentation",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"remotePeer"
+	],
+	"name" : "SeamlessRemoteScriptPresentation",
+	"type" : "normal"
+}

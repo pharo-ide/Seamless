@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "OpalCompiler",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRemoteClassCompiler",
+	"type" : "normal"
+}

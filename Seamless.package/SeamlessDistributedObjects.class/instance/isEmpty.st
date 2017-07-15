@@ -1,0 +1,3 @@
+testing
+isEmpty
+	^referencesToObjects isEmpty

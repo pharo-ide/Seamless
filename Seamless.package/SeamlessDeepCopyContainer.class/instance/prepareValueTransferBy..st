@@ -1,0 +1,4 @@
+transfer
+prepareValueTransferBy: anObjectTransporter
+
+	anObjectTransporter transferByDeepCopy: content

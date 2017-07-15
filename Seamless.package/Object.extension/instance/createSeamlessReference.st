@@ -1,0 +1,3 @@
+*Seamless
+createSeamlessReference
+	^SeamlessObjectReference new

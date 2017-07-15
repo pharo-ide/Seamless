@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"reference",
+		"peer"
+	],
+	"name" : "SeamlessObjectReferenceTestCase",
+	"type" : "normal"
+}

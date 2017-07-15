@@ -1,0 +1,4 @@
+printing
+printMessageForLog
+
+	^self printBlock

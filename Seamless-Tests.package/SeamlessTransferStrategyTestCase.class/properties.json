@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"strategy",
+		"transporter"
+	],
+	"name" : "SeamlessTransferStrategyTestCase",
+	"type" : "normal"
+}

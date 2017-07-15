@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "DenisKudryashov 2/23/2016 09:49",
+	"super" : "SeamlessTransferObject",
+	"category" : "Seamless-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"content"
+	],
+	"name" : "SeamlessObjectValueContainer",
+	"type" : "normal"
+}

@@ -1,0 +1,3 @@
+private
+performRequestSend: aSeamlessRequest
+	connection sendDataPacket: aSeamlessRequest 

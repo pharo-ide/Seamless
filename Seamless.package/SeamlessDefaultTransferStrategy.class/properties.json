@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "DenisKudryashov 1/12/2017 18:29",
+	"super" : "SeamlessTransferStrategy",
+	"category" : "Seamless-Transport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessDefaultTransferStrategy",
+	"type" : "normal"
+}

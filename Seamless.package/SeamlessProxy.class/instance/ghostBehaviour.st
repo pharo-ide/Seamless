@@ -1,0 +1,3 @@
+accessing
+ghostBehaviour
+	^SeamlessProxyBehaviour default

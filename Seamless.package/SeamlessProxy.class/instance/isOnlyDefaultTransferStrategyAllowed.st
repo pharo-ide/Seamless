@@ -1,0 +1,3 @@
+transfer
+isOnlyDefaultTransferStrategyAllowed
+	^true

@@ -1,0 +1,1 @@
+I am behaviour for real Proxy implementation based on Ghost. I just delegate all intercepted messages to proxy seamless reference

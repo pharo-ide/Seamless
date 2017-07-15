@@ -1,0 +1,3 @@
+*Seamless
+asLocalObject
+	^self

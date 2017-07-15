@@ -1,0 +1,3 @@
+*Seamless
+remotePrintString
+	^self printString

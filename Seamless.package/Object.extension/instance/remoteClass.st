@@ -1,0 +1,3 @@
+*Seamless
+remoteClass
+	^self class

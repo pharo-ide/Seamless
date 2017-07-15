@@ -1,0 +1,3 @@
+running
+referenceClass
+	self subclassResponsibility 

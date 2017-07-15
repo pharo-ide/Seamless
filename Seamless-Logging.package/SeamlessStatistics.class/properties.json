@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "DenisKudryashov 6/1/2016 15:36",
+	"super" : "ObjectStatistics",
+	"category" : "Seamless-Logging",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessStatistics",
+	"type" : "normal"
+}

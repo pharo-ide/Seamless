@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "OCRequestorScope",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRequestorScope",
+	"type" : "normal"
+}

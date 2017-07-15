@@ -1,0 +1,3 @@
+printing
+printMessageForLog
+	^self printString

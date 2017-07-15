@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "DenisKudryashov 6/9/2016 18:40",
+	"super" : "Error",
+	"category" : "Seamless-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessReferencedObjectIsLost",
+	"type" : "normal"
+}

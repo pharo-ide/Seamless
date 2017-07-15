@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "WorkspaceVariable",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessRemoteWorkspaceVariable",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "SeamlessTransferStrategyTestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessTransferByDeepCopyStrategyTests",
+	"type" : "normal"
+}

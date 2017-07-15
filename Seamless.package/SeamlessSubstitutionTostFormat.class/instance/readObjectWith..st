@@ -1,0 +1,4 @@
+operations
+readObjectWith: aTostMaterialization
+
+	^aTostMaterialization readSeamlessSubstitution 

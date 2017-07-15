@@ -1,0 +1,4 @@
+testing
+isConnectedToRemotePeer
+
+	^senderPeer isConnected

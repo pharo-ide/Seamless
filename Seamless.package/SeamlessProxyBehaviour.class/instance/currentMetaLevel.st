@@ -1,0 +1,3 @@
+accessing
+currentMetaLevel
+	^GHMetaLevel standard

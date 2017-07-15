@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "GTObjectVariablesBrowser",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"remotePeer"
+	],
+	"name" : "SeamlessObjectVariablesBrowser",
+	"type" : "normal"
+}

@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "SeamlessRequestSendingContextTestCase",
+	"category" : "Seamless-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "SeamlessSyncRequestContextTests",
+	"type" : "normal"
+}

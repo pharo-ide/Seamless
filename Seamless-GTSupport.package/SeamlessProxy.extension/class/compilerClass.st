@@ -1,0 +1,4 @@
+*Seamless-GTSupport
+compilerClass
+
+	^SeamlessRemoteClassCompiler

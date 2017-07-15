@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "DenisKudryashov 6/21/2016 15:23",
+	"super" : "SeamlessRequest",
+	"category" : "Seamless-Requests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"valuable"
+	],
+	"name" : "SeamlessEvaluationRequest",
+	"type" : "normal"
+}

@@ -1,0 +1,18 @@
+{
+	"commentStamp" : "DenisKudryashov 8/15/2016 00:35",
+	"super" : "TostTransporter",
+	"category" : "Seamless-Transport",
+	"classinstvars" : [
+		"default"
+	],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"network",
+		"remotePeer",
+		"objectSubstitutions",
+		"objectsByDeepCopy"
+	],
+	"name" : "SeamlessObjectTransporter",
+	"type" : "normal"
+}

@@ -1,0 +1,4 @@
+testing
+isConnectedToRemotePeer
+
+	^reference isConnectedToRemotePeer

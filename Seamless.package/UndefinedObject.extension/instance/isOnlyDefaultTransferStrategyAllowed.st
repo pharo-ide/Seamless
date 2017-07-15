@@ -1,0 +1,3 @@
+*Seamless
+isOnlyDefaultTransferStrategyAllowed
+	^true

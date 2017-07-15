@@ -1,0 +1,15 @@
+{
+	"classtraitcomposition" : "GHTNotNilGhost classTrait + GHTIdentifiedGhost classTrait",
+	"classvars" : [ ],
+	"instvars" : [
+		"reference"
+	],
+	"name" : "SeamlessProxy",
+	"commentStamp" : "DenisKudryashov 2/19/2016 10:57",
+	"super" : "GHObjectGhost",
+	"traitcomposition" : "GHTNotNilGhost + GHTIdentifiedGhost",
+	"type" : "normal",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"category" : "Seamless-Proxy"
+}

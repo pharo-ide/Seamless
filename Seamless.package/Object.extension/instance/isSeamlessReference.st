@@ -1,0 +1,3 @@
+*Seamless
+isSeamlessReference
+	^false

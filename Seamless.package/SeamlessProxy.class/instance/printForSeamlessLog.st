@@ -1,0 +1,3 @@
+printing
+printForSeamlessLog
+	^reference printForSeamlessLog 

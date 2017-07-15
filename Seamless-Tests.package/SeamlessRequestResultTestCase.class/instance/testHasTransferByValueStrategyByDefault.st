@@ -1,0 +1,4 @@
+tests
+testHasTransferByValueStrategyByDefault
+
+	result seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue

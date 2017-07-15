@@ -1,0 +1,3 @@
+operations
+sendRequest: aSeamlessRequest
+	self subclassResponsibility 
