@@ -19,7 +19,7 @@ baseline: spec
 			"------------"								
 			baseline: 'Ghost' with: [
 				spec
-					repository: 'github://dionisiydk/ObjectGhost:v3.0.x';
+					repository: 'github://dionisiydk/Ghost:v3.0.x';
 					loads: 'ObjectGhost' ];
 			project: 'GhostTests' copyFrom: 'Ghost' with: [
 				spec loads: 'default'];
