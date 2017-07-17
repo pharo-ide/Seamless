@@ -21,3 +21,9 @@ Metacello new
   repository: 'github://dionisiydk/Seamless';
   load
 ```
+Use following snippet for stable dependency in your project baseline:
+```Smalltalk
+spec
+    baseline: 'Seamless'
+    with: [ spec repository: 'github://dionisiydk/Seamless:v0.9.x' ]
+```
