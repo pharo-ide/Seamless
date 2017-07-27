@@ -15,7 +15,7 @@ baseline: spec
 					repository: 'github://dionisiydk/ObjectStatistics:v0.1.x';
 					loads: 'Core' ];
 			project: 'ObjectStatisticsTests' copyFrom: 'ObjectStatistics' with: [
-				spec loads: 'Tests' ];				
+				spec loads: 'default' ];				
 			"------------"								
 			baseline: 'Ghost' with: [
 				spec
