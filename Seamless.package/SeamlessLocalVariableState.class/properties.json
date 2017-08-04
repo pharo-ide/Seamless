@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "DenisKudryashov 8/4/2017 11:42",
+	"super" : "SeamlessTransferObject",
+	"category" : "Seamless-Core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"remoteVariable",
+		"value",
+		"isAssigned"
+	],
+	"name" : "SeamlessLocalVariableState",
+	"type" : "normal"
+}
