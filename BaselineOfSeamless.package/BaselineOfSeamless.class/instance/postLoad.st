@@ -1,4 +1,4 @@
 baselines
 postLoad
 
-	(self class environment classNamed: #SeamlessSubstitutionTostFormat) createDefault
+	(self class environment classNamed: #SeamlessObjectTransporter) createDefault
