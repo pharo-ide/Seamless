@@ -1,7 +1,7 @@
 accessing
 write: anObject
 	| remotePeer writeMessage |
-	value := anObject.
+	self value: anObject.
 	remotePeer := remoteVariable remotePeer.
 	remotePeer isConnected ifFalse: [ ^anObject].
 	

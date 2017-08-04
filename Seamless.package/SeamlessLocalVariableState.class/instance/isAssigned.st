@@ -1,0 +1,3 @@
+accessing
+isAssigned
+	^ isAssigned
