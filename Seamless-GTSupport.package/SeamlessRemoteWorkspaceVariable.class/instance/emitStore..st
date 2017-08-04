@@ -7,6 +7,6 @@ emitStore: methodBuilder
 		addTemp: tempName;
 		storeTemp: tempName;
 		popTop;
-		pushLiteralVariable: #slot -> self;
+		pushLiteralVariable: #slot -> state;
 		pushTemp: tempName;
 		send: #write:

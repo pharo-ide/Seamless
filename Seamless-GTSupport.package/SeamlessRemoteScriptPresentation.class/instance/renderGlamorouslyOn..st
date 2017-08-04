@@ -1,4 +1,4 @@
 rendering
-renderGlamorouslyOn: aRenderer 
+renderGlamorouslyOn: aRenderer
 	self registerAnnouncements.
-	^ aRenderer renderRemoteScriptPresentation: self
+	^ SeamlessRemoteScriptRenderer render: self from: aRenderer

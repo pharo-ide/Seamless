@@ -3,17 +3,17 @@ gtInspectorPresentationsFromPragmas: aCollection In: composite inContext: aGTIns
 
 	aCollection
 		do: [ :eachPragma | 
-			eachPragma selector numArgs = 1
+			eachPragma methodSelector numArgs = 1
 				ifTrue: [ 
 					GHMetaMessages  
 						withReceiver: self 
-						perform: eachPragma selector 
+						perform: eachPragma methodSelector 
 						withArguments: { composite } 
 						inClass: self class ].
-			eachPragma selector numArgs = 2
+			eachPragma methodSelector numArgs = 2
 				ifTrue: [ 
 					GHMetaMessages  
 						withReceiver: self 
-						perform: eachPragma selector 
+						perform: eachPragma methodSelector 
 						withArguments: { composite . aGTInspector } 
 						inClass: self class ] ]

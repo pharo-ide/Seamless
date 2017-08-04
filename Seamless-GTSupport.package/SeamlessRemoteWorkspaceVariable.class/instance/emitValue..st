@@ -2,5 +2,5 @@ code generation
 emitValue: methodBuilder
 
 	methodBuilder 
-		pushLiteralVariable: #slot -> self;
+		pushLiteralVariable: #slot -> state;
 		send: #read

@@ -1,0 +1,16 @@
+{
+	"commentStamp" : "DenisKudryashov 8/3/2017 18:24",
+	"super" : "Object",
+	"category" : "Seamless-GTSupport",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"UnassignedValue"
+	],
+	"instvars" : [
+		"remoteVariable",
+		"value"
+	],
+	"name" : "SeamlessLocalVariableState",
+	"type" : "normal"
+}
