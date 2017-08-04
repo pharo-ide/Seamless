@@ -1,4 +1,4 @@
 baselines
 postLoad
 
-	(self class environment classNamed: #SeamlessObjectTransporter) createDefault
+	(self class environment classNamed: #SeamlessObjectTransporter) resetDefault

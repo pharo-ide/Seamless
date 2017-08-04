@@ -1,0 +1,4 @@
+default
+resetDefault
+
+	^default := nil
