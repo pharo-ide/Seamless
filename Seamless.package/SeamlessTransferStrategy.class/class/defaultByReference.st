@@ -1,3 +1,3 @@
 defaults
 defaultByReference
-	^ DefaultByReference ifNil: [ DefaultByReference := SeamlessTransferByReferenceStrategy new ]
+	^ SeamlessTransferByReferenceStrategy default
