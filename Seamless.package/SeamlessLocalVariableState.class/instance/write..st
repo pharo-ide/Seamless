@@ -1,9 +1,8 @@
 accessing
 write: anObject
-	| remotePeer writeMessage |
+	| writeMessage |
 	self value: anObject.
-	remotePeer := remoteVariable remotePeer.
-	remotePeer isConnected ifFalse: [ ^anObject].
+	self checkConnection ifFalse: [ ^anObject].
 	
 	writeMessage := MessageSend receiver: remoteVariable selector: #write: argument: anObject.
 	[remoteVariable remotePeer 

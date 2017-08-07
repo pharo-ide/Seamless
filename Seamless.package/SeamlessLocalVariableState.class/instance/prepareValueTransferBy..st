@@ -1,4 +1,5 @@
 accessing
 prepareValueTransferBy: aSeamlessObjectTransporter
 
-	aSeamlessObjectTransporter transferByReference: remoteVariable
+	remoteVariable ifNotNil: [ 
+		aSeamlessObjectTransporter transferByReference: remoteVariable]
