@@ -1,16 +1,12 @@
 {
-	"commentStamp" : "DenisKudryashov 1/28/2016 15:46",
+	"commentStamp" : "DenisKudryashov 8/7/2017 13:31",
 	"super" : "Object",
 	"category" : "Seamless-Transport",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [
-		"DefaultByDeepCopy",
-		"DefaultByGlobalName",
-		"DefaultByReference",
-		"DefaultByReferencedCopy",
-		"DefaultByValue"
+	"classinstvars" : [
+		"default"
 	],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"criteria",
 		"priority"

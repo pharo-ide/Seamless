@@ -6,9 +6,12 @@ to prepare object transfer by transporter instance. They can command transporter
 
 Any object can define default strategy by overriding #seamlessDefaultTransferStrategy method. 
 For example Object supplies SeamlessTransferByReferenceStrategy. But numbers and strings return SeamlessTransferByValueStrategy.
-This default strategies has no state and defined as singleton in my class variables DefaultByValue, DefaultByReference. Users can use it by 
+This default strategies has no state and defined as singleton in my class variables default. I provide suitable clas side messages to access them:
 	SeamlessTransferStrategy defaultByValue 
 	SeamlessTransferStrategy defaultByReference
+	SeamlessTransferStrategy defaultByReferencedCopy
+	SeamlessTransferStrategy defaultByGlobalName
+	SeamlessTransferStrategy defaultByDeepCopy
 
 SeamlessNetwork allows overriding default strategies on network level. You can add strategy to network for specific set objects. This set of objects is specified by criteria. It can be any object which understands message #matches: .  
 When I have no criteria I can not be applied to any object. Default strategies are not checked for this.

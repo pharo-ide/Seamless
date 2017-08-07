@@ -1,3 +1,3 @@
 defaults
 defaultByDeepCopy
-	^ DefaultByDeepCopy ifNil: [ DefaultByDeepCopy := SeamlessTransferByDeepCopyStrategy new ]
+	^ SeamlessTransferByDeepCopyStrategy default

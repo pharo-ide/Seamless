@@ -1,3 +1,3 @@
 defaults
 defaultByGlobalName
-	^ DefaultByGlobalName ifNil: [ DefaultByGlobalName := SeamlessTransferByGlobalNameStrategy new ]
+	^ SeamlessTransferByGlobalNameStrategy default

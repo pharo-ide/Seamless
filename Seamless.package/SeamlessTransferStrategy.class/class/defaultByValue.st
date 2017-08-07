@@ -1,3 +1,3 @@
 defaults
 defaultByValue
-	^ DefaultByValue ifNil: [ DefaultByValue := SeamlessTransferByValueStrategy new ]
+	^ SeamlessTransferByValueStrategy default
