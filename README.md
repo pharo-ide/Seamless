@@ -119,7 +119,7 @@ remotePeer evaluate: [100 to: 500 do: [:i | result add: i factorial ]].
 ```
 Non local return is also supported in regular Smalltalk semantics:
 ```Smalltalk
-       remotePeer evaluate: [1 to: 10 do: [:i | i>5 ifTrue: [^i] ] ]. "==>6"
+remotePeer evaluate: [1 to: 10 do: [:i | i>5 ifTrue: [^i] ] ]. "==>6"
 ```
 Also block could be evaluated asynchronously without waiting any result:
 ```Smalltalk
@@ -128,14 +128,18 @@ result := OrderedCollection new.
 remotePeer evaluateAsync: [result add: 1000 factorial]. "it will not wait result"
 ```
 ## Tools
-Seamless provides integration with GT tools. Remote proxies could be inspected to explore remote objects state with ability to execute remote scripts (doIt, printIt). It is shown in [demo about remote debugging](https://youtu.be/SgFjgQpo_nU) which is built with Seamless transport.
+Seamless provides integration with GT tools. Remote proxies can be inspected to explore remote objects state with ability to execute remote scripts (doIt, printIt). It is shown in [the demo about remote debugging](https://youtu.be/SgFjgQpo_nU) which is built with Seamless transport.
 
-To analyse remote communication Seamless implements special tool SeamlessLogger. It is explained in [doc](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastSuccessfulBuild/artifact/book-result/Seamless/Seamless.pdf). To activate logging evaluate:
+To analyze remote communication Seamless implements special tool SeamlessLogger. It is explained in [doc](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastSuccessfulBuild/artifact/book-result/Seamless/Seamless.pdf). To activate logging evaluate:
 ```Smalltalk
 SeamlessLogger startAFresh
 ```
-It will print all remote messages into Transcript. But most important is that SeamlessLogger provide profiler of remote communication. You can inspect statistics using:
+To disable:
+```Smalltalk
+SeamlessLogger stop
+```
+Logger prints all remote messages into Transcript. Also it provides profiler of remote communication. You can inspect request statistics using:
 ```Smalltalk
 SeamlessLogger collectStatistics "inspect it"
 ```
-Statistics will show number of messages, receivers and bytes which was transferred over network in dimension of receiver class or message selector.
+Statistics shows number of messages, receivers and bytes which was transferred over network in dimension of receiver class or message selector.
