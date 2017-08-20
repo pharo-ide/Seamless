@@ -1,7 +1,7 @@
 # Seamless. Distributed object network.
 [![Build Status](https://travis-ci.org/dionisiydk/Seamless.svg?branch=master)](https://travis-ci.org/dionisiydk/Seamless)
 
-For details look at [release post](http://dionisiydk.blogspot.fr/2016/07/major-seamless-update.html) or full [documentation](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastBuild/artifact/book-result/Seamless/Seamless.pdf).
+For details on Seamless design read full [documentation](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastBuild/artifact/book-result/Seamless/Seamless.pdf).
 
 ## Installation on server
 On server only Core group of project is needed:
