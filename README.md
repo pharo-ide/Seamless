@@ -2,18 +2,7 @@
 [![Build Status](https://travis-ci.org/dionisiydk/Seamless.svg?branch=master)](https://travis-ci.org/dionisiydk/Seamless)
 
 For details look at [release post](http://dionisiydk.blogspot.fr/2016/07/major-seamless-update.html) or full [documentation](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastBuild/artifact/book-result/Seamless/Seamless.pdf).
-```Smalltalk
-serverSideNetwork := SeamlessNetwork new.
-server := serverSideNetwork startServerOn: 40423
-	
-clientSideNetwork := SeamlessNetwork new.
-remoteEnv := clientSideNetwork environmentAt: (TCPAddress localAt: 40423).
-remoteTranscript := remoteEnv at: #Transcript.
-remoteTranscript show: 'hello from remote side'.
 
-remotePeer := clientSideNetwork remotePeerAt: (TCPAddress localAt: 40423).
-remotePeer evaluate: [Object inform: 'message from remote side']
-```
 ## Installation on server
 On server only Core group of project is needed:
 ```Smalltalk
@@ -119,7 +108,7 @@ remotePeer evaluate: [100 to: 500 do: [:i | result add: i factorial ]].
 ```
 Non local return is also supported in regular Smalltalk semantics:
 ```Smalltalk
-remotePeer evaluate: [1 to: 10 do: [:i | i>5 ifTrue: [^i] ] ]. "==>6"
+remotePeer evaluate: [1 to: 10 do: [:i | i > 5 ifTrue: [ ^i ]]]. "==>6"
 ```
 Also block can be evaluated asynchronously without waiting any result:
 ```Smalltalk
