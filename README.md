@@ -100,14 +100,14 @@ network transferByReference: (Kind to: Class) withCacheFor: #(name)
 ```
 And then proxy for remote class will return #name from local cache instead of real remote call.
 
-## Remote block execution
-Another important feature is block evaluation on remote peers:
+### Remote block execution
+Seamless allows evaluate block of code on remote peers:
 ```Smalltalk
 remotePeer evaluate: [1 + 2]. "==>3"
 ```
 Given block is transferred to remote side and evaluated. Result is returned to client. As in other cases it could be proxy or normal object.
 
-Block could use globals. On remote side they will be local globals of this remote environment. Following example will show notification on remote image:
+Block can use globals. On remote side they will be local globals of this remote environment. Following example will show notification on remote image:
 ```Smalltalk
 remotePeer evaluate: [Object inform: 'message from remote image'].
 ```
@@ -121,7 +121,7 @@ Non local return is also supported in regular Smalltalk semantics:
 ```Smalltalk
 remotePeer evaluate: [1 to: 10 do: [:i | i>5 ifTrue: [^i] ] ]. "==>6"
 ```
-Also block could be evaluated asynchronously without waiting any result:
+Also block can be evaluated asynchronously without waiting any result:
 ```Smalltalk
 | result |
 result := OrderedCollection new.
@@ -143,3 +143,15 @@ Logger prints all remote messages into Transcript. Also it provides profiler of 
 SeamlessLogger collectStatistics "inspect it"
 ```
 Statistics shows number of messages, receivers and bytes which was transferred over network in dimension of receiver class or message selector.
+
+## TODO
+In current version there are two missing features which will be supported in future:
+
+1) No garbage collection
+
+SeamlessNetwork keeps all objects which was transferred by reference. They will never be cleaned while network is live. 
+Now It cleanup can be performed manually by evaluating "network destroy". It will clean all object caches and close all connections. It could be not safe because remote peers could still use these objects. Seamless tries to handle it properly with clear errors in such cases. 
+
+In future unused distributed objects will be cleaned automatically.
+
+2) No security: no authorization and encryption. Now for security purpose you need external tools like VPN or SSH tunnel.
