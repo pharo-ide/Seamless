@@ -1,0 +1,2 @@
+*Seamless-Pharo5Support
+rebuildCacheFor: anObject
