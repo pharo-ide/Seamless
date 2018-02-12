@@ -3,7 +3,25 @@
 
 For details on Seamless design read [full documentation](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastSuccessfulBuild/artifact/book-result/Seamless/Seamless.pdf).
 
+## Installation on client
+On client you can load default project group: 
+```Smalltalk
+Metacello new
+  baseline: 'Seamless';
+  repository: 'github://dionisiydk/Seamless';
+  load
+```
+It will include tests and tools to inspect remote objects.
+
+And use following snippet for stable dependency in your client project baseline:
+```Smalltalk
+spec
+    baseline: 'Seamless'
+    with: [ spec repository: 'github://dionisiydk/Seamless:v0.9.x' ]
+```
 ## Installation on server
+You can just use client instructions to prepare servers. But in case if you want prepare really small images without any tools and even without SUnit then follow this section.
+
 On server only Core group of project is needed:
 ```Smalltalk
 Metacello new
@@ -21,22 +39,7 @@ spec
         repository: 'github://dionisiydk/Seamless:v0.9.x';
 	loads: #(Core)]
 ```
-## Installation on client
-On client you can load default project group: 
-```Smalltalk
-Metacello new
-  baseline: 'Seamless';
-  repository: 'github://dionisiydk/Seamless';
-  load
-```
-It will include tests and tools to inspect remote objects.
 
-And use following snippet for stable dependency in your client project baseline:
-```Smalltalk
-spec
-    baseline: 'Seamless'
-    with: [ spec repository: 'github://dionisiydk/Seamless:v0.9.x' ]
-```
 ## How to use
 To use Seamless SeamlessNetwork instance should be created on client and server:
 ```Smalltalk
