@@ -1,7 +1,7 @@
 # Seamless. Distributed object network.
 [![Build Status](https://travis-ci.org/dionisiydk/Seamless.svg?branch=master)](https://travis-ci.org/dionisiydk/Seamless)
 
-For details on Seamless design read [full documentation](https://ci.inria.fr/pharo-contribution/view/Books/job/PharoBookWorkInProgress/lastSuccessfulBuild/artifact/book-result/Seamless/Seamless.pdf).
+For details on Seamless design read [full documentation](https://github.com/SquareBracketAssociates/Booklet-Infrastructure).
 
 ## Installation on client
 On client you can load default project group: 
