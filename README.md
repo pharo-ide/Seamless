@@ -141,7 +141,7 @@ In the current version there are two missing features which will be supported in
 
 1) No garbage collection
 
-SeamlessNetwork keeps all objects which were transferred by reference. They will never be cleaned while network the is live. 
+SeamlessNetwork keeps all objects which were transferred by reference. They will never be cleaned while the network is live. 
 Now cleanup can be performed manually by evaluating "network destroy". It will clean all object caches and close all connections. It is not safe operation because removed objects can be still used by remote peers. Seamless tries to handle it properly with clear errors in such cases. 
 
 In future unused distributed objects will be cleaned automatically.
