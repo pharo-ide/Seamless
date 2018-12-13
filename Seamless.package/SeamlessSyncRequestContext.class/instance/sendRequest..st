@@ -5,7 +5,7 @@ sendRequest: aSeamlessRequest
 	
 	self forkProcessingOf: aSeamlessRequest.
 
-	resultWaiter wait.
+	resultWaiter waitTimeoutSeconds: 3.
 	
 	"Here we fix data statistics about request execution"
 	aSeamlessRequest resultBytes: result transferredBytes.
