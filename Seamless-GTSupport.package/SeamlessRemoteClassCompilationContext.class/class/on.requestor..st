@@ -1,7 +1,6 @@
 instance creation
 on: remoteClass requestor: aRequestor
-	^self new 
-		parseOptions: OpalCompiler defaultOptions;
+	
+	^(self on: remoteClass) 
 		requestor: aRequestor;
-		class: remoteClass;		
 		yourself
