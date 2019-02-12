@@ -1,6 +1,10 @@
 instance creation
 on: remoteClass
-	^self new 
-		parseOptions: OpalCompiler defaultOptions;
-		class: remoteClass;
-		yourself
+	| context |
+	context := self new 
+		class: remoteClass;		
+		yourself.
+	(OpalCompiler respondsTo: #defaultOptions) ifTrue: [
+		"Compatibility with Pharo 6" 
+		context parseOptions: OpalCompiler defaultOptions].
+	^context
