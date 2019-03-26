@@ -40,7 +40,7 @@ baseline: spec
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://dionisiydk/Mocketry:v4.0.6' ].
+				spec repository: 'github://pharo-iot/Mocketry:v4.0.7' ].
 							
 		spec 
 			package: 'Seamless' with: [
