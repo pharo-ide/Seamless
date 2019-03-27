@@ -1,5 +1,5 @@
 # Seamless. Distributed object network.
-[![Build Status](https://travis-ci.org/dionisiydk/Seamless.svg?branch=master)](https://travis-ci.org/dionisiydk/Seamless)
+[![Build Status](https://travis-ci.org/pharo-ide/Seamless.svg?branch=master)](https://travis-ci.org/pharo-ide/Seamless)
 
 For details on Seamless design read [full documentation](https://github.com/SquareBracketAssociates/Booklet-Infrastructure).
 
