@@ -3,7 +3,8 @@ evaluate
 
 	| value selectedSource itsSelection itsSelectionString doItMethod |
 	receiver isRemoteDoItReceiver 
-		ifTrue: [compilationContext := SeamlessRemoteClassCompilationContext on: receiver remoteClass requestor: compilationContext requestor]
+		ifTrue: [compilationContext := SeamlessRemoteClassCompilationContext on: receiver remoteClass requestor: compilationContext requestor.
+			compilationContext environment: receiver]
 		ifFalse: [ self class: (context 
 				ifNil: [ receiver remoteClass ]
 				ifNotNil: [ context method methodClass ])].
