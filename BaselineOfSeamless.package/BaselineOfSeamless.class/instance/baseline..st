@@ -6,41 +6,41 @@ baseline: spec
 		spec 
 			baseline: 'Basys' with: [
 				spec
-					repository: 'github://pharo-ide/Basys:v0.1.11';
+					repository: 'github://pharo-ide/Basys:v0.1.12';
 					loads: 'Core' ];
 			project: 'BasysTests' copyFrom: 'Basys' with: [
 				spec loads: 'Tests'];
 			"------------"				
 			baseline: 'ObjectStatistics' with: [
 				spec
-					repository: 'github://pharo-ide/ObjectStatistics:v0.1.2';
+					repository: 'github://pharo-ide/ObjectStatistics:v0.1.3';
 					loads: 'Core' ];
 			project: 'ObjectStatisticsTests' copyFrom: 'ObjectStatistics' with: [
 				spec loads: 'default' ];				
 			"------------"								
 			baseline: 'Ghost' with: [
 				spec
-					repository: 'github://pharo-ide/Ghost:v3.1.2';
+					repository: 'github://pharo-ide/Ghost:v3.1.3';
 					loads: 'ObjectGhost' ];
 			project: 'GhostTests' copyFrom: 'Ghost' with: [
 				spec loads: 'default'];
 			"------------"
 			baseline: 'ReadWriteLock' with: [
 				spec
-					repository: 'github://pharo-ide/ReadWriteLock:v0.2.2';
+					repository: 'github://pharo-ide/ReadWriteLock:v0.2.3';
 					loads: 'Core'];
 			project: 'ReadWriteLockTests' copyFrom: 'ReadWriteLock' with: [
 				spec loads: 'Tests'];
 			"------------"				
 			baseline: 'TostSerializer' with: [
 				spec
-					repository: 'github://pharo-ide/TostSerializer:v0.2.1';
+					repository: 'github://pharo-ide/TostSerializer:v0.2.2';
 					loads: 'Core'];
 			project: 'TostSerializerTests' copyFrom: 'TostSerializer' with: [
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://pharo-iot/Mocketry:v4.0.7' ].
+				spec repository: 'github://dionisiydk/Mocketry:v4.0.7' ].
 							
 		spec 
 			package: 'Seamless' with: [
