@@ -27,7 +27,7 @@ baseline: spec
 			"------------"
 			baseline: 'ReadWriteLock' with: [
 				spec
-					repository: 'github://pharo-ide/ReadWriteLock:v0.2.3';
+					repository: 'github://pharo-ide/ReadWriteLock:v0.2.4';
 					loads: 'Core'];
 			project: 'ReadWriteLockTests' copyFrom: 'ReadWriteLock' with: [
 				spec loads: 'Tests'];
