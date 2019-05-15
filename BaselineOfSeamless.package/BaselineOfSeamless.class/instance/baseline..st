@@ -34,7 +34,7 @@ baseline: spec
 			"------------"				
 			baseline: 'TostSerializer' with: [
 				spec
-					repository: 'github://pharo-ide/TostSerializer:v0.2.3';
+					repository: 'github://pharo-ide/TostSerializer:v0.2.4';
 					loads: 'Core'];
 			project: 'TostSerializerTests' copyFrom: 'TostSerializer' with: [
 				spec loads: 'Tests'];
