@@ -1,3 +1,0 @@
-proxy creation
-createProxy
-	^objectCopy

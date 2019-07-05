@@ -1,3 +1,0 @@
-accessing
-seamlessReference: aSeamlessObjectReference
-	reference := aSeamlessObjectReference

@@ -1,4 +1,0 @@
-tests
-testHasEmptyObjectsToReferencesMapByDefault
-
-	distributedObjects objectsToReferences should be isEmpty

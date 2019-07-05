@@ -1,3 +1,0 @@
-navigation
-referenceOf: aSeamlessObjectReference atIndex: referenceIndex
-	^aSeamlessObjectReference remotePropertyAt: referenceIndex

@@ -1,3 +1,0 @@
-printing
-printMessageForLog
-	^self printString

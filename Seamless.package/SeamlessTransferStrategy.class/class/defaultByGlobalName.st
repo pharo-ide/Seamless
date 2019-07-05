@@ -1,3 +1,0 @@
-defaults
-defaultByGlobalName
-	^ SeamlessTransferByGlobalNameStrategy default

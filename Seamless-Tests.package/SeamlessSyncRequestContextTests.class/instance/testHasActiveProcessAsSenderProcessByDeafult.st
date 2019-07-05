@@ -1,4 +1,0 @@
-tests
-testHasActiveProcessAsSenderProcessByDeafult
-	
-	context senderProcess should be: Processor activeProcess

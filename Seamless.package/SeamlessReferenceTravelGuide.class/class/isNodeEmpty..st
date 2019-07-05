@@ -1,3 +1,0 @@
-navigation
-isNodeEmpty: aSeamlessObjectReference
-	^aSeamlessObjectReference hasRemoteProperties not

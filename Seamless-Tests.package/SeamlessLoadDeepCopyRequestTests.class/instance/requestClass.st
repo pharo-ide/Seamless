@@ -1,3 +1,0 @@
-running
-requestClass
-	^SeamlessLoadDeepCopyRequest 

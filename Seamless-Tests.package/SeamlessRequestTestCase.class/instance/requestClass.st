@@ -1,4 +1,0 @@
-running
-requestClass
-	
-	self subclassResponsibility 

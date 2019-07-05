@@ -1,3 +1,0 @@
-*Seamless
-remoteClass
-	^self class

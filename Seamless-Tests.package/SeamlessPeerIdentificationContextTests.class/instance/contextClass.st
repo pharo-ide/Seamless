@@ -1,3 +1,0 @@
-running
-contextClass
-	^SeamlessPeerIdentificationContext 

@@ -1,3 +1,0 @@
-transfer
-asTransferredByDeepCopy 
-	^self

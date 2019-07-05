@@ -1,1 +1,0 @@
-I am strategy which transfer objects by referenced copy which means that remote side will contain copy of original object which will be connected by me to client side object

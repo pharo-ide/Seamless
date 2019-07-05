@@ -1,3 +1,0 @@
-operations
-prepareTransferObjectFor: anObject by: anObjectTransporter
-	self subclassResponsibility 

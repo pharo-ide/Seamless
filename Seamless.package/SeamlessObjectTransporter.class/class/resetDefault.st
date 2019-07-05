@@ -1,4 +1,0 @@
-default
-resetDefault
-
-	^default := nil

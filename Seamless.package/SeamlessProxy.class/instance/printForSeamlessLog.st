@@ -1,3 +1,0 @@
-printing
-printForSeamlessLog
-	^reference printForSeamlessLog 

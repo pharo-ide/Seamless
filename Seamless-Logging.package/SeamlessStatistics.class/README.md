@@ -1,1 +1,0 @@
-I am represent statistics over sent seamless requests. I define structire of metrics and dimensions suitable from analysis

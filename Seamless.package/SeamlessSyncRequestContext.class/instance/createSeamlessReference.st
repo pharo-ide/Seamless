@@ -1,3 +1,0 @@
-accessing
-createSeamlessReference
-	^SeamlessRequestContextReference new
