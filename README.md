@@ -8,7 +8,7 @@ On the client you can load default project group:
 ```Smalltalk
 Metacello new
   baseline: 'Seamless';
-  repository: 'github://dionisiydk/Seamless';
+  repository: 'github://pharo-ide/Seamless';
   load
 ```
 It will include tests and tools to inspect remote objects.
