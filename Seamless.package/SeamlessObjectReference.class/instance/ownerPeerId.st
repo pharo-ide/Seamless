@@ -1,3 +1,0 @@
-accessing
-ownerPeerId
-	^ ownerPeerId

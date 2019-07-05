@@ -1,1 +1,0 @@
-I am request to execute block on remote side (my valuable instance is one args block closure)

@@ -1,4 +1,0 @@
-testing
-isConnectedToRemotePeer
-
-	^senderPeer isConnected

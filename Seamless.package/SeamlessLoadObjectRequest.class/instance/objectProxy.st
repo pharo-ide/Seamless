@@ -1,3 +1,0 @@
-accessing
-objectProxy
-	^ objectProxy

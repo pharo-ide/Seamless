@@ -1,3 +1,0 @@
-accessing
-ownBytes
-	^ ownBytes

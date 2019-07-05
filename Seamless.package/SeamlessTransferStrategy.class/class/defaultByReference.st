@@ -1,3 +1,0 @@
-defaults
-defaultByReference
-	^ SeamlessTransferByReferenceStrategy default

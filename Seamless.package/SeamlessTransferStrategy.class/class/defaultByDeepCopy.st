@@ -1,3 +1,0 @@
-defaults
-defaultByDeepCopy
-	^ SeamlessTransferByDeepCopyStrategy default

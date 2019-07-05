@@ -1,4 +1,0 @@
-tests
-testShouldOnlyAllowDefaultTransferStrategy
-
-	context should be isOnlyDefaultTransferStrategyAllowed

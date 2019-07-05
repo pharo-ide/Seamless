@@ -1,3 +1,0 @@
-accessing
-network
-	^receiverPeer network

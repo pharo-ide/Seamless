@@ -1,4 +1,0 @@
-tests
-testHasEmptyCachedMessagesByDefault
-
-	strategy where cachedMessages should be isEmpty

@@ -1,4 +1,0 @@
-*Seamless
-prepareValueTransferBy: aSeamlessObjectTransporter
-
-	aSeamlessObjectTransporter transferByValue: arguments

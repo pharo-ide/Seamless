@@ -1,3 +1,0 @@
-controlling
-collectStatistics
-	^default collectStatistics

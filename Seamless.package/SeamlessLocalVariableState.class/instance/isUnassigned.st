@@ -1,4 +1,0 @@
-testing
-isUnassigned
-
-	^isAssigned not

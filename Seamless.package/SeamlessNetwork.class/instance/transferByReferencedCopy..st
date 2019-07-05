@@ -1,4 +1,0 @@
-transfer strategies
-transferByReferencedCopy: objectsCriteria
-
-	self addTransferStrategy: (SeamlessTransferByReferencedCopyStrategy for: objectsCriteria)

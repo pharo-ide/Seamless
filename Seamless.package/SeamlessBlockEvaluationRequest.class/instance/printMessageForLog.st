@@ -1,4 +1,0 @@
-printing
-printMessageForLog
-
-	^self printBlock

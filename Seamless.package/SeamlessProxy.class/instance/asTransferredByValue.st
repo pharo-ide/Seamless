@@ -1,3 +1,0 @@
-transfer
-asTransferredByValue 
-	^self

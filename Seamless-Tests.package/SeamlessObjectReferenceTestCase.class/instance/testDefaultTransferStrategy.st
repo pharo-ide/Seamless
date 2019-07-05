@@ -1,4 +1,0 @@
-tests
-testDefaultTransferStrategy
-
-	reference seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue 

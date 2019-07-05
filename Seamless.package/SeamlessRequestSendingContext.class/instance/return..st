@@ -1,3 +1,0 @@
-operations
-return: aSeamlessRequestResult
-	self subclassResponsibility 

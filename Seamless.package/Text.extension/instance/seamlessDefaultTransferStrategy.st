@@ -1,3 +1,0 @@
-*Seamless
-seamlessDefaultTransferStrategy 
-	^SeamlessTransferStrategy defaultByValue

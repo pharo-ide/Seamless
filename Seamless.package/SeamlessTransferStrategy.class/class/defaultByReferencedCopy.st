@@ -1,3 +1,0 @@
-defaults
-defaultByReferencedCopy
-	^ SeamlessTransferByReferencedCopyStrategy default

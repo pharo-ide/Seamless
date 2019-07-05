@@ -1,3 +1,0 @@
-running
-referenceClass
-	self subclassResponsibility 

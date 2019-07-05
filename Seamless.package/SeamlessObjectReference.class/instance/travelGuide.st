@@ -1,3 +1,0 @@
-travel guide support
-travelGuide
-	^SeamlessReferenceTravelGuide

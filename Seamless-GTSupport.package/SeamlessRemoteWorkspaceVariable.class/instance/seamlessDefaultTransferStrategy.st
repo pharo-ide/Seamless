@@ -1,3 +1,0 @@
-accessing
-seamlessDefaultTransferStrategy
-	^SeamlessTransferStrategy defaultByReference 
