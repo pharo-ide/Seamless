@@ -46,7 +46,7 @@ BaselineOfSeamless >> baseline: spec [
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://dionisiydk/Mocketry:v5.0.8' ].
+				spec repository: 'github://dionisiydk/Mocketry:v5.0.0' ].
 							
 		spec 
 			package: 'Seamless' with: [
