@@ -17,7 +17,7 @@ And use the following snippet for stable dependency in your client project basel
 ```Smalltalk
 spec
     baseline: 'Seamless'
-    with: [ spec repository: 'github://dionisiydk/Seamless:v0.9.x' ]
+    with: [ spec repository: 'github://pharo-ide/Seamless' ]
 ```
 ## Installation on server
 You can just use client instructions to prepare servers. But in case if you want to prepare really small images without any tools and even without SUnit then follow this section.
@@ -26,7 +26,7 @@ On server only Core group of project is needed:
 ```Smalltalk
 Metacello new
   baseline: 'Seamless';
-  repository: 'github://dionisiydk/Seamless';
+  repository: 'github://pharo-ide/Seamless';
   load: #(Core)
 ```
 It will not include any tools to work with remote objects. And it will not install tests. If you want tests then add Tests group into a script.
@@ -36,7 +36,7 @@ Use the following snippet for stable dependency in your project server baseline:
 spec
     baseline: 'Seamless'
     with: [ spec 
-        repository: 'github://dionisiydk/Seamless:v0.9.x';
+        repository: 'github://pharo-ide/Seamless:v1.0.0';
 	loads: #(Core)]
 ```
 
