@@ -9,5 +9,5 @@ testLoadingRealObjectAsDeepCopy
 		(reference loadDeepCopy: #proxy) should be: #result.
 	
 		Arg request should beInstanceOf: SeamlessLoadDeepCopyRequest.
-		Arg request objectProxy should be: #proxy.
+		Arg request where objectProxy should be: #proxy.
 	 ] runWithMocks 

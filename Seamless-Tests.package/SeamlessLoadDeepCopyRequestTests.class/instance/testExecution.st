@@ -11,4 +11,4 @@ testExecution
 	request executeFor: #senderPeer.
 	
 	Arg container should beInstanceOf: SeamlessDeepCopyContainer.
-	Arg container content should be: #localObjectForReference
+	Arg container where content should be: #localObjectForReference

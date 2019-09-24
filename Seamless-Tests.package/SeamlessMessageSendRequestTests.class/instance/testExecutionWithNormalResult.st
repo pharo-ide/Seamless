@@ -9,5 +9,5 @@ testExecutionWithNormalResult
 		request executeFor: #senderPeer.
 
 		Arg result should beInstanceOf: SeamlessReturnValueResult.
-		Arg result returnValue should be: #messageResult
+		Arg result where returnValue should be: #messageResult
 	] runWithMocks 

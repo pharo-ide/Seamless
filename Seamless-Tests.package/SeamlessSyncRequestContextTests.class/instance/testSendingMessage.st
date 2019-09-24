@@ -6,4 +6,4 @@ testSendingMessage
 	(context sendMessage: #messageSend) should be: #result.
 	
 	Arg request should beInstanceOf: SeamlessMessageSendRequest.
-	Arg request messageSend should be: #messageSend
+	Arg request where messageSend should be: #messageSend

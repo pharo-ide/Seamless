@@ -11,6 +11,6 @@ testExecutionWithRaisedSeamlessRemoteException
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessThrowExceptionResult.
-		Arg result exception should beInstanceOf: SeamlessRemoteException.
+		Arg result where exception should beInstanceOf: SeamlessRemoteException.
 		"Arg result exception messageText should equal: error messageText."
 	] runWithMocks 
