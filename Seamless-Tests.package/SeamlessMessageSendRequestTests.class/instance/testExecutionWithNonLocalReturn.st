@@ -11,6 +11,6 @@ testExecutionWithNonLocalReturn
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessNonLocalReturnResult.
-		Arg result fromFirstCall value should be: #returnedValue.
-		Arg result homeContext should be: #context
+		Arg result where value should be: #returnedValue.
+		Arg result where homeContext should be: #context
 	] runWithMocks 

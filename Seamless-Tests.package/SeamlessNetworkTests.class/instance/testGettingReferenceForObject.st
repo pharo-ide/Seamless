@@ -11,4 +11,4 @@ testGettingReferenceForObject
 	actual := network referenceFor: #object.
 	
 	actual should be: #reference.
-	Arg creationBlock fromFirstCall value should beInstanceOf: SeamlessObjectReference
+	Arg creationBlock where value should beInstanceOf: SeamlessObjectReference
