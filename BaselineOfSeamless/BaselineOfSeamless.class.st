@@ -12,21 +12,21 @@ BaselineOfSeamless >> baseline: spec [
 		spec 
 			baseline: 'Basys' with: [
 				spec
-					repository: 'github://pharo-ide/Basys:v1.0.0';
+					repository: 'github://pharo-ide/Basys:v1.0.1';
 					loads: 'Core' ];
 			project: 'BasysTests' copyFrom: 'Basys' with: [
 				spec loads: 'Tests'];
 			"------------"				
 			baseline: 'ObjectStatistics' with: [
 				spec
-					repository: 'github://pharo-ide/ObjectStatistics:v1.0.0';
+					repository: 'github://pharo-ide/ObjectStatistics:v1.0.1';
 					loads: 'Core' ];
 			project: 'ObjectStatisticsTests' copyFrom: 'ObjectStatistics' with: [
 				spec loads: 'default' ];				
 			"------------"								
 			baseline: 'Ghost' with: [
 				spec
-					repository: 'github://pharo-ide/Ghost:v4.0.0';
+					repository: 'github://pharo-ide/Ghost:v5.0.0';
 					loads: 'ObjectGhost' ];
 			project: 'GhostTests' copyFrom: 'Ghost' with: [
 				spec loads: 'default'];
@@ -40,13 +40,13 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"				
 			baseline: 'TostSerializer' with: [
 				spec
-					repository: 'github://pharo-ide/TostSerializer:v1.0.0';
+					repository: 'github://pharo-ide/TostSerializer:v1.0.1';
 					loads: 'Core'];
 			project: 'TostSerializerTests' copyFrom: 'TostSerializer' with: [
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://dionisiydk/Mocketry:v5.0.0' ].
+				spec repository: 'github://dionisiydk/Mocketry:v6.0.0' ].
 							
 		spec 
 			package: 'Seamless' with: [
