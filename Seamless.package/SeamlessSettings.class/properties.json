@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "Seamless",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [
+		"DefaultTimeout"
+	],
+	"instvars" : [ ],
+	"name" : "SeamlessSettings",
+	"type" : "normal"
+}

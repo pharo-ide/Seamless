@@ -1,3 +1,3 @@
-as yet unclassified
+accessors
 waitTimeout
 	^ WaitTimeout
