@@ -4,7 +4,9 @@
 	"category" : "Seamless-Requests",
 	"classinstvars" : [ ],
 	"pools" : [ ],
-	"classvars" : [ ],
+	"classvars" : [
+		"WaitTimeout"
+	],
 	"instvars" : [
 		"senderProcess",
 		"resultWaiter",
