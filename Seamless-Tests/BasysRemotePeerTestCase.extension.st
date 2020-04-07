@@ -94,7 +94,7 @@ BasysRemotePeerTestCase >> testEvaluationBlockRemotelly [
 		
 		(peer evaluate: block) should be: #result.
 		Arg request should beInstanceOf: SeamlessBlockEvaluationRequest.
-		Arg request valuable should be: localBlock
+		Arg request where valuable should be: localBlock
 	] runWithMocks 
 	
 ]

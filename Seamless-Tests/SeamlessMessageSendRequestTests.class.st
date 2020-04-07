@@ -23,8 +23,8 @@ SeamlessMessageSendRequestTests >> testExecutionWithBasysCommunicationFailure [
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessThrowExceptionResult.
-		Arg result exception should beInstanceOf: SeamlessRemoteException.
-		Arg result exception messageText should equal: error printString
+		Arg result where exception should beInstanceOf: SeamlessRemoteException.
+		Arg result where exception messageText should equal: error printString
 	] runWithMocks 
 ]
 
@@ -54,8 +54,8 @@ SeamlessMessageSendRequestTests >> testExecutionWithNonLocalReturn [
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessNonLocalReturnResult.
-		Arg result fromFirstCall value should be: #returnedValue.
-		Arg result homeContext should be: #context
+		Arg result where value should be: #returnedValue.
+		Arg result where homeContext should be: #context
 	] runWithMocks 
 ]
 
@@ -70,7 +70,7 @@ SeamlessMessageSendRequestTests >> testExecutionWithNormalResult [
 		request executeFor: #senderPeer.
 
 		Arg result should beInstanceOf: SeamlessReturnValueResult.
-		Arg result returnValue should be: #messageResult
+		Arg result where returnValue should be: #messageResult
 	] runWithMocks 
 ]
 
@@ -99,8 +99,8 @@ SeamlessMessageSendRequestTests >> testExecutionWithRaisedError [
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessThrowExceptionResult.
-		Arg result exception should beInstanceOf: SeamlessRemoteException.
-		Arg result exception messageText should equal: error printString
+		Arg result where exception should beInstanceOf: SeamlessRemoteException.
+		Arg result where exception messageText should equal: error printString
 	] runWithMocks 
 ]
 
@@ -117,7 +117,7 @@ SeamlessMessageSendRequestTests >> testExecutionWithRaisedSeamlessRemoteExceptio
 		request executeFor: #senderPeer.
 		
 		Arg result should beInstanceOf: SeamlessThrowExceptionResult.
-		Arg result exception should beInstanceOf: SeamlessRemoteException.
+		Arg result where exception should beInstanceOf: SeamlessRemoteException.
 		"Arg result exception messageText should equal: error messageText."
 	] runWithMocks 
 ]

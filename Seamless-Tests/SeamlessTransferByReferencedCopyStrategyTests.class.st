@@ -14,15 +14,14 @@ SeamlessTransferByReferencedCopyStrategyTests >> setUp [
 { #category : #tests }
 SeamlessTransferByReferencedCopyStrategyTests >> testTransferPreparation [
 
-	| object transferObject newReference |
+	| object transferObject |
 	object := 'object' copy.
 	(transporter stub referenceFor: 'object' ifNewUse: Arg block) willReturn: #reference.
 	
 	transferObject := strategy prepareTransferObjectFor: #object by: transporter.
 	
 	transferObject should be: #reference. 
-	newReference := Arg block fromFirstCall value.
-	newReference should beInstanceOf: SeamlessObjectCopyReference.
-	newReference objectCopy should equal: object.
-	newReference objectCopy should not be: object.
+	Arg block where value should beInstanceOf: SeamlessObjectCopyReference.
+	Arg block where value objectCopy should equal: object.
+	Arg block where value objectCopy should not be: object.
 ]
