@@ -22,5 +22,5 @@ SeamlessLoadObjectRequestTests >> testExecution [
 	request executeFor: #senderPeer.
 	
 	Arg container should beInstanceOf: SeamlessObjectValueContainer.
-	Arg container content should be: #localObjectForReference
+	Arg container where content should be: #localObjectForReference
 ]

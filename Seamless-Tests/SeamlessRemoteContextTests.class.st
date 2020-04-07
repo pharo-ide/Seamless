@@ -20,7 +20,7 @@ SeamlessRemoteContextTests >> testReturningResult [
 		network removeDistributedObject: context].
 	
 		Arg request should beInstanceOf: SeamlessDeliverResultRequest.
-		Arg request context should be: context.
-		Arg request result should be: #result
+		Arg request where context should be: context.
+		Arg request where result should be: #result
 	 ] runWithMocks 
 ]
