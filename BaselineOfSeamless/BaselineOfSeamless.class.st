@@ -26,7 +26,7 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"								
 			baseline: 'Ghost' with: [
 				spec
-					repository: 'github://pharo-ide/Ghost:v5.0.0';
+					repository: 'github://pharo-ide/Ghost:v5.0.2';
 					loads: 'ObjectGhost' ];
 			project: 'GhostTests' copyFrom: 'Ghost' with: [
 				spec loads: 'default'];
