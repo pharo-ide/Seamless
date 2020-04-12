@@ -36,16 +36,15 @@ SeamlessSyncRequestContext >> forkProcessingOf: aSeamlessRequest [
 	] forkAt: Processor activePriority named: 'Seamless request sending'
 ]
 
-{ #category : #initialization }
-SeamlessSyncRequestContext >> initialize [
-	super initialize.
-	
-	resultDelivery := SeamlessRequestResultDelivery new
-]
-
 { #category : #private }
 SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
 	receiverPeer sendDataPacket: aSeamlessRequest 
+]
+
+{ #category : #accessing }
+SeamlessSyncRequestContext >> receiverPeer: anObject [
+	super receiverPeer: anObject.
+	resultDelivery := self network defaultResultDeliveryForRequests
 ]
 
 { #category : #accessing }

@@ -3,7 +3,7 @@ I am a helper object to manage a delivery of result inside SeamlessSyncRequestCo
 
 From the one side users which need a result should ask me for:
 
-	delivery deliverResultTo: aRequest
+	delivery deliverResultFor: aRequest
 	
 which will wait until the result will be finally delivered. When it will happen I will return actual result value from this method. aRequest will receive transferredBytes for statistics. 
 
@@ -29,17 +29,17 @@ Class {
 	#category : #'Seamless-Requests'
 }
 
-{ #category : #execution }
+{ #category : #delivery }
 SeamlessRequestResultDelivery >> deliverResult: aRequestResult [
 
 	requestResult := aRequestResult.
 	synchronizationSemaphore signal
 ]
 
-{ #category : #execution }
+{ #category : #delivery }
 SeamlessRequestResultDelivery >> deliverResultFor: aRequest [
 
-	synchronizationSemaphore wait.
+	self waitResult.
 	
 	aRequest resultBytes: requestResult transferredBytes.
 	
@@ -58,17 +58,7 @@ SeamlessRequestResultDelivery >> requestResult [
 	^ requestResult
 ]
 
-{ #category : #accessing }
-SeamlessRequestResultDelivery >> requestResult: anObject [
-	requestResult := anObject
-]
-
-{ #category : #accessing }
-SeamlessRequestResultDelivery >> synchronizationSemaphore [
-	^ synchronizationSemaphore
-]
-
-{ #category : #accessing }
-SeamlessRequestResultDelivery >> synchronizationSemaphore: anObject [
-	synchronizationSemaphore := anObject
+{ #category : #private }
+SeamlessRequestResultDelivery >> waitResult [
+	synchronizationSemaphore wait
 ]

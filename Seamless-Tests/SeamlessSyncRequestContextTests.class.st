@@ -33,10 +33,11 @@ SeamlessSyncRequestContextTests >> stubRequestDataSend: aSeamlessRequest [
 ]
 
 { #category : #tests }
-SeamlessSyncRequestContextTests >> testHasResultDeliveryByDefault [
+SeamlessSyncRequestContextTests >> testHasDefaultResultDeliveryFromNetwork [
 	
-	context := self contextClass new.
-	context resultDelivery should beInstanceOf: SeamlessRequestResultDelivery 
+	context receiverPeer: receiverPeer.
+		
+	context resultDelivery should beReturnedFrom: [ network defaultResultDeliveryForRequests ]
 ]
 
 { #category : #tests }
@@ -58,11 +59,7 @@ SeamlessSyncRequestContextTests >> testReturningResult [
 
 { #category : #tests }
 SeamlessSyncRequestContextTests >> testReturningResultShouldRemoveContextFromDistributedObjects [
-	
-	| network |
-	network := Mock new.
-	receiverPeer stub network willReturn: network.
-		
+			
 	context return: #result.
 		
 	network should receive removeDistributedObject: context

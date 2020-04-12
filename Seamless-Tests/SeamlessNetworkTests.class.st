@@ -134,6 +134,29 @@ SeamlessNetworkTests >> testCleanDestroyedPeerWhenItIsOnlyConnectedPeer [
 ]
 
 { #category : #tests }
+SeamlessNetworkTests >> testDefaultResultDeliveryForRequestsWhenThereIsNoTimeout [
+
+	| actual |
+	network requestProcessingTimeout: nil.
+	
+	actual := network defaultResultDeliveryForRequests.
+	
+	actual should beInstanceOf: SeamlessRequestResultDelivery
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testDefaultResultDeliveryForRequestsWhenThereIsTimeout [
+
+	| actual |
+	network requestProcessingTimeout: 10 seconds.
+	
+	actual := network defaultResultDeliveryForRequests.
+	
+	actual should beInstanceOf: SeamlessRequestResultTimelyDelivery.
+	actual maxTime should equal: 10 seconds
+]
+
+{ #category : #tests }
 SeamlessNetworkTests >> testDestroying [
 
 	[:peer1 :peer2 |
@@ -256,6 +279,12 @@ SeamlessNetworkTests >> testGettingTransferStrategyWhenItNotSpecifiedForGivenObj
 	actual := network transferStrategyFor: object.
 		
 	actual should beReturnedFrom: [object seamlessDefaultTransferStrategy]
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testHasDefaultRequestProcessingTimeoutByDefault [
+
+	network requestProcessingTimeout should equal: SeamlessNetwork defaultRequestProcessingTimeout
 ]
 
 { #category : #tests }

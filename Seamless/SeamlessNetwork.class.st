@@ -62,10 +62,24 @@ Class {
 	#instVars : [
 		'distributedObjects',
 		'transferStrategies',
-		'transport'
+		'transport',
+		'requestProcessingTimeout'
 	],
-	#category : 'Seamless-Core'
+	#classInstVars : [
+		'defaultRequestProcessingTimeout'
+	],
+	#category : #'Seamless-Core'
 }
+
+{ #category : #accessing }
+SeamlessNetwork class >> defaultRequestProcessingTimeout [
+	^defaultRequestProcessingTimeout
+]
+
+{ #category : #accessing }
+SeamlessNetwork class >> defaultRequestProcessingTimeout: aDuration [
+	defaultRequestProcessingTimeout := aDuration
+]
 
 { #category : #accessing }
 SeamlessNetwork >> addTransferStrategy: aTransferStrategy [
@@ -86,6 +100,13 @@ SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
 	distributedObjects removeObjectsDistributedBy: aRemotePeer.
 	remotePeers remove: aRemotePeer ifAbsent: [].
 	remotePeers ifEmpty: [ distributedObjects clear ]
+]
+
+{ #category : #accessing }
+SeamlessNetwork >> defaultResultDeliveryForRequests [
+	^ requestProcessingTimeout 
+			ifNil: [SeamlessRequestResultDelivery new]
+			ifNotNil: [ SeamlessRequestResultTimelyDelivery maxTime: requestProcessingTimeout  ]
 ]
 
 { #category : #controlling }
@@ -133,6 +154,7 @@ SeamlessNetwork >> initialize [
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
 	transport := SeamlessObjectTransporter default.
 	connectionTimeout := 10 seconds.
+	requestProcessingTimeout := self class defaultRequestProcessingTimeout
 ]
 
 { #category : #accessing }
@@ -182,6 +204,16 @@ SeamlessNetwork >> referenceFor: anObject ifNewUse: refCreationBlock [
 SeamlessNetwork >> removeDistributedObject: anObject [
 
 	distributedObjects remove: anObject
+]
+
+{ #category : #accessing }
+SeamlessNetwork >> requestProcessingTimeout [
+	^ requestProcessingTimeout
+]
+
+{ #category : #accessing }
+SeamlessNetwork >> requestProcessingTimeout: anObject [
+	requestProcessingTimeout := anObject
 ]
 
 { #category : #operations }
