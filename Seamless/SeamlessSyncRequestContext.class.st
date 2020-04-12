@@ -17,9 +17,10 @@ Class {
 	#instVars : [
 		'senderProcess',
 		'resultWaiter',
-		'result'
+		'result',
+		'resultDelivery'
 	],
-	#category : 'Seamless-Requests'
+	#category : #'Seamless-Requests'
 }
 
 { #category : #accessing }
@@ -41,8 +42,7 @@ SeamlessSyncRequestContext >> forkProcessingOf: aSeamlessRequest [
 SeamlessSyncRequestContext >> initialize [
 	super initialize.
 	
-	resultWaiter := Semaphore new.
-	senderProcess := Processor activeProcess
+	resultDelivery := SeamlessRequestResultDelivery new
 ]
 
 { #category : #private }
@@ -61,6 +61,16 @@ SeamlessSyncRequestContext >> result: anObject [
 ]
 
 { #category : #accessing }
+SeamlessSyncRequestContext >> resultDelivery [
+	^ resultDelivery
+]
+
+{ #category : #accessing }
+SeamlessSyncRequestContext >> resultDelivery: anObject [
+	resultDelivery := anObject
+]
+
+{ #category : #accessing }
 SeamlessSyncRequestContext >> resultWaiter [
 	^ resultWaiter
 ]
@@ -73,9 +83,7 @@ SeamlessSyncRequestContext >> resultWaiter: anObject [
 { #category : #operations }
 SeamlessSyncRequestContext >> return: aSeamlessRequestResult [
 
-	result := aSeamlessRequestResult.
-
-	resultWaiter signal.
+	resultDelivery deliverResult: aSeamlessRequestResult.
 	
 	self network removeDistributedObject: self
 ]
@@ -90,15 +98,11 @@ SeamlessSyncRequestContext >> sendMessage: aMessageSend [
 SeamlessSyncRequestContext >> sendRequest: aSeamlessRequest [ 
 
 	aSeamlessRequest context: self.
+	senderProcess := Processor activeProcess.
 	
 	self forkProcessingOf: aSeamlessRequest.
 
-	resultWaiter wait.
-	
-	"Here we fix data statistics about request execution"
-	aSeamlessRequest resultBytes: result transferredBytes.
-	
-	^result returnValue
+	^resultDelivery deliverResultFor: aSeamlessRequest
 ]
 
 { #category : #accessing }

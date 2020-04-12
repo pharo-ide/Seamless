@@ -1,7 +1,10 @@
 Class {
 	#name : #SeamlessSyncRequestContextTests,
 	#superclass : #SeamlessRequestSendingContextTestCase,
-	#category : 'Seamless-Tests'
+	#instVars : [
+		'resultDelivery'
+	],
+	#category : #'Seamless-Tests'
 }
 
 { #category : #running }
@@ -10,21 +13,30 @@ SeamlessSyncRequestContextTests >> contextClass [
 ]
 
 { #category : #specs }
-SeamlessSyncRequestContextTests >> requestSendSpecFor: aSeamlessRequest [
+SeamlessSyncRequestContextTests >> contextShouldSend: aSeamlessRequest [
 
-	^receiverPeer sendDataPacket: aSeamlessRequest
+	^receiverPeer should takeAWhile to receive sendDataPacket: aSeamlessRequest
+]
+
+{ #category : #running }
+SeamlessSyncRequestContextTests >> setUp [
+	super setUp.
+	
+	resultDelivery := Mock new.
+	context resultDelivery: resultDelivery
+]
+
+{ #category : #specs }
+SeamlessSyncRequestContextTests >> stubRequestDataSend: aSeamlessRequest [
+
+	^receiverPeer stub sendDataPacket: aSeamlessRequest
 ]
 
 { #category : #tests }
-SeamlessSyncRequestContextTests >> testHasActiveProcessAsSenderProcessByDeafult [
+SeamlessSyncRequestContextTests >> testHasResultDeliveryByDefault [
 	
-	context senderProcess should be: Processor activeProcess
-]
-
-{ #category : #tests }
-SeamlessSyncRequestContextTests >> testHasResultWaiterByDefault [
-	
-	context resultWaiter should beInstanceOf: Semaphore
+	context := self contextClass new.
+	context resultDelivery should beInstanceOf: SeamlessRequestResultDelivery 
 ]
 
 { #category : #tests }
@@ -39,34 +51,27 @@ SeamlessSyncRequestContextTests >> testReferenceCreation [
 { #category : #tests }
 SeamlessSyncRequestContextTests >> testReturningResult [
 	
-	[:network :waiterSemaphore |
-		context resultWaiter: waiterSemaphore.
-		waiterSemaphore stub signal when: [ context result ] is: #result.
-		
-		context return: #result.
+	context return: #result.
 
-		waiterSemaphore should receive signal
-	
-	 ] runWithMocks 
+	resultDelivery should receive deliverResult: #result
 ]
 
 { #category : #tests }
 SeamlessSyncRequestContextTests >> testReturningResultShouldRemoveContextFromDistributedObjects [
 	
-	[:network |
-		receiverPeer stub network willReturn: network.
+	| network |
+	network := Mock new.
+	receiverPeer stub network willReturn: network.
 		
-		context return: #result.
+	context return: #result.
 		
-		network should receive removeDistributedObject: context.
-			
-	 ] runWithMocks 
+	network should receive removeDistributedObject: context
 ]
 
 { #category : #tests }
 SeamlessSyncRequestContextTests >> testReturningResultToGivenPeer [
 	
-	context stub return: Any.
+	context stub.
 		
 	context return: #result to: #senderPeer.
 	
@@ -86,47 +91,62 @@ SeamlessSyncRequestContextTests >> testSendingMessage [
 ]
 
 { #category : #tests }
-SeamlessSyncRequestContextTests >> testSendingRequest [
+SeamlessSyncRequestContextTests >> testSendingRequestShouldAssignItToContext [
 	
-	[:request :waiterSemaphore :result |
-		context resultWaiter: waiterSemaphore.		
-		[ (context sendRequest: request) should be: #returnedValue.
-		20 milliSeconds wait ]
-			should strictly satisfy: 
-		[request context: context.
-		 waiterSemaphore wait will: [ context result: result. Processor yield ].
-		(self requestSendSpecFor: request)
-				shouldBeSentInAnotherProcess;
-				when: [ Processor activeProcess priority] is: Processor activeProcess priority.
-		result returnValue willReturn: #returnedValue]	
-	 ] runWithMocks 
+	| request |
+	request := Mock new.
+		
+	context sendRequest: request.
+		
+	request should receive context: context
+]
+
+{ #category : #tests }
+SeamlessSyncRequestContextTests >> testSendingRequestShouldBeDoneAsynchronous [
+	
+	| request |
+	request := Mock new.
+	
+	context sendRequest: request.
+
+	(self contextShouldSend: request) inAnotherProcess
+		inProcessWhich priority should equal: Processor activeProcess priority.
+
+]
+
+{ #category : #tests }
+SeamlessSyncRequestContextTests >> testSendingRequestShouldHoldSenderProcess [
+	
+	| request |
+	request := Mock new.
+		
+	context sendRequest: request.
+		
+	context senderProcess should be: Processor activeProcess
+]
+
+{ #category : #tests }
+SeamlessSyncRequestContextTests >> testSendingRequestShouldReturnResultUsingDelivery [
+	
+	| request |
+	request := Mock new.
+		
+	context sendRequest: request.
+		
+	resultDelivery should receive deliverResultFor: request
 ]
 
 { #category : #tests }
 SeamlessSyncRequestContextTests >> testSendingRequestWhenSendIsFailed [
 	
-	| sendFailure |
-	[:request |
-		sendFailure := Error new.
-		[(self requestSendSpecFor: request) willRaise: sendFailure] should expect.
+	| sendFailure request |
+	request := Mock new.
+	sendFailure := Error new.
+	(self stubRequestDataSend: request) willRaise: sendFailure.
+	resultDelivery stub deliverResult: Arg result.
 		
-		[context sendRequest: request] should raise: sendFailure
-		
-	] runWithMocks 
-]
-
-{ #category : #tests }
-SeamlessSyncRequestContextTests >> testShouldSaveResultBytesInRequest [
+	context sendRequest: request.
 	
-	[:request :waiterSemaphore :result |
-		context resultWaiter: waiterSemaphore.		
-		result stub transferredBytes willReturn: #resultBytes.
-		waiterSemaphore stub wait will: [ context result: result. Processor yield ].
-		
-		context sendRequest: request.
-		20 milliSeconds wait.
-		
-		[ waiterSemaphore wait.
-		request resultBytes: #resultBytes ] should beDoneInOrder 
-	 ] runWithMocks 
+	Arg result should takeAWhile to beInstanceOf: SeamlessThrowExceptionResult.
+	Arg result where exception should be: sendFailure
 ]
