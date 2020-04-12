@@ -16,8 +16,6 @@ Class {
 	#superclass : #SeamlessRequestSendingContext,
 	#instVars : [
 		'senderProcess',
-		'resultWaiter',
-		'result',
 		'resultDelivery'
 	],
 	#category : #'Seamless-Requests'
@@ -51,16 +49,6 @@ SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
 ]
 
 { #category : #accessing }
-SeamlessSyncRequestContext >> result [
-	^ result
-]
-
-{ #category : #accessing }
-SeamlessSyncRequestContext >> result: anObject [
-	result := anObject
-]
-
-{ #category : #accessing }
 SeamlessSyncRequestContext >> resultDelivery [
 	^ resultDelivery
 ]
@@ -68,16 +56,6 @@ SeamlessSyncRequestContext >> resultDelivery [
 { #category : #accessing }
 SeamlessSyncRequestContext >> resultDelivery: anObject [
 	resultDelivery := anObject
-]
-
-{ #category : #accessing }
-SeamlessSyncRequestContext >> resultWaiter [
-	^ resultWaiter
-]
-
-{ #category : #accessing }
-SeamlessSyncRequestContext >> resultWaiter: anObject [
-	resultWaiter := anObject
 ]
 
 { #category : #operations }
