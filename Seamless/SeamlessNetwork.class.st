@@ -103,6 +103,14 @@ SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
 ]
 
 { #category : #accessing }
+SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
+	^ requestProcessingTimeout 
+			ifNil: [SeamlessRequestResultDelivery from: aRemotePeer]
+			ifNotNil: [ 	SeamlessRequestResultTimelyDelivery 
+								from: aRemotePeer maxTime: requestProcessingTimeout  ]
+]
+
+{ #category : #accessing }
 SeamlessNetwork >> defaultResultDeliveryForRequests [
 	^ requestProcessingTimeout 
 			ifNil: [SeamlessRequestResultDelivery new]

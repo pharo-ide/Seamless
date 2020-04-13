@@ -134,26 +134,28 @@ SeamlessNetworkTests >> testCleanDestroyedPeerWhenItIsOnlyConnectedPeer [
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testDefaultResultDeliveryForRequestsWhenThereIsNoTimeout [
+SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
 
-	| actual |
+	| delivery |
 	network requestProcessingTimeout: nil.
 	
-	actual := network defaultResultDeliveryForRequests.
+	delivery := network createDeliveryForResultFrom: #remotePeer.
 	
-	actual should beInstanceOf: SeamlessRequestResultDelivery
+	delivery should beInstanceOf: SeamlessRequestResultDelivery.
+	delivery senderPeer should be: #remotePeer
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testDefaultResultDeliveryForRequestsWhenThereIsTimeout [
+SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsTimeout [
 
-	| actual |
+	| delivery |
 	network requestProcessingTimeout: 10 seconds.
 	
-	actual := network defaultResultDeliveryForRequests.
+	delivery := network createDeliveryForResultFrom: #remotePeer.
 	
-	actual should beInstanceOf: SeamlessRequestResultTimelyDelivery.
-	actual maxTime should equal: 10 seconds
+	delivery should beInstanceOf: SeamlessRequestResultTimelyDelivery.
+	delivery senderPeer should be: #remotePeer.
+	delivery maxTime should equal: 10 seconds
 ]
 
 { #category : #tests }

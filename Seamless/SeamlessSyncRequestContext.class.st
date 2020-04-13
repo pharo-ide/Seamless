@@ -44,7 +44,7 @@ SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
 { #category : #accessing }
 SeamlessSyncRequestContext >> receiverPeer: anObject [
 	super receiverPeer: anObject.
-	resultDelivery := self network defaultResultDeliveryForRequests
+	resultDelivery := receiverPeer createResultDeliveryForRequests 
 ]
 
 { #category : #accessing }

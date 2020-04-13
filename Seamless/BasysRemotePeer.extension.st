@@ -1,6 +1,12 @@
 Extension { #name : #BasysRemotePeer }
 
 { #category : #'*Seamless' }
+BasysRemotePeer >> createResultDeliveryForRequests [
+
+	^network createDeliveryForResultFrom: self
+]
+
+{ #category : #'*Seamless' }
 BasysRemotePeer >> createSyncRequestContext [
 
 	^SeamlessSyncRequestContext receiverPeer: self

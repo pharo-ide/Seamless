@@ -16,6 +16,12 @@ Class {
 }
 
 { #category : #'instance creation' }
+SeamlessRequestResultTimelyDelivery class >> from: aRemotePeer maxTime: aDuration [
+	^(self from: aRemotePeer)
+		maxTime: aDuration
+]
+
+{ #category : #'instance creation' }
 SeamlessRequestResultTimelyDelivery class >> maxTime: aDuration [
 	^self new 
 		maxTime: aDuration

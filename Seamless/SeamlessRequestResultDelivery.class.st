@@ -23,11 +23,18 @@ Class {
 	#name : #SeamlessRequestResultDelivery,
 	#superclass : #Object,
 	#instVars : [
+		'senderPeer',
 		'synchronizationSemaphore',
 		'requestResult'
 	],
 	#category : #'Seamless-Requests'
 }
+
+{ #category : #'instance creation' }
+SeamlessRequestResultDelivery class >> from: aRemotePeer [
+	^self new 
+		senderPeer: aRemotePeer
+]
 
 { #category : #delivery }
 SeamlessRequestResultDelivery >> deliverResult: aRequestResult [
@@ -56,6 +63,16 @@ SeamlessRequestResultDelivery >> initialize [
 { #category : #accessing }
 SeamlessRequestResultDelivery >> requestResult [
 	^ requestResult
+]
+
+{ #category : #accessing }
+SeamlessRequestResultDelivery >> senderPeer [
+	^ senderPeer
+]
+
+{ #category : #accessing }
+SeamlessRequestResultDelivery >> senderPeer: anObject [
+	senderPeer := anObject
 ]
 
 { #category : #private }

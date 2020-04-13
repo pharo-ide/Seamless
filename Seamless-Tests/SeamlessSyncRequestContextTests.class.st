@@ -33,11 +33,11 @@ SeamlessSyncRequestContextTests >> stubRequestDataSend: aSeamlessRequest [
 ]
 
 { #category : #tests }
-SeamlessSyncRequestContextTests >> testHasDefaultResultDeliveryFromNetwork [
+SeamlessSyncRequestContextTests >> testCreatesDeliveryForRequestResult [
 	
 	context receiverPeer: receiverPeer.
 		
-	context resultDelivery should beReturnedFrom: [ network defaultResultDeliveryForRequests ]
+	context resultDelivery should beReturnedFrom: [ receiverPeer createResultDeliveryForRequests ]
 ]
 
 { #category : #tests }
