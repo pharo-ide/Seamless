@@ -6,5 +6,5 @@ Class {
 
 { #category : #running }
 SeamlessRequestResultDeliveryTests >> createDelivery [
-	^SeamlessRequestResultDelivery new
+	^SeamlessRequestResultDelivery from: senderPeer
 ]

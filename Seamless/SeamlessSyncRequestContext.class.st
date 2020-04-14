@@ -60,7 +60,7 @@ SeamlessSyncRequestContext >> resultDelivery: anObject [
 { #category : #operations }
 SeamlessSyncRequestContext >> return: aSeamlessRequestResult [
 
-	resultDelivery deliverResult: aSeamlessRequestResult.
+	resultDelivery shipResult: aSeamlessRequestResult.
 	
 	self network removeDistributedObject: self
 ]

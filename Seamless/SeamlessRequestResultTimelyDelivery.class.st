@@ -1,5 +1,5 @@
 "
-I represent a delivery of request results which restricted in time using specified timeout, #maxTime.
+I represent a result delivery restricted in time using specified timeout, #maxTime.
  
 Internal Representation and Key Implementation Points.
 
@@ -18,12 +18,6 @@ Class {
 { #category : #'instance creation' }
 SeamlessRequestResultTimelyDelivery class >> from: aRemotePeer maxTime: aDuration [
 	^(self from: aRemotePeer)
-		maxTime: aDuration
-]
-
-{ #category : #'instance creation' }
-SeamlessRequestResultTimelyDelivery class >> maxTime: aDuration [
-	^self new 
 		maxTime: aDuration
 ]
 

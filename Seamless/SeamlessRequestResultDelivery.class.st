@@ -1,5 +1,5 @@
 "
-I am a helper object to manage a delivery of result inside SeamlessSyncRequestContext.
+I am a helper object to manage the delivery of result inside SeamlessSyncRequestContext.
 
 From the one side users which need a result should ask me for:
 
@@ -7,15 +7,20 @@ From the one side users which need a result should ask me for:
 	
 which will wait until the result will be finally delivered. When it will happen I will return actual result value from this method. aRequest will receive transferredBytes for statistics. 
 
-From the other side users which have a result should send it through me using: 
+From the other side users which have a result should ship it through me using: 
 
-	deliver deliverResult: aRequestResult 
+	deliver shipResult: aRequestResult 
 	
 where I will signal all waiting users that the result is ready using my synchronizationSemaphore.
+
+My instances are created with remote peer instance, #senderPeer, which is supposed to send the result as the response to received request:
+
+	SeamlessRequestResultDelivery from: aRemotePeer
 
 Internal Representation and Key Implementation Points.
 
     Instance Variables
+	senderPeer:		<BasysRemotePeer>
 	requestResult:		<SeamlessRequestResult>
 	synchronizationSemaphore:		<Semaphore>
 "
@@ -34,13 +39,6 @@ Class {
 SeamlessRequestResultDelivery class >> from: aRemotePeer [
 	^self new 
 		senderPeer: aRemotePeer
-]
-
-{ #category : #delivery }
-SeamlessRequestResultDelivery >> deliverResult: aRequestResult [
-
-	requestResult := aRequestResult.
-	synchronizationSemaphore signal
 ]
 
 { #category : #delivery }
@@ -73,6 +71,13 @@ SeamlessRequestResultDelivery >> senderPeer [
 { #category : #accessing }
 SeamlessRequestResultDelivery >> senderPeer: anObject [
 	senderPeer := anObject
+]
+
+{ #category : #delivery }
+SeamlessRequestResultDelivery >> shipResult: aRequestResult [
+
+	requestResult := aRequestResult.
+	synchronizationSemaphore signal
 ]
 
 { #category : #private }

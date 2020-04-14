@@ -110,13 +110,6 @@ SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
 								from: aRemotePeer maxTime: requestProcessingTimeout  ]
 ]
 
-{ #category : #accessing }
-SeamlessNetwork >> defaultResultDeliveryForRequests [
-	^ requestProcessingTimeout 
-			ifNil: [SeamlessRequestResultDelivery new]
-			ifNotNil: [ SeamlessRequestResultTimelyDelivery maxTime: requestProcessingTimeout  ]
-]
-
 { #category : #controlling }
 SeamlessNetwork >> destroy [
 	"This methods supposed to be used when you really want to destroy local peer network and release all resources without thinking that they can be in use on remote peers.

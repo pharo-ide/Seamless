@@ -6,7 +6,7 @@ Class {
 
 { #category : #running }
 SeamlessRequestResultTimelyDeliveryTests >> createDelivery [
-	^SeamlessRequestResultTimelyDelivery maxTime: 10 seconds
+	^SeamlessRequestResultTimelyDelivery from: senderPeer maxTime: 10 seconds
 ]
 
 { #category : #tests }

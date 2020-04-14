@@ -54,7 +54,7 @@ SeamlessSyncRequestContextTests >> testReturningResult [
 	
 	context return: #result.
 
-	resultDelivery should receive deliverResult: #result
+	resultDelivery should receive shipResult: #result
 ]
 
 { #category : #tests }
@@ -140,7 +140,7 @@ SeamlessSyncRequestContextTests >> testSendingRequestWhenSendIsFailed [
 	request := Mock new.
 	sendFailure := Error new.
 	(self stubRequestDataSend: request) willRaise: sendFailure.
-	resultDelivery stub deliverResult: Arg result.
+	resultDelivery stub shipResult: Arg result.
 		
 	context sendRequest: request.
 	
