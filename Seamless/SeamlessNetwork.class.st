@@ -81,6 +81,34 @@ SeamlessNetwork class >> defaultRequestProcessingTimeout: aDuration [
 	defaultRequestProcessingTimeout := aDuration
 ]
 
+{ #category : #settings }
+SeamlessNetwork class >> defaultRequestProcessingTimeoutSecs [
+	^self defaultRequestProcessingTimeout ifNil: [ 0 ] ifNotNil: [:timeout | timeout asSeconds]
+]
+
+{ #category : #settings }
+SeamlessNetwork class >> defaultRequestProcessingTimeoutSecs: aNumber [
+
+	| timeout |
+	timeout := (aNumber isNil or: [aNumber isZero]) 
+					ifTrue: [ nil ] ifFalse: [ aNumber seconds].
+	self defaultRequestProcessingTimeout: timeout
+]
+
+{ #category : #settings }
+SeamlessNetwork class >> settingOn: aBuilder [
+	<systemsettings>
+	(aBuilder group: #seamless)
+		label: 'Seamless';
+		parent: #tools;
+		description: 'Seamless network settings';
+		with: [ (aBuilder setting: #defaultRequestProcessingTimeoutSecs)
+				target: self; 
+				label: 'Default request processing timeout (secs)';
+				default: 0
+				] 
+]
+
 { #category : #accessing }
 SeamlessNetwork >> addTransferStrategy: aTransferStrategy [
 
@@ -154,7 +182,6 @@ SeamlessNetwork >> initialize [
 	distributedObjects := SeamlessDistributedObjects over: self.
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
 	transport := SeamlessObjectTransporter default.
-	connectionTimeout := 10 seconds.
 	requestProcessingTimeout := self class defaultRequestProcessingTimeout
 ]
 
@@ -213,8 +240,8 @@ SeamlessNetwork >> requestProcessingTimeout [
 ]
 
 { #category : #accessing }
-SeamlessNetwork >> requestProcessingTimeout: anObject [
-	requestProcessingTimeout := anObject
+SeamlessNetwork >> requestProcessingTimeout: aDuration [
+	requestProcessingTimeout := aDuration
 ]
 
 { #category : #operations }
