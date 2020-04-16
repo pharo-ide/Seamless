@@ -132,10 +132,9 @@ SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
 
 { #category : #accessing }
 SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
-	^ requestProcessingTimeout 
+	^ self requestProcessingTimeout
 			ifNil: [SeamlessRequestResultDelivery from: aRemotePeer]
-			ifNotNil: [ 	SeamlessRequestResultTimelyDelivery 
-								from: aRemotePeer maxTime: requestProcessingTimeout  ]
+			ifNotNil: [:timeout |	SeamlessRequestResultTimelyDelivery from: aRemotePeer maxTime: timeout]
 ]
 
 { #category : #controlling }
@@ -181,8 +180,7 @@ SeamlessNetwork >> initialize [
 	
 	distributedObjects := SeamlessDistributedObjects over: self.
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
-	transport := SeamlessObjectTransporter default.
-	requestProcessingTimeout := self class defaultRequestProcessingTimeout
+	transport := SeamlessObjectTransporter default
 ]
 
 { #category : #accessing }
@@ -236,7 +234,7 @@ SeamlessNetwork >> removeDistributedObject: anObject [
 
 { #category : #accessing }
 SeamlessNetwork >> requestProcessingTimeout [
-	^ requestProcessingTimeout
+	^ requestProcessingTimeout ifNil: [self class defaultRequestProcessingTimeout]
 ]
 
 { #category : #accessing }

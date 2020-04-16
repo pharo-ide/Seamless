@@ -134,19 +134,7 @@ SeamlessNetworkTests >> testCleanDestroyedPeerWhenItIsOnlyConnectedPeer [
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
-
-	| delivery |
-	network requestProcessingTimeout: nil.
-	
-	delivery := network createDeliveryForResultFrom: #remotePeer.
-	
-	delivery should beInstanceOf: SeamlessRequestResultDelivery.
-	delivery senderPeer should be: #remotePeer
-]
-
-{ #category : #tests }
-SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsTimeout [
+SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsConfiguredTimeout [
 
 	| delivery |
 	network requestProcessingTimeout: 10 seconds.
@@ -156,6 +144,31 @@ SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsTimeout [
 	delivery should beInstanceOf: SeamlessRequestResultTimelyDelivery.
 	delivery senderPeer should be: #remotePeer.
 	delivery maxTime should equal: 10 seconds
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsDefaultTimeout [
+
+	| delivery current |
+	current := SeamlessNetwork defaultRequestProcessingTimeout.
+	[SeamlessNetwork defaultRequestProcessingTimeout: 1000 seconds.
+	delivery := network createDeliveryForResultFrom: #remotePeer.
+	
+	delivery should beInstanceOf: SeamlessRequestResultTimelyDelivery.
+	delivery maxTime should equal: 1000 seconds] 
+		ensure: [ SeamlessNetwork defaultRequestProcessingTimeout: current ]
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
+
+	| delivery |
+	network requestProcessingTimeout: nil.
+	
+	delivery := network createDeliveryForResultFrom: #remotePeer.
+	
+	delivery should beInstanceOf: SeamlessRequestResultDelivery.
+	delivery senderPeer should be: #remotePeer
 ]
 
 { #category : #tests }
@@ -360,6 +373,18 @@ SeamlessNetworkTests >> testSendingDataPacket [
 		 
 		transporter should receive sendObject: #dataPacket by: connection
 	] runWithMocks 
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testShouldFollowDefaultRequestProcessingTimeoutChangesWhenInstanceIsNotConfigured [
+
+	| current |
+	network requestProcessingTimeout should equal: SeamlessNetwork defaultRequestProcessingTimeout.
+	current := SeamlessNetwork defaultRequestProcessingTimeout.
+	[ 
+		SeamlessNetwork defaultRequestProcessingTimeout: 1000 seconds.
+		network requestProcessingTimeout should equal: SeamlessNetwork defaultRequestProcessingTimeout.
+	] ensure: [ SeamlessNetwork defaultRequestProcessingTimeout: current ]
 ]
 
 { #category : #tests }
