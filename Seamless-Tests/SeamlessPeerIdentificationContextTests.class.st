@@ -15,7 +15,7 @@ SeamlessPeerIdentificationContextTests >> contextClass [
 { #category : #specs }
 SeamlessPeerIdentificationContextTests >> contextShouldSend: aSeamlessRequest [
 
-	^connection should takeAWhile to receive sendDataPacket: aSeamlessRequest 
+	^connection should receive sendDataPacket: aSeamlessRequest 
 ]
 
 { #category : #running }

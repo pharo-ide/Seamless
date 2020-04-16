@@ -15,7 +15,7 @@ SeamlessSyncRequestContextTests >> contextClass [
 { #category : #specs }
 SeamlessSyncRequestContextTests >> contextShouldSend: aSeamlessRequest [
 
-	^receiverPeer should takeAWhile to receive sendDataPacket: aSeamlessRequest
+	^receiverPeer should receive sendDataPacket: aSeamlessRequest
 ]
 
 { #category : #running }
@@ -88,6 +88,17 @@ SeamlessSyncRequestContextTests >> testSendingMessage [
 ]
 
 { #category : #tests }
+SeamlessSyncRequestContextTests >> testSendingRequest [
+	
+	| request |
+	request := Mock new.
+	
+	context sendRequest: request.
+
+	self contextShouldSend: request
+]
+
+{ #category : #tests }
 SeamlessSyncRequestContextTests >> testSendingRequestShouldAssignItToContext [
 	
 	| request |
@@ -96,19 +107,6 @@ SeamlessSyncRequestContextTests >> testSendingRequestShouldAssignItToContext [
 	context sendRequest: request.
 		
 	request should receive context: context
-]
-
-{ #category : #tests }
-SeamlessSyncRequestContextTests >> testSendingRequestShouldBeDoneAsynchronous [
-	
-	| request |
-	request := Mock new.
-	
-	context sendRequest: request.
-
-	(self contextShouldSend: request) inAnotherProcess
-		inProcessWhich priority should equal: Processor activeProcess priority.
-
 ]
 
 { #category : #tests }
@@ -140,10 +138,6 @@ SeamlessSyncRequestContextTests >> testSendingRequestWhenSendIsFailed [
 	request := Mock new.
 	sendFailure := Error new.
 	(self stubRequestDataSend: request) willRaise: sendFailure.
-	resultDelivery stub shipResult: Arg result.
 		
-	context sendRequest: request.
-	
-	Arg result should takeAWhile to beInstanceOf: SeamlessThrowExceptionResult.
-	Arg result where exception should be: sendFailure
+	[context sendRequest: request] should raise: sendFailure
 ]
