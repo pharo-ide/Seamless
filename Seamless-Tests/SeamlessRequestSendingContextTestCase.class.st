@@ -2,9 +2,10 @@ Class {
 	#name : #SeamlessRequestSendingContextTestCase,
 	#superclass : #SeamlessRequestContextTestCase,
 	#instVars : [
-		'receiverPeer'
+		'receiverPeer',
+		'network'
 	],
-	#category : 'Seamless-Tests'
+	#category : #'Seamless-Tests'
 }
 
 { #category : #testing }
@@ -16,6 +17,9 @@ SeamlessRequestSendingContextTestCase class >> isAbstract [
 SeamlessRequestSendingContextTestCase >> setUp [
 	super setUp.
 	
+	network := Mock new.
 	receiverPeer := Mock new.
-	context receiverPeer: receiverPeer
+	receiverPeer stub network willReturn: network.
+	 
+	context receiverPeer: receiverPeer.
 ]

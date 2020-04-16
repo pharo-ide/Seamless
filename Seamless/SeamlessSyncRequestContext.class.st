@@ -16,10 +16,9 @@ Class {
 	#superclass : #SeamlessRequestSendingContext,
 	#instVars : [
 		'senderProcess',
-		'resultWaiter',
-		'result'
+		'resultDelivery'
 	],
-	#category : 'Seamless-Requests'
+	#category : #'Seamless-Requests'
 }
 
 { #category : #accessing }
@@ -37,45 +36,31 @@ SeamlessSyncRequestContext >> forkProcessingOf: aSeamlessRequest [
 	] forkAt: Processor activePriority named: 'Seamless request sending'
 ]
 
-{ #category : #initialization }
-SeamlessSyncRequestContext >> initialize [
-	super initialize.
-	
-	resultWaiter := Semaphore new.
-	senderProcess := Processor activeProcess
-]
-
 { #category : #private }
 SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
 	receiverPeer sendDataPacket: aSeamlessRequest 
 ]
 
 { #category : #accessing }
-SeamlessSyncRequestContext >> result [
-	^ result
+SeamlessSyncRequestContext >> receiverPeer: anObject [
+	super receiverPeer: anObject.
+	resultDelivery := receiverPeer createResultDeliveryForRequests 
 ]
 
 { #category : #accessing }
-SeamlessSyncRequestContext >> result: anObject [
-	result := anObject
+SeamlessSyncRequestContext >> resultDelivery [
+	^ resultDelivery
 ]
 
 { #category : #accessing }
-SeamlessSyncRequestContext >> resultWaiter [
-	^ resultWaiter
-]
-
-{ #category : #accessing }
-SeamlessSyncRequestContext >> resultWaiter: anObject [
-	resultWaiter := anObject
+SeamlessSyncRequestContext >> resultDelivery: anObject [
+	resultDelivery := anObject
 ]
 
 { #category : #operations }
 SeamlessSyncRequestContext >> return: aSeamlessRequestResult [
 
-	result := aSeamlessRequestResult.
-
-	resultWaiter signal.
+	resultDelivery shipResult: aSeamlessRequestResult.
 	
 	self network removeDistributedObject: self
 ]
@@ -90,15 +75,11 @@ SeamlessSyncRequestContext >> sendMessage: aMessageSend [
 SeamlessSyncRequestContext >> sendRequest: aSeamlessRequest [ 
 
 	aSeamlessRequest context: self.
+	senderProcess := Processor activeProcess.
 	
 	self forkProcessingOf: aSeamlessRequest.
 
-	resultWaiter wait.
-	
-	"Here we fix data statistics about request execution"
-	aSeamlessRequest resultBytes: result transferredBytes.
-	
-	^result returnValue
+	^resultDelivery deliverResultFor: aSeamlessRequest
 ]
 
 { #category : #accessing }

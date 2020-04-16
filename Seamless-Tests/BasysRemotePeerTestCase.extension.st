@@ -1,26 +1,26 @@
 Extension { #name : #BasysRemotePeerTestCase }
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testCreationSyncRequestContext [
+BasysRemotePeerTestCase >> testCreateResultDeliveryForRequests [
+
+	| delivery |
+	delivery := peer createResultDeliveryForRequests.
+
+	delivery should beReturnedFrom: [ network createDeliveryForResultFrom: peer ]
+]
+
+{ #category : #'*Seamless-Tests' }
+BasysRemotePeerTestCase >> testCreateSyncRequestContext [
 
 	| context |
 	context := peer createSyncRequestContext.
 
 	context should beInstanceOf: SeamlessSyncRequestContext.
-	context receiverPeer should be: peer.
-	context senderProcess should be: Processor activeProcess
+	context receiverPeer should be: peer
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyedOnRemoteSide [
-
-	peer destroyedOnRemoteSide.
-	
-	network should receive cleanDestroyedPeer: peer
-]
-
-{ #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldAskNetworkForCleanupAfterNotificationRequest [
+BasysRemotePeerTestCase >> testDestroyShouldAskNetworkForCleanupAfterNotificationRequest [
 
 	(peer stub sendDataPacket: Any) willReturnYourself.
 	
@@ -31,7 +31,7 @@ BasysRemotePeerTestCase >> testDestroyingShouldAskNetworkForCleanupAfterNotifica
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldIgnoreConnectionProblemDuringPeerNotification [
+BasysRemotePeerTestCase >> testDestroyShouldIgnoreConnectionProblemDuringPeerNotification [
 
 	(peer stub sendDataPacket: Any) willRaise: ConnectionTimedOut new.
 	
@@ -41,7 +41,7 @@ BasysRemotePeerTestCase >> testDestroyingShouldIgnoreConnectionProblemDuringPeer
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldIgnoreIdentificationFailureDuringPeersNotifications [
+BasysRemotePeerTestCase >> testDestroyShouldIgnoreIdentificationFailureDuringPeersNotifications [
 
 	(peer stub sendDataPacket: Any) willRaise: BasysIdentificationFailed new.
 	
@@ -51,7 +51,7 @@ BasysRemotePeerTestCase >> testDestroyingShouldIgnoreIdentificationFailureDuring
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldIgnoreTimeoutProblemDuringPeersNotifications [
+BasysRemotePeerTestCase >> testDestroyShouldIgnoreTimeoutProblemDuringPeersNotifications [
 
 	(peer stub sendDataPacket: Any) willRaise: OPTimedOutError new.
 	
@@ -61,17 +61,17 @@ BasysRemotePeerTestCase >> testDestroyingShouldIgnoreTimeoutProblemDuringPeersNo
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldSendNotificationRequestToRemoteSide [
+BasysRemotePeerTestCase >> testDestroyShouldSendNotificationRequestToRemoteSide [
 	
-	(peer stub sendDataPacket: Any) willReturnYourself.
+	(peer stub sendDataPacket: Arg request) willReturnYourself.
 	
 	peer destroy.
 		
-	peer should receive sendDataPacket: (Kind of: SeamlessPeerDestroyedRequest).
+	Arg request should beInstanceOf: SeamlessPeerDestroyedRequest
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testDestroyingShouldSignalUnexpectedProblemsDuringRemoteSideNotifications [
+BasysRemotePeerTestCase >> testDestroyShouldSignalUnexpectedProblemsDuringRemoteSideNotifications [
 
 	| unexpectedProblem |
 	unexpectedProblem := Error new.
@@ -83,7 +83,15 @@ BasysRemotePeerTestCase >> testDestroyingShouldSignalUnexpectedProblemsDuringRem
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTestCase >> testEvaluationBlockRemotelly [
+BasysRemotePeerTestCase >> testDestroyedOnRemoteSide [
+
+	peer destroyedOnRemoteSide.
+	
+	network should receive cleanDestroyedPeer: peer
+]
+
+{ #category : #'*Seamless-Tests' }
+BasysRemotePeerTestCase >> testEvaluateBlockRemotelly [
 
 	| localBlock |
 	[:context :block |

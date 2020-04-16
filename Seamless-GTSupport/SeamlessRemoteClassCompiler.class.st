@@ -33,7 +33,7 @@ SeamlessRemoteClassCompiler >> evaluate [
 		ifTrue: [ itsSelectionString ]
 		ifFalse: [ source ].
 	self source: selectedSource.
-	doItMethod := self translate methodNode generateWithSource.
+	doItMethod := self parse methodNode generateWithSource.
 	
 	value := receiver withArgs: (context ifNil: [ #() ] ifNotNil: [ {context} ]) executeMethod:  doItMethod.
 	self compilationContext logged

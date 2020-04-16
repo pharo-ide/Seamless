@@ -13,8 +13,9 @@ SeamlessPeerIdentificationContextTests >> contextClass [
 ]
 
 { #category : #specs }
-SeamlessPeerIdentificationContextTests >> requestSendSpecFor: aSeamlessRequest [
-	^connection sendDataPacket: aSeamlessRequest 
+SeamlessPeerIdentificationContextTests >> contextShouldSend: aSeamlessRequest [
+
+	^connection should takeAWhile to receive sendDataPacket: aSeamlessRequest 
 ]
 
 { #category : #running }
@@ -24,4 +25,10 @@ SeamlessPeerIdentificationContextTests >> setUp [
 	connection := Mock new.
 	
 	context connection: connection
+]
+
+{ #category : #specs }
+SeamlessPeerIdentificationContextTests >> stubRequestDataSend: aSeamlessRequest [
+
+	^connection stub sendDataPacket: aSeamlessRequest 
 ]

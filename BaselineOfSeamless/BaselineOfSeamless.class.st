@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfSeamless,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfSeamless'
+	#category : #BaselineOfSeamless
 }
 
 { #category : #baselines }
@@ -12,7 +12,7 @@ BaselineOfSeamless >> baseline: spec [
 		spec 
 			baseline: 'Basys' with: [
 				spec
-					repository: 'github://pharo-ide/Basys:v1.0.2';
+					repository: 'github://pharo-ide/Basys:v1.0.4';
 					loads: 'Core' ];
 			project: 'BasysTests' copyFrom: 'Basys' with: [
 				spec loads: 'Tests'];
