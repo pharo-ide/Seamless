@@ -33,8 +33,12 @@ SeamlessRemoteClassCompiler >> evaluate [
 		ifTrue: [ itsSelectionString ]
 		ifFalse: [ source ].
 	self source: selectedSource.
-	doItMethod := self parse methodNode generateWithSource.
 	
+	"Keeping compability with Pharo 7"
+	(OpalCompiler canUnderstand: #transformDoit) 
+		ifTrue: [ self parse. doItMethod := self transformDoit methodNode generateWithSource ] 
+		ifFalse: [ doItMethod := self parse methodNode generateWithSource ].	
+			
 	value := receiver withArgs: (context ifNil: [ #() ] ifNotNil: [ {context} ]) executeMethod:  doItMethod.
 	self compilationContext logged
 		ifTrue: [ Smalltalk globals 
