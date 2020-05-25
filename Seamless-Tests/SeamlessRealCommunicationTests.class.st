@@ -424,7 +424,7 @@ SeamlessRealCommunicationTests >> testGettingEnvironmentFromAddressWhenPassivePe
 
 	remoteEnv isSeamlessProxy should be: true.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysActiveRemotePeer.
+	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysRemotePeer.
 	serverSideNetwork remotePeers anyOne address should equal: self serverAddress.
 	remoteEnv seamlessReference senderPeer should be: serverSideNetwork remotePeers anyOne.
 ]
@@ -1341,7 +1341,8 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
 
 	serverSideNetwork connectionsCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysActiveRemotePeer 
+	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysRemotePeer.
+	serverSideNetwork remotePeers anyOne should isActive
 ]
 
 { #category : #tests }
