@@ -390,7 +390,7 @@ SeamlessRealCommunicationTests >> testFirstConnectionEstablishing [
  
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
-	self forkAndWait: [remotePeer establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection].
 
 	serverSideNetwork connectionsCount should be: 1.
 	clientSideNetwork connectionsCount should be: 1
@@ -1337,7 +1337,7 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
  
 	| remotePeer |
 	remotePeer := serverSideNetwork remotePeerAt: self serverAddress.
-	self forkAndWait: [remotePeer establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection].
 
 	serverSideNetwork connectionsCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1.
@@ -1424,7 +1424,7 @@ SeamlessRealCommunicationTests >> testSendingClientProxyFromServerToClient [
 	remoteProxy := self prepareClientProxyForServerObject: transferedObject.
 	
 	self forkAndWait: [
-		remotePeer establishNewConnection.
+		remotePeer openNewConnection.
 		serverSidePeer := serverSideNetwork remotePeers anyOne.
 		clientEnv := serverSidePeer remoteEnvironment.
 		remoteArrayOnServer := (clientEnv at: #Array) with: remoteProxy. "it will lead to request from server to client with client proxy as parameter"
@@ -1482,7 +1482,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxyWhenTwoConnecti
 	proxy := self prepareClientProxyForServerObject: 'test'. 
 	
 	self forkAndWait: [
-		proxy remotePeer establishNewConnection; establishNewConnection.
+		proxy remotePeer openNewConnection; openNewConnection.
 		result := proxy , ' extra'].
 
 	result should equal: 'test extra'
@@ -1494,8 +1494,8 @@ SeamlessRealCommunicationTests >> testTwiceConnectionEstablishing [
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
 	self forkAndWait: [
-		remotePeer establishNewConnection.
-		remotePeer establishNewConnection].
+		remotePeer openNewConnection.
+		remotePeer openNewConnection].
 
 	serverSideNetwork connectionsCount should be: 2.
 	clientSideNetwork connectionsCount should be: 2
@@ -1509,8 +1509,8 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromDifferentLocalPe
 	remotePeerForClient1 := self connectToServerPeer.
 	client2Network := self networkClass new.
 	remotePeerForClient2 := client2Network remotePeerAt: self serverAddress.
-	self forkAndWait: [remotePeerForClient1 establishNewConnection. 
-			remotePeerForClient2 establishNewConnection].
+	self forkAndWait: [remotePeerForClient1 openNewConnection. 
+			remotePeerForClient2 openNewConnection].
 
 	serverSideNetwork connectionsCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 2.
@@ -1523,7 +1523,7 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromSameLocalPeer [
  
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
-	self forkAndWait: [remotePeer establishNewConnection; establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection; openNewConnection].
 
 	serverSideNetwork connectionsCount should be: 2.
 	clientSideNetwork connectionsCount should be: 2.
