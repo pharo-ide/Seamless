@@ -12,14 +12,13 @@ SeamlessPeerIdentificationRequestTests >> requestClass [
 { #category : #tests }
 SeamlessPeerIdentificationRequestTests >> testExecution [
 
-	[:senderPeer |
-		request peerId: #senderPeerId.
+	| senderPeer |
+	senderPeer := Mock new.
+	senderPeer stub localPeerId willReturn: #localPeerId.
+	request peerId: #senderPeerId.
 		
-		[request executeFor: senderPeer]
-			should strictly satisfy: 
-		[ (senderPeer beIdentifiedAs: #senderPeerId) willReturn: #identifiedPeer.
-		senderPeer localPeerId willReturn: #localPeerId.
-		context returnValue: #localPeerId to: #identifiedPeer]
+	request executeFor: senderPeer.
 	
-	] runWithMocks 
+	[senderPeer ensureIdentity: #senderPeerId.
+	context returnValue: #localPeerId to: senderPeer] should beDoneInOrder
 ]
