@@ -392,8 +392,8 @@ SeamlessRealCommunicationTests >> testFirstConnectionEstablishing [
 	remotePeer := self connectToServerPeer.
 	self forkAndWait: [remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 1.
-	clientSideNetwork connectionsCount should be: 1
+	serverSideNetwork connectionCount should be: 1.
+	clientSideNetwork connectionCount should be: 1
 	
 ]
 
@@ -1339,7 +1339,7 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
 	remotePeer := serverSideNetwork remotePeerAt: self serverAddress.
 	self forkAndWait: [remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1.
 	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysRemotePeer.
 	serverSideNetwork remotePeers anyOne should isActive
@@ -1497,8 +1497,8 @@ SeamlessRealCommunicationTests >> testTwiceConnectionEstablishing [
 		remotePeer openNewConnection.
 		remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
-	clientSideNetwork connectionsCount should be: 2
+	serverSideNetwork connectionCount should be: 2.
+	clientSideNetwork connectionCount should be: 2
 	
 ]
 
@@ -1512,10 +1512,10 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromDifferentLocalPe
 	self forkAndWait: [remotePeerForClient1 openNewConnection. 
 			remotePeerForClient2 openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 2.
-	serverSideNetwork remotePeers first connectionsCount should be: 1.
-	serverSideNetwork remotePeers last connectionsCount should be: 1.	
+	serverSideNetwork remotePeers first connectionCount should be: 1.
+	serverSideNetwork remotePeers last connectionCount should be: 1.	
 ]
 
 { #category : #tests }
@@ -1525,8 +1525,8 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromSameLocalPeer [
 	remotePeer := self connectToServerPeer.
 	self forkAndWait: [remotePeer openNewConnection; openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
-	clientSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
+	clientSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1
 	
 ]
