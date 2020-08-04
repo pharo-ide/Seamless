@@ -19,7 +19,7 @@ BasysRemotePeer >> destroy [
 	Maybe it should be general #close method. But for now it is separate method (peer #close only close all connections but not cleanup any resources and not send any notification).
 	At the end peer will be removed from network"
 	[self sendDataPacket: SeamlessPeerDestroyedRequest new]
-			on: ConnectionTimedOut, OPTimedOutError, BasysIdentificationFailed do: [ :err | ].
+			on: ConnectionTimedOut, BasysIdentificationFailed do: [ :err | ].
 	network cleanDestroyedPeer: self
 ]
 

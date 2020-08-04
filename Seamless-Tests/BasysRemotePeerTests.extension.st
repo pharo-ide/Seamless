@@ -51,16 +51,6 @@ BasysRemotePeerTests >> testDestroyShouldIgnoreIdentificationFailureDuringPeersN
 ]
 
 { #category : #'*Seamless-Tests' }
-BasysRemotePeerTests >> testDestroyShouldIgnoreTimeoutProblemDuringPeersNotifications [
-
-	(peer stub sendDataPacket: Any) willRaise: OPTimedOutError new.
-	
-	peer destroy.
-		
-	network should receive cleanDestroyedPeer: peer
-]
-
-{ #category : #'*Seamless-Tests' }
 BasysRemotePeerTests >> testDestroyShouldSendNotificationRequestToRemoteSide [
 	
 	(peer stub sendDataPacket: Arg request) willReturnYourself.
