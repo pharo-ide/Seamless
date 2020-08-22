@@ -126,8 +126,8 @@ SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
 
 	aRemotePeer close.
 	distributedObjects removeObjectsDistributedBy: aRemotePeer.
-	remotePeers remove: aRemotePeer ifAbsent: [].
-	remotePeers ifEmpty: [ distributedObjects clear ]
+	peerRegistry remotePeers remove: aRemotePeer ifAbsent: [].
+	peerRegistry remotePeers ifEmpty: [ distributedObjects clear ]
 ]
 
 { #category : #accessing }
@@ -143,7 +143,7 @@ SeamlessNetwork >> destroy [
 	Special request will be send to all connected peers to notify them. Then all connections and distributed objects will be cleaned.
 	Maybe it should be general #close method. But for now it is separate method (network #close only close peers with existing connections).
 	When peer is destroying it removes itself from network. That's why we need to enumeration on copy"
-	remotePeers copy do: [ :each |	each destroy]
+	peerRegistry remotePeers copy do: [ :each |	each destroy]
 ]
 
 { #category : #accessing }
