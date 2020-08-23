@@ -121,15 +121,6 @@ SeamlessNetwork >> addTransferStrategy: aTransferStrategy priority: anInteger [
 	self addTransferStrategy: aTransferStrategy
 ]
 
-{ #category : #controlling }
-SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
-
-	aRemotePeer close.
-	distributedObjects removeObjectsDistributedBy: aRemotePeer.
-	peerRegistry remotePeers remove: aRemotePeer ifAbsent: [].
-	peerRegistry remotePeers ifEmpty: [ distributedObjects clear ]
-]
-
 { #category : #accessing }
 SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
 	^ self requestProcessingTimeout
@@ -183,6 +174,11 @@ SeamlessNetwork >> initialize [
 	transport := SeamlessObjectTransporter default
 ]
 
+{ #category : #factory }
+SeamlessNetwork >> newRemotePeer [ 
+	^SeamlessRemotePeer inside: self
+]
+
 { #category : #accessing }
 SeamlessNetwork >> objectFor: aSeamlessObjectReference [
 
@@ -230,6 +226,14 @@ SeamlessNetwork >> referenceFor: anObject ifNewUse: refCreationBlock [
 SeamlessNetwork >> removeDistributedObject: anObject [
 
 	distributedObjects remove: anObject
+]
+
+{ #category : #accessing }
+SeamlessNetwork >> removeRemotePeer: aRemotePeer [
+	super removeRemotePeer: aRemotePeer.
+	
+	distributedObjects removeObjectsDistributedBy: aRemotePeer.
+	peerRegistry isEmpty ifTrue: [ distributedObjects clear ]
 ]
 
 { #category : #accessing }

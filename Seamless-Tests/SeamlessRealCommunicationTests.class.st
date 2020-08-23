@@ -56,33 +56,34 @@ SeamlessRealCommunicationTests >> setUp [
 ]
 
 { #category : #tests }
-SeamlessRealCommunicationTests >> testDestroyedNetworkShouldFailAnyRemoteRequestsOnClient [
+SeamlessRealCommunicationTests >> testClosedNetworkShouldFailAnyRemoteRequestsOnClient [
  
 	| remoteEnv |
 	 
 	self forkAndWait: [
 		remoteEnv := clientSideNetwork environmentAt: self serverAddress.
-		clientSideNetwork destroy.
+		clientSideNetwork close.
 		[ remoteEnv at: #Rectangle ] should raise: BasysRemotePeerClosed
 	]
 ]
 
 { #category : #tests }
-SeamlessRealCommunicationTests >> testDestroyingNetworkShouldCleanAllDistributedObjects [
- 
-	| remoteEnv |
+SeamlessRealCommunicationTests >> testClosedNetworkShouldHaveCleanDistributedObjects [
+ 	| remoteEnv |
 	 
 	self forkAndWait: [
 		remoteEnv := clientSideNetwork environmentAt: self serverAddress.
-		clientSideNetwork destroy.
+		clientSideNetwork distributedObjects should not be isEmpty.
+		serverSideNetwork distributedObjects should not be isEmpty.
+		
+		clientSideNetwork close.
 	].
-	100 milliSeconds wait. "destroying request is async. So we should give a time to clean objects"
+	100 milliSeconds wait. "close request is async. So we should give a time to clean objects"
 	
 	clientSideNetwork distributedObjects should be isEmpty.
 	clientSideNetwork remotePeers should be isEmpty.
 	serverSideNetwork distributedObjects should be isEmpty.
-	serverSideNetwork remotePeers should be isEmpty.
-	
+	serverSideNetwork remotePeers should be isEmpty
 ]
 
 { #category : #tests }
