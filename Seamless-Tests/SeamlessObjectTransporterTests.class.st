@@ -16,7 +16,7 @@ SeamlessObjectTransporterTests >> setUp [
 	
 	network := SeamlessNetwork new.
 	transporter := SeamlessObjectTransporter default 
-		newTransporterFor: network toTransferBy: (BasysRemotePeer new id: UUID new).
+		newTransporterFor: network toTransferBy: (SeamlessRemotePeer new id: UUID new).
 	
 	connection := Mock new.
 	transferBuffer := ByteArray new: 10000.

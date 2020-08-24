@@ -425,7 +425,7 @@ SeamlessRealCommunicationTests >> testGettingEnvironmentFromAddressWhenPassivePe
 
 	remoteEnv isSeamlessProxy should be: true.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysRemotePeer.
+	serverSideNetwork remotePeers anyOne should beInstanceOf: SeamlessRemotePeer.
 	serverSideNetwork remotePeers anyOne address should equal: self serverAddress.
 	remoteEnv seamlessReference senderPeer should be: serverSideNetwork remotePeers anyOne.
 ]
@@ -457,7 +457,6 @@ SeamlessRealCommunicationTests >> testGettingLargeInteger [
 { #category : #tests }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 	| remotePeer result state |
-	self timeLimit: 10 minute.
 	remotePeer := self connectToServerPeer.
 	state := SeamlessLocalVariableState of: #remoteVar.
 	state value: #varValue.
@@ -473,7 +472,6 @@ SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 { #category : #tests }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItIsUnassigned [
 	| remotePeer result state |
-	self timeLimit: 10 minute.
 	remotePeer := self connectToServerPeer.
 	state := SeamlessLocalVariableState of: #remoteVar.
 	state should be isUnassigned.
@@ -1342,8 +1340,8 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
 
 	serverSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysRemotePeer.
-	serverSideNetwork remotePeers anyOne should isActive
+	serverSideNetwork remotePeers anyOne should beInstanceOf: SeamlessRemotePeer.
+	serverSideNetwork remotePeers anyOne should be isActive
 ]
 
 { #category : #tests }

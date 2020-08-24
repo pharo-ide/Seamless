@@ -35,6 +35,7 @@ SeamlessRemotePeerTests >> testClosingByRemoteSideShouldNotSendCloseRequest [
 { #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldIgnoreConnectionTimeoutDuringClosePeerRequest [
 
+	peer stub isConnected willReturn: true.
 	(peer stub sendDataPacket: Any) willRaise: ConnectionTimedOut new.
 	
 	peer close.
@@ -45,6 +46,7 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreConnectionTimeoutDuringClosePe
 { #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClosePeerRequest [
 
+	peer stub isConnected willReturn: true.
 	(peer stub sendDataPacket: Any) willRaise: BasysIdentificationFailed new.
 	
 	peer close.
@@ -55,6 +57,7 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClo
 { #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldIgnoreNoConnectionErrorDuringClosePeerRequest [
 
+	peer stub isConnected willReturn: true.
 	(peer stub sendDataPacket: Any) willRaise: BasysConnectionDoesNotExist new.
 	
 	peer close.
@@ -63,8 +66,18 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreNoConnectionErrorDuringClosePe
 ]
 
 { #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSide [
+SeamlessRemotePeerTests >> testClosingShouldNotSendCloseRequestWhenItIsNotConnected [
+	peer stub isConnected willReturn: false.
+		
+	peer close.
 	
+	peer should not receive sendDataPacket: Any.
+	peer should be isClosed
+]
+
+{ #category : #tests }
+SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIsConnected [
+	peer stub isConnected willReturn: true.
 	(peer stub sendDataPacket: Arg request) 
 		when: [ peer isClosed ] is: false;
 		willReturnYourself.		
@@ -79,6 +92,7 @@ SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSide [
 SeamlessRemotePeerTests >> testClosingShouldSignalUnexpectedProblemsDuringClosePeerRequest [
 
 	| unexpectedProblem |
+	peer stub isConnected willReturn: true.
 	unexpectedProblem := Error new.
 	(peer stub sendDataPacket: Any) willRaise: unexpectedProblem.
 		
