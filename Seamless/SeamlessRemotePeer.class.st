@@ -45,7 +45,7 @@ SeamlessRemotePeer >> createSyncRequestContext [
 { #category : #requests }
 SeamlessRemotePeer >> evaluate: aBlock [
 
-	^self createSyncRequestContext sendRequest: (SeamlessBlockEvaluationRequest with: aBlock asLocalObject)
+	^self createSyncRequestContext sendRequest: (SeamlessBlockEvaluationRequest with: aBlock)
 ]
 
 { #category : #requests }

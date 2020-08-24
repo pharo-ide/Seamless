@@ -132,20 +132,6 @@ SeamlessRemotePeerTests >> testRemoteBlockAsyncEvaluation [
 ]
 
 { #category : #tests }
-SeamlessRemotePeerTests >> testRemoteBlockEvaluationShouldConvertGivenBlockToLocalObject [
-
-	| context block |
-	context := Mock new.
-	peer stub createSyncRequestContext willReturn: context.
-	context stub sendRequest: Arg request.
-	block := Mock new.
-			
-	peer evaluate: block.
-
-	Arg request where valuable should beReturnedFrom: [ block asLocalObject ]
-]
-
-{ #category : #tests }
 SeamlessRemotePeerTests >> testRemoteBlockEvaluationShouldReturnResultOfRequestSend [
 
 	| context result |
