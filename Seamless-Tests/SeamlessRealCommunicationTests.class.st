@@ -48,6 +48,11 @@ SeamlessRealCommunicationTests >> prepareClientProxyForServerObject: serverSideO
 ]
 
 { #category : #running }
+SeamlessRealCommunicationTests >> runCaseManaged [
+	^DefaultExecutionEnvironment beActiveDuring: [ self runCase ]
+]
+
+{ #category : #running }
 SeamlessRealCommunicationTests >> setUp [
 	SeamlessObjectTransporter createDefault.
 	super setUp.
