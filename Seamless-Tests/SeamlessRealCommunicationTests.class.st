@@ -105,6 +105,24 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockAsynchronously [
 ]
 
 { #category : #tests }
+SeamlessRealCommunicationTests >> testEvaluatingBlockWhenConnectionLostDuringExecution [
+	| remotePeer error |
+	remotePeer := self connectToServerPeer.
+	self fork: [
+		[remotePeer evaluate: [ 
+			200 milliSeconds wait. 
+			"Following code is to avoid any references to objects/classes inside remote block.
+			Termination needs to avoid an error from remote side during result delivery"
+			(#SmalltalkImage asClass current at: #Processor) activeProcess terminate ]] 
+			on: Error do: [:err | error := err ].
+	]. 
+
+	20 milliSeconds wait. 
+	remotePeer closeConnections.	
+	[error] should takeAWhile to beInstanceOf: SeamlessResultDeliveryUnavailable
+]
+
+{ #category : #tests }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichAccessLocalTempWhichTransferedByReference [
 	| remotePeer result rect |
 	remotePeer := self connectToServerPeer.
