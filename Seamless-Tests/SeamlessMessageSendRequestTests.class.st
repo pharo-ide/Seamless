@@ -10,6 +10,60 @@ SeamlessMessageSendRequestTests >> requestClass [
 ]
 
 { #category : #tests }
+SeamlessMessageSendRequestTests >> testExecutionWithBasysNoConnectionRaisedDuringBlockExecution [
+
+	| error |
+	error := BasysConnectionDoesNotExist new.	
+	request valuable: [error signal].
+	context stub return: Arg result to: #senderPeer.		
+		
+	request executeFor: #senderPeer.
+		
+	Arg result should beInstanceOf: SeamlessThrowExceptionResult.
+	Arg result where exception should beInstanceOf: SeamlessRemoteException.
+	Arg result where exception messageText should equal: error printString
+]
+
+{ #category : #tests }
+SeamlessMessageSendRequestTests >> testExecutionWithBasysNoConnectionRaisedDuringResultReturn [
+
+	request valuable: [ #resultValue ].	
+	(context stub return: (Kind of: SeamlessReturnValueResult) to: #senderPeer) 
+		willRaise: BasysConnectionDoesNotExist new.
+		
+	request executeFor: #senderPeer.
+			
+	(context should receive return: Any to: Any) once
+]
+
+{ #category : #tests }
+SeamlessMessageSendRequestTests >> testExecutionWithBasysPeerClosedErrorRaisedDuringBlockExecution [
+
+	| error |
+	error := BasysRemotePeerClosed new.	
+	request valuable: [error signal].
+	context stub return: Arg result to: #senderPeer.		
+		
+	request executeFor: #senderPeer.
+		
+	Arg result should beInstanceOf: SeamlessThrowExceptionResult.
+	Arg result where exception should beInstanceOf: SeamlessRemoteException.
+	Arg result where exception messageText should equal: error printString
+]
+
+{ #category : #tests }
+SeamlessMessageSendRequestTests >> testExecutionWithBasysPeerClosedErrorRaisedDuringResultReturn [
+
+	request valuable: [ #resultValue ].	
+	(context stub return: (Kind of: SeamlessReturnValueResult) to: #senderPeer) 
+		willRaise: BasysRemotePeerClosed new.
+		
+	request executeFor: #senderPeer.
+			
+	(context should receive return: Any to: Any) once
+]
+
+{ #category : #tests }
 SeamlessMessageSendRequestTests >> testExecutionWithHaltRaised [
 
 	[:messageSend |

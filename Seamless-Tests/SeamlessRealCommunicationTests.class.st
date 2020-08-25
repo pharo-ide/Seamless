@@ -109,11 +109,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhenConnectionLostDuringExe
 	| remotePeer error |
 	remotePeer := self connectToServerPeer.
 	self fork: [
-		[remotePeer evaluate: [ 
-			200 milliSeconds wait. 
-			"Following code is to avoid any references to objects/classes inside remote block.
-			Termination needs to avoid an error from remote side during result delivery"
-			(#SmalltalkImage asClass current at: #Processor) activeProcess terminate ]] 
+		[remotePeer evaluate: [ 200 milliSeconds wait ]] 
 			on: Error do: [:err | error := err ].
 	]. 
 

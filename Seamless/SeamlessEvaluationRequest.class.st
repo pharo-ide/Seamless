@@ -101,9 +101,10 @@ SeamlessEvaluationRequest >> processPrimitiveFailure: aPrimitiveFailed [
 { #category : #execution }
 SeamlessEvaluationRequest >> returnResult: aSeamlessRequestResult to: senderPeer [
 
-	context return: aSeamlessRequestResult to: senderPeer.
-	
-	resultBytes := aSeamlessRequestResult transferredBytes
+	[context return: aSeamlessRequestResult to: senderPeer.	
+	resultBytes := aSeamlessRequestResult transferredBytes]
+		on: BasysConnectionDoesNotExist, BasysRemotePeerClosed do: [ :err | 
+			('SeamlessRequest cant return result: ' , err printString) logCr ]
 ]
 
 { #category : #accessing }
