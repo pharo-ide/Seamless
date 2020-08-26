@@ -80,11 +80,6 @@ SeamlessProxy >> isSeamlessProxy [
 ]
 
 { #category : #testing }
-SeamlessProxy >> isSeamlessReference [
-	^false
-]
-
-{ #category : #testing }
 SeamlessProxy >> isTostValueObject [
 	^false
 ]

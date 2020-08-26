@@ -18,7 +18,7 @@ SeamlessRemotePeer >> close [
 	self isConnected ifFalse: [ ^super close ].
 	
 	[self sendDataPacket: SeamlessClosePeerRequest new]
-			on: ConnectionTimedOut, BasysIdentificationFailed , BasysConnectionDoesNotExist 
+			on: ConnectionTimedOut, BasysIdentificationFailed , BasysNoConnection 
 			do: [ :err | ].
 			
 	super close

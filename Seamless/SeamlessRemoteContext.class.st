@@ -12,7 +12,9 @@ Class {
 { #category : #operations }
 SeamlessRemoteContext >> return: aSeamlessRequestResult to: senderPeer [
 	
-	senderPeer sendDataPacket: (SeamlessDeliverResultRequest result: aSeamlessRequestResult to: self).
-	
+	[senderPeer sendDataPacket: (SeamlessDeliverResultRequest result: aSeamlessRequestResult to: self)]
+		on: BasysNoConnection, BasysRemotePeerClosed do: [ :err | 
+			('SeamlessRequestResult cant be returned: ' , err printString) logCr ].
+		
 	senderPeer network removeDistributedObject: self
 ]

@@ -10,17 +10,57 @@ SeamlessRemoteContextTests >> contextClass [
 ]
 
 { #category : #tests }
-SeamlessRemoteContextTests >> testReturningResult [
+SeamlessRemoteContextTests >> testIgnoresClosedPeerErrorDuringResultReturn [
 	
-	[:senderPeer :network |
-		[ context return: #result to: senderPeer]
-			should strictly satisfy: 
-		[ senderPeer sendDataPacket: Arg request.
-		senderPeer network willReturn: network.
-		network removeDistributedObject: context].
+	| senderPeer network |
+	network := Mock new.
+	senderPeer := Mock new.
+	senderPeer stub network willReturn: network.
+	(senderPeer stub sendDataPacket: Any) willRaise: BasysRemotePeerClosed new.
 	
-		Arg request should beInstanceOf: SeamlessDeliverResultRequest.
-		Arg request where context should be: context.
-		Arg request where result should be: #result
-	 ] runWithMocks 
+	context return: #result to: senderPeer.
+	
+	network should receive removeDistributedObject: context
+]
+
+{ #category : #tests }
+SeamlessRemoteContextTests >> testIgnoresNoConnectionErrorDuringResultReturn [
+	
+	| senderPeer network |
+	network := Mock new.
+	senderPeer := Mock new.
+	senderPeer stub network willReturn: network.
+	(senderPeer stub sendDataPacket: Any) willRaise: BasysNoConnection new.
+	
+	context return: #result to: senderPeer.
+	
+	network should receive removeDistributedObject: context
+]
+
+{ #category : #tests }
+SeamlessRemoteContextTests >> testRemovesItselfFromDistributedObjectsWhenCompletesResultReturn [
+	
+	| senderPeer network |
+	network := Mock new.
+	senderPeer := Mock new.
+	senderPeer stub network willReturn: network.
+	
+	context return: #result to: senderPeer.
+	
+	[senderPeer sendDataPacket: Any.
+	network removeDistributedObject: context] should beDoneInOrder 
+]
+
+{ #category : #tests }
+SeamlessRemoteContextTests >> testSendsRequestToReturnResult [
+	
+	| senderPeer |
+	senderPeer := Mock new.
+	senderPeer stub sendDataPacket: Arg request.
+	
+	context return: #result to: senderPeer.
+	
+	Arg request should beInstanceOf: SeamlessDeliverResultRequest.
+	Arg request where context should be: context.
+	Arg request where result should be: #result
 ]

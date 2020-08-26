@@ -112,11 +112,6 @@ SeamlessObjectReference >> isConnectedToRemotePeer [
 	^senderPeer isConnected
 ]
 
-{ #category : #testing }
-SeamlessObjectReference >> isSeamlessReference [
-	^true
-]
-
 { #category : #operations }
 SeamlessObjectReference >> loadDeepCopy: aSeamlessProxy [
 

@@ -58,7 +58,7 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClo
 SeamlessRemotePeerTests >> testClosingShouldIgnoreNoConnectionErrorDuringClosePeerRequest [
 
 	peer stub isConnected willReturn: true.
-	(peer stub sendDataPacket: Any) willRaise: BasysConnectionDoesNotExist new.
+	(peer stub sendDataPacket: Any) willRaise: BasysNoConnection new.
 	
 	peer close.
 		

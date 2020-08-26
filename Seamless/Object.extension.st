@@ -36,11 +36,6 @@ Object >> isSeamlessProxy [
 ]
 
 { #category : #'*Seamless' }
-Object >> isSeamlessReference [
-	^false
-]
-
-{ #category : #'*Seamless' }
 Object >> nameForSeamlessStatistics [
 
 	^self class name
