@@ -193,10 +193,10 @@ SeamlessNetwork >> process: aSeamlessRequest receivedFrom: aRemotePeer [
 ]
 
 { #category : #operations }
-SeamlessNetwork >> receiveIncomingDataPacketFrom: aRemotePeer by: aBasysConnection [
+SeamlessNetwork >> receiveObjectBy: aBasysConnection [
 
 	| transporter |
-	transporter := transport newTransporterFor: self toTransferBy: aRemotePeer.
+	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
 	
 	^transporter receiveObjectBy: aBasysConnection
 ]
@@ -238,7 +238,7 @@ SeamlessNetwork >> requestProcessingTimeout: aDuration [
 ]
 
 { #category : #operations }
-SeamlessNetwork >> sendDataPacket: aSeamlessRequest by: aBasysConnection [
+SeamlessNetwork >> sendObject: aSeamlessRequest by: aBasysConnection [
 
 	| transporter |
 	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.

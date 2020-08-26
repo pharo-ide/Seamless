@@ -29,14 +29,14 @@ SeamlessRemotePeerTests >> testClosingByRemoteSideShouldNotSendCloseRequest [
 	
 	peer closeByRemoteSide.
 		
-	peer should not receive sendDataPacket: Any
+	peer should not receive sendObject: Any
 ]
 
 { #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldIgnoreConnectionTimeoutDuringClosePeerRequest [
 
 	peer stub isConnected willReturn: true.
-	(peer stub sendDataPacket: Any) willRaise: ConnectionTimedOut new.
+	(peer stub sendObject: Any) willRaise: ConnectionTimedOut new.
 	
 	peer close.
 		
@@ -47,7 +47,7 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreConnectionTimeoutDuringClosePe
 SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClosePeerRequest [
 
 	peer stub isConnected willReturn: true.
-	(peer stub sendDataPacket: Any) willRaise: BasysIdentificationFailed new.
+	(peer stub sendObject: Any) willRaise: BasysIdentificationFailed new.
 	
 	peer close.
 		
@@ -58,7 +58,7 @@ SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClo
 SeamlessRemotePeerTests >> testClosingShouldIgnoreNoConnectionErrorDuringClosePeerRequest [
 
 	peer stub isConnected willReturn: true.
-	(peer stub sendDataPacket: Any) willRaise: BasysNoConnection new.
+	(peer stub sendObject: Any) willRaise: BasysNoConnection new.
 	
 	peer close.
 		
@@ -71,14 +71,14 @@ SeamlessRemotePeerTests >> testClosingShouldNotSendCloseRequestWhenItIsNotConnec
 		
 	peer close.
 	
-	peer should not receive sendDataPacket: Any.
+	peer should not receive sendObject: Any.
 	peer should be isClosed
 ]
 
 { #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIsConnected [
 	peer stub isConnected willReturn: true.
-	(peer stub sendDataPacket: Arg request) 
+	(peer stub sendObject: Arg request) 
 		when: [ peer isClosed ] is: false;
 		willReturnYourself.		
 	
@@ -94,7 +94,7 @@ SeamlessRemotePeerTests >> testClosingShouldSignalUnexpectedProblemsDuringCloseP
 	| unexpectedProblem |
 	peer stub isConnected willReturn: true.
 	unexpectedProblem := Error new.
-	(peer stub sendDataPacket: Any) willRaise: unexpectedProblem.
+	(peer stub sendObject: Any) willRaise: unexpectedProblem.
 		
 	[peer close] should raise: unexpectedProblem.
 		
@@ -123,7 +123,7 @@ SeamlessRemotePeerTests >> testCreateSyncRequestContext [
 { #category : #tests }
 SeamlessRemotePeerTests >> testRemoteBlockAsyncEvaluation [
 
-	(peer stub sendDataPacket: Arg request) will: [].
+	(peer stub sendObject: Arg request) will: [].
 			
 	peer evaluateAsync: #block.
 

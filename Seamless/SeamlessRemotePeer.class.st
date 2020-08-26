@@ -17,7 +17,7 @@ SeamlessRemotePeer >> close [
 	At the end peer will be removed from the network. See super implementation for details"
 	self isConnected ifFalse: [ ^super close ].
 	
-	[self sendDataPacket: SeamlessClosePeerRequest new]
+	[self sendObject: SeamlessClosePeerRequest new]
 			on: ConnectionTimedOut, BasysIdentificationFailed , BasysNoConnection 
 			do: [ :err | ].
 			
@@ -51,7 +51,7 @@ SeamlessRemotePeer >> evaluate: aBlock [
 { #category : #requests }
 SeamlessRemotePeer >> evaluateAsync: aBlock [
 
-	self sendDataPacket: (SeamlessBlockEvaluationRequest with: aBlock)
+	self sendObject: (SeamlessBlockEvaluationRequest with: aBlock)
 ]
 
 { #category : #requests }

@@ -213,7 +213,7 @@ SeamlessObjectTransporter >> receiveObjectBy: aBasysConnection [
 		compressionStream := GZipReadStream on: buffer readStream.
 		buffer := compressionStream contents].
 	
-	object := self receiveObjectFrom: buffer readStream.	
+	object := self receiveObjectBy: buffer readStream.	
 	object ownBytes: size.
 	
 	^object

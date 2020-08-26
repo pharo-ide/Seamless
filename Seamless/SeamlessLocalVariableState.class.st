@@ -123,6 +123,6 @@ SeamlessLocalVariableState >> write: anObject [
 	
 	writeMessage := MessageSend receiver: remoteVariable selector: #write: argument: anObject.
 	[remoteVariable remotePeer 
-		sendDataPacket: (SeamlessMessageSendRequest with: writeMessage)] ifError: [  ].
+		sendObject: (SeamlessMessageSendRequest with: writeMessage)] ifError: [  ].
 	^anObject.
 ]

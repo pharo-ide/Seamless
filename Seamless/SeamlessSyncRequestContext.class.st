@@ -28,7 +28,7 @@ SeamlessSyncRequestContext >> createSeamlessReference [
 
 { #category : #private }
 SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
-	receiverPeer sendDataPacket: aSeamlessRequest 
+	receiverPeer sendObject: aSeamlessRequest 
 ]
 
 { #category : #accessing }

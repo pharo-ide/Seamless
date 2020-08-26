@@ -16,7 +16,7 @@ SeamlessRemoteContextTests >> testIgnoresClosedPeerErrorDuringResultReturn [
 	network := Mock new.
 	senderPeer := Mock new.
 	senderPeer stub network willReturn: network.
-	(senderPeer stub sendDataPacket: Any) willRaise: BasysRemotePeerClosed new.
+	(senderPeer stub sendObject: Any) willRaise: BasysRemotePeerClosed new.
 	
 	context return: #result to: senderPeer.
 	
@@ -30,7 +30,7 @@ SeamlessRemoteContextTests >> testIgnoresNoConnectionErrorDuringResultReturn [
 	network := Mock new.
 	senderPeer := Mock new.
 	senderPeer stub network willReturn: network.
-	(senderPeer stub sendDataPacket: Any) willRaise: BasysNoConnection new.
+	(senderPeer stub sendObject: Any) willRaise: BasysNoConnection new.
 	
 	context return: #result to: senderPeer.
 	
@@ -47,7 +47,7 @@ SeamlessRemoteContextTests >> testRemovesItselfFromDistributedObjectsWhenComplet
 	
 	context return: #result to: senderPeer.
 	
-	[senderPeer sendDataPacket: Any.
+	[senderPeer sendObject: Any.
 	network removeDistributedObject: context] should beDoneInOrder 
 ]
 
@@ -56,7 +56,7 @@ SeamlessRemoteContextTests >> testSendsRequestToReturnResult [
 	
 	| senderPeer |
 	senderPeer := Mock new.
-	senderPeer stub sendDataPacket: Arg request.
+	senderPeer stub sendObject: Arg request.
 	
 	context return: #result to: senderPeer.
 	
