@@ -12,9 +12,7 @@ SeamlessGetEnvironmentRequestTests >> requestClass [
 { #category : #tests }
 SeamlessGetEnvironmentRequestTests >> testExecution [
 
-	[
-		[request executeFor: #senderPeer]
-			should strictly satisfy: 
-		[context returnValue: Smalltalk to: #senderPeer]
-	] runWithMocks 
+	request executeFor: #senderPeer.
+	
+	context should receive returnValue: Smalltalk to: #senderPeer
 ]

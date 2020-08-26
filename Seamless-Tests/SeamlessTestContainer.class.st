@@ -2,9 +2,10 @@ Class {
 	#name : #SeamlessTestContainer,
 	#superclass : #Object,
 	#instVars : [
+		'name',
 		'content'
 	],
-	#category : 'Seamless-Tests'
+	#category : #'Seamless-Tests'
 }
 
 { #category : #'instance creation' }
@@ -43,7 +44,7 @@ SeamlessTestContainer >> name: anObject [
 { #category : #printing }
 SeamlessTestContainer >> printOn: aStream [
 	super printOn: aStream.
-	
+	 
 	aStream nextPut: $(.
 	name printOn: aStream.
 	aStream nextPut: $).
