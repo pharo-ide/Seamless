@@ -15,7 +15,7 @@ SeamlessObjectTransporterTests >> setUp [
 	super setUp.
 	
 	network := SeamlessNetwork new.
-	transporter := SeamlessObjectTransporter default 
+	transporter := SeamlessRequestTransporter default 
 		newTransporterFor: network toTransferBy: (SeamlessRemotePeer new id: UUID new).
 	
 	connection := Mock new.
@@ -30,8 +30,8 @@ SeamlessObjectTransporterTests >> testTransferAndReceiveObjectWithOneReference [
 	| transferedObject |
 	
 	network transferByReference: (Identical to: #value).
-	transporter sendObject: (SeamlessRequestStub with: #key -> #value) by: connection.
-	transferedObject := transporter receiveObjectBy: connection.
+	transporter sendRequest: (SeamlessRequestStub with: #key -> #value) by: connection.
+	transferedObject := transporter receiveRequestBy: connection.
 	
 	transferedObject should beInstanceOf: SeamlessRequestStub.
 	transferedObject content should beInstanceOf: Association.
@@ -45,8 +45,8 @@ SeamlessObjectTransporterTests >> testTransferAndReceiveObjectWithOneReferencedC
 	| transferedObject |
 	
 	network transferByReferencedCopy: (Identical to: #value).
-	transporter sendObject: (SeamlessRequestStub with: #key -> #value) by: connection.
-	transferedObject := transporter receiveObjectBy: connection.
+	transporter sendRequest: (SeamlessRequestStub with: #key -> #value) by: connection.
+	transferedObject := transporter receiveRequestBy: connection.
 	
 	transferedObject should beInstanceOf: SeamlessRequestStub.
 	transferedObject content should beInstanceOf: Association.
@@ -62,8 +62,8 @@ SeamlessObjectTransporterTests >> testTransferAndReceiveObjectWithOneReferencedC
 	network transferByReferencedCopy: (Identical to: #value).
 	network transferByValue: (Instance of: Point).
 	network transferByValue: (Instance of: Array).
-	transporter sendObject: (SeamlessRequestStub with: {#value. 10@20}) by: connection.
-	transferedObject := transporter receiveObjectBy: connection.
+	transporter sendRequest: (SeamlessRequestStub with: {#value. 10@20}) by: connection.
+	transferedObject := transporter receiveRequestBy: connection.
 	
 	transferedObject should beInstanceOf: SeamlessRequestStub.
 	transferedObject content should equal: { #value. 10@20 }
@@ -76,8 +76,8 @@ SeamlessObjectTransporterTests >> testTransferAndReceiveObjectWithTwoSameReferen
 	
 	network transferByReference: (Identical to: #value).
 	network transferByValue: (Instance of: Array).
-	transporter sendObject: (SeamlessRequestStub with: {#value. #value}) by: connection.
-	transferedObject := transporter receiveObjectBy: connection.
+	transporter sendRequest: (SeamlessRequestStub with: {#value. #value}) by: connection.
+	transferedObject := transporter receiveRequestBy: connection.
 	
 	transferedObject should beInstanceOf: SeamlessRequestStub.
 	transferedObject content should equal: {#value. #value}

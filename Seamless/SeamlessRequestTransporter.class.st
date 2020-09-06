@@ -1,5 +1,5 @@
 "
-I am responsible for transfer objects between Seamless peers.
+I am responsible for transfer of Seamless requests between Seamless peers.
 
 I extend TostTransporter by defining appropriate format for data exchange. Particulary I use SeamlessSubstitutionTostFormat  which implements object substitution according to their transfer strategies.
 
@@ -8,10 +8,10 @@ SeamlessNetwork uses my default instance as transprot to instantiate concrete tr
 
 	transporter newTransporterFor: aSeamlessNetwork toTransferBy: aRemotePeer
 
-SeamlessNetwork uses me to send and receive objects from connections:
+SeamlessNetwork uses me to send and receive requests to and from connections:
 
-	transporter sendObject: anObject by: aBasysConnection
-	transporter receiveObjectBy: aBasicConnection
+	transporter sendRequest: anObject by: aBasysConnection
+	transporter receiveRequestBy: aBasicConnection
 	
 I maintain objectSubstitutions dictionary to control how specific objects should be transferred. Transport strategies command me for this using following messages:
 
@@ -41,7 +41,7 @@ Internal Representation and Key Implementation Points.
 	objectsByDeepCopy:		<IdentityDictionary>
 "
 Class {
-	#name : #SeamlessObjectTransporter,
+	#name : #SeamlessRequestTransporter,
 	#superclass : #TostTransporter,
 	#instVars : [
 		'network',
@@ -52,11 +52,11 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : 'Seamless-Transport'
+	#category : #'Seamless-Transport'
 }
 
 { #category : #default }
-SeamlessObjectTransporter class >> collectWellKnownClasses [
+SeamlessRequestTransporter class >> collectWellKnownClasses [
 
 	| wellKnownClasses |
 	wellKnownClasses := (SortedCollection new: 255) sortBlock: [:a :b | a name < b name].
@@ -67,7 +67,7 @@ SeamlessObjectTransporter class >> collectWellKnownClasses [
 ]
 
 { #category : #default }
-SeamlessObjectTransporter class >> collectWellKnownObjects [
+SeamlessRequestTransporter class >> collectWellKnownObjects [
 
 	^TostWellKnownObjectFormat default objects, 
 		#(name printString asString class printOn: at: at:put: size do: select: collect: reject:
@@ -78,7 +78,7 @@ SeamlessObjectTransporter class >> collectWellKnownObjects [
 ]
 
 { #category : #default }
-SeamlessObjectTransporter class >> createDefault [
+SeamlessRequestTransporter class >> createDefault [
 
 	^default := self new 
 		formats: { 
@@ -91,25 +91,25 @@ SeamlessObjectTransporter class >> createDefault [
 ]
 
 { #category : #default }
-SeamlessObjectTransporter class >> default [
+SeamlessRequestTransporter class >> default [
 	^default ifNil: [self createDefault]
 ]
 
 { #category : #'instance creation' }
-SeamlessObjectTransporter class >> forTransferOver: aSeamlessNetwork by: aRemotePeer [
+SeamlessRequestTransporter class >> forTransferOver: aSeamlessNetwork by: aRemotePeer [
 	^self new
 		network: aSeamlessNetwork;
 		remotePeer: aRemotePeer
 ]
 
 { #category : #default }
-SeamlessObjectTransporter class >> resetDefault [
+SeamlessRequestTransporter class >> resetDefault [
 
 	^default := nil
 ]
 
 { #category : #'sending-private' }
-SeamlessObjectTransporter >> activateSubstitutionFor: anObject by: aBlock [
+SeamlessRequestTransporter >> activateSubstitutionFor: anObject by: aBlock [
 
 	| substitution |
 	substitution := objectSubstitutions removeKey: anObject ifAbsent: [ ^self ].
@@ -117,20 +117,20 @@ SeamlessObjectTransporter >> activateSubstitutionFor: anObject by: aBlock [
 ]
 
 { #category : #'sending-deep copy' }
-SeamlessObjectTransporter >> deepCopyTransferFinishedFor: anObject [
+SeamlessRequestTransporter >> deepCopyTransferFinishedFor: anObject [
 
 	objectsByDeepCopy removeKey: anObject.
 	objectsByDeepCopy ifEmpty: [ objectsByDeepCopy := nil ]
 ]
 
 { #category : #'sending-deep copy' }
-SeamlessObjectTransporter >> deepCopyTransferStartedFor: anObject at: pathIndex [
+SeamlessRequestTransporter >> deepCopyTransferStartedFor: anObject at: pathIndex [
 
 	objectsByDeepCopy at: anObject put: pathIndex
 ]
 
 { #category : #'sending-deep copy' }
-SeamlessObjectTransporter >> findActiveDeepCopyNodeAndIndex [
+SeamlessRequestTransporter >> findActiveDeepCopyNodeAndIndex [
 	
 	objectsByDeepCopy associationsDo: [ :objectAndIndex |
 		objectAndIndex value > 0 ifTrue: [ ^objectAndIndex  ]].
@@ -139,23 +139,23 @@ SeamlessObjectTransporter >> findActiveDeepCopyNodeAndIndex [
 ]
 
 { #category : #'sending-deep copy' }
-SeamlessObjectTransporter >> isDeepCopyTransferRequiredFor: anObject [
+SeamlessRequestTransporter >> isDeepCopyTransferRequiredFor: anObject [
 
 	^objectsByDeepCopy includesKey: anObject
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> network [
+SeamlessRequestTransporter >> network [
 	^ network
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> network: anObject [
+SeamlessRequestTransporter >> network: anObject [
 	network := anObject
 ]
 
 { #category : #factory }
-SeamlessObjectTransporter >> newTransporterFor: aSeamlessNetwork toTransferBy: aRemotePeer [
+SeamlessRequestTransporter >> newTransporterFor: aSeamlessNetwork toTransferBy: aRemotePeer [
 
 	| transporter |
 	transporter := self class forTransferOver: aSeamlessNetwork by: aRemotePeer.
@@ -164,13 +164,13 @@ SeamlessObjectTransporter >> newTransporterFor: aSeamlessNetwork toTransferBy: a
 ]
 
 { #category : #receiving }
-SeamlessObjectTransporter >> prepareLocalSubstitutionOf: aLoadedObject with: aTostMaterialization [
+SeamlessRequestTransporter >> prepareLocalSubstitutionOf: aLoadedObject with: aTostMaterialization [
 
 	^aLoadedObject prepareLocalSubstitutionIn: network with: aTostMaterialization
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> prepareTransferObjectFor: anObject with: aTostSerialization [
+SeamlessRequestTransporter >> prepareTransferObjectFor: anObject with: aTostSerialization [
 
 	| strategy |
 	self activateSubstitutionFor: anObject by: [ :s | ^s ].
@@ -183,7 +183,7 @@ SeamlessObjectTransporter >> prepareTransferObjectFor: anObject with: aTostSeria
 ]
 
 { #category : #'serialize/materialize' }
-SeamlessObjectTransporter >> readObjectReference: anObjectReference with: aTostMaterialization [
+SeamlessRequestTransporter >> readObjectReference: anObjectReference with: aTostMaterialization [
 	| type uuid |
 	type := aTostMaterialization readByte.
 	anObjectReference id: aTostMaterialization readPositiveInteger.
@@ -199,8 +199,8 @@ SeamlessObjectTransporter >> readObjectReference: anObjectReference with: aTostM
 ]
 
 { #category : #api }
-SeamlessObjectTransporter >> receiveObjectBy: aBasysConnection [
-	| object in sizeSize size buffer compressionType compressionStream |
+SeamlessRequestTransporter >> receiveRequestBy: aBasysConnection [
+	| request in sizeSize size buffer compressionType compressionStream |
 	in := aBasysConnection inputStream.
 	in binary.
 	
@@ -213,42 +213,42 @@ SeamlessObjectTransporter >> receiveObjectBy: aBasysConnection [
 		compressionStream := GZipReadStream on: buffer readStream.
 		buffer := compressionStream contents].
 	
-	object := self receiveObjectFrom: buffer readStream.	
-	object ownBytes: size.
+	request := self receiveObjectFrom: buffer readStream.	
+	request ownBytes: size.
 	
-	^object
+	^request
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> referenceFor: anObject [
+SeamlessRequestTransporter >> referenceFor: anObject [
 
 	^self referenceFor: anObject ifNewUse: [anObject createSeamlessReference]
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> referenceFor: anObject ifNewUse: refCreationBlock [
+SeamlessRequestTransporter >> referenceFor: anObject ifNewUse: refCreationBlock [
 	
 	^network referenceFor: anObject ifNewUse: refCreationBlock.
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> remotePeer [
+SeamlessRequestTransporter >> remotePeer [
 	^ remotePeer
 ]
 
 { #category : #accessing }
-SeamlessObjectTransporter >> remotePeer: anObject [
+SeamlessRequestTransporter >> remotePeer: anObject [
 	remotePeer := anObject
 ]
 
 { #category : #api }
-SeamlessObjectTransporter >> sendObject: anObject by: aBasysConnection [
+SeamlessRequestTransporter >> sendRequest: aSeamlessRequest by: aBasysConnection [
 
 	| bufferStream buffer bufferSizeBytes compressedBytes compressedStream compressionType |
 	objectSubstitutions := IdentityDictionary new.
 	
 	bufferStream := (ByteArray new: 300) writeStream. 			
-	self sendObject: anObject to: bufferStream.	
+	self sendObject: aSeamlessRequest to: bufferStream.	
 	buffer := bufferStream contents.
 	compressionType := 0.
 	buffer size > 100 ifTrue: [ 
@@ -258,10 +258,9 @@ SeamlessObjectTransporter >> sendObject: anObject by: aBasysConnection [
 		compressedStream nextPutAll: buffer; close.
 		buffer := compressedBytes contents].
 	
-	anObject ownBytes: buffer size.	
+	aSeamlessRequest ownBytes: buffer size.	
 	bufferSizeBytes := buffer size asByteArray.
 	bufferSizeBytes size > 255 ifTrue: [ ^self error: 'Cant serialize given object. It is too big' ].
-	
 	
 	aBasysConnection outputStream
 		nextPut: compressionType;
@@ -272,7 +271,7 @@ SeamlessObjectTransporter >> sendObject: anObject by: aBasysConnection [
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transfer: anObject byReference: refCreationBlock [
+SeamlessRequestTransporter >> transfer: anObject byReference: refCreationBlock [
 
 	| reference |
 	reference := self referenceFor: anObject ifNewUse: refCreationBlock.
@@ -281,19 +280,19 @@ SeamlessObjectTransporter >> transfer: anObject byReference: refCreationBlock [
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transfer: anObject byReplacement: replacementObject [
+SeamlessRequestTransporter >> transfer: anObject byReplacement: replacementObject [
 	
 	objectSubstitutions at: anObject put: replacementObject
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transfer: anObject byWellKnownObjectNamed: globalName [
+SeamlessRequestTransporter >> transfer: anObject byWellKnownObjectNamed: globalName [
 
 	objectSubstitutions at: anObject put: (SeamlessWellKnownObject named: globalName)
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transferByDeepCopy: anObject [
+SeamlessRequestTransporter >> transferByDeepCopy: anObject [
 
 	self transferByValue: anObject.
 	
@@ -302,13 +301,13 @@ SeamlessObjectTransporter >> transferByDeepCopy: anObject [
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transferByReference: anObject [
+SeamlessRequestTransporter >> transferByReference: anObject [
 
 	self transfer: anObject byReference: [anObject createSeamlessReference ]
 ]
 
 { #category : #'sending-controlling' }
-SeamlessObjectTransporter >> transferByValue: anObject [
+SeamlessRequestTransporter >> transferByValue: anObject [
 
 	| transferObject |
 		
@@ -318,7 +317,7 @@ SeamlessObjectTransporter >> transferByValue: anObject [
 ]
 
 { #category : #'serialize/materialize' }
-SeamlessObjectTransporter >> writeObjectReference: anObjectReference with: aTostSerialization [
+SeamlessRequestTransporter >> writeObjectReference: anObjectReference with: aTostSerialization [
 	| type |
 	type := 2 "given reference is alien. It is not belongs to sender or receiver peers".
 	

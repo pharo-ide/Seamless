@@ -275,7 +275,7 @@ SeamlessNetworkTests >> testProcessingData [
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testReceivingObject [
+SeamlessNetworkTests >> testReceivingRequest [
 
 	| result |
 	[:transport :transporter :connection |
@@ -285,7 +285,7 @@ SeamlessNetworkTests >> testReceivingObject [
 		
 		result := network receiveObjectBy: connection.
 		
-		result should beReturnedFrom: [transporter receiveObjectBy: connection]		
+		result should beReturnedFrom: [transporter receiveRequestBy: connection]		
 	] runWithMocks 
 ]
 
@@ -330,7 +330,7 @@ SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanObjectsWhichPeerDistribut
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testSendingObject [
+SeamlessNetworkTests >> testSendingRequest [
 	
 	[:transporterClass :transporter :connection |
 		network transport: transporterClass.
@@ -340,7 +340,7 @@ SeamlessNetworkTests >> testSendingObject [
 		
 		network sendObject: #object by: connection.
 		 
-		transporter should receive sendObject: #object by: connection
+		transporter should receive sendRequest: #object by: connection
 	] runWithMocks 
 ]
 

@@ -54,7 +54,7 @@ SeamlessRealCommunicationTests >> runCaseManaged [
 
 { #category : #running }
 SeamlessRealCommunicationTests >> setUp [
-	SeamlessObjectTransporter createDefault.
+	SeamlessRequestTransporter createDefault.
 	super setUp.
 	
 	

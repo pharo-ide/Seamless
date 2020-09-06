@@ -32,9 +32,9 @@ When object should be transferred by reference I create SeamlesObjectReference f
 By default proxy is SeamlessProxy which delegates all messages to remote side. But it is possible to use specific proxy classes for specific objects. 
 For this you should implement subclass of SeamlessObjectReference which will return new kind of proxy. And you should override method #createSeamlessReference on your class to return new reference instance. For more details look at SeamlessObjectReference comments. 
 
-I contain transporterClass which defines actual protocol for sending and receiving data. It is implemented by SeamlessObjectTransforter subclasses. Look at it comments for details. Now there is only Fuel based protocol.
+I contain a transporter object, an instance of SeamlessRequestTransporter. It defines actual protocol for sending and receiving requests. Look at it comments for details.
 
-Network peers communicate with each others by sending request objects. It is subclasses of SeamlessRequest. Remote message send is just one type of it (SeamlessMessageSendRequest). 
+Network peers communicate with each others by sending request objects. They are subclasses of SeamlessRequest. Remote message send is just one type of it (SeamlessMessageSendRequest). 
 Requests are sent by contexts which represent logical sender. And requests return result to contexts.
 	context sendRequest: SeamlessRequest
 	context return: result to: senderPeer.
@@ -52,7 +52,7 @@ Internal Representation and Key Implementation Points.
     Instance Variables
 	distributedObjects:		<SeamlessDistributedObjects>
 	transferStrategies:		<Colection of <SeamlessTransferStrategy>>
-	transporterClass:		<SeamlessObjectTransporter class>
+	transporter:		<SeamlessRequestTransporter class>
 				
 
 "
@@ -162,7 +162,7 @@ SeamlessNetwork >> initialize [
 	
 	distributedObjects := SeamlessDistributedObjects over: self.
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
-	transport := SeamlessObjectTransporter default
+	transport := SeamlessRequestTransporter default
 ]
 
 { #category : #factory }
@@ -198,7 +198,7 @@ SeamlessNetwork >> receiveObjectBy: aBasysConnection [
 	| transporter |
 	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
 	
-	^transporter receiveObjectBy: aBasysConnection
+	^transporter receiveRequestBy: aBasysConnection
 ]
 
 { #category : #accessing }
@@ -243,7 +243,7 @@ SeamlessNetwork >> sendObject: aSeamlessRequest by: aBasysConnection [
 	| transporter |
 	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
 	
-	transporter sendObject: aSeamlessRequest by: aBasysConnection
+	transporter sendRequest: aSeamlessRequest by: aBasysConnection
 ]
 
 { #category : #'transfer strategies' }
