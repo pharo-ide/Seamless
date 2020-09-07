@@ -15,12 +15,7 @@ SeamlessRemotePeer >> close [
 	"This method is supposed to be used when you really want to close (destroy) the peer and release all resources independently if they are used anywhere in the network.
 	Special request is sent here to remote side to notify it. Then local and remote sides will clean all related resources, close connections and clean distributed objects.
 	At the end peer will be removed from the network. See super implementation for details"
-	self isConnected ifFalse: [ ^super close ].
-	
-	[self sendObject: SeamlessClosePeerRequest new]
-			on: ConnectionTimedOut, BasysIdentificationFailed , BasysNoConnection 
-			do: [ :err | ].
-			
+	self trySendObjectIfConnected: SeamlessClosePeerRequest new.			
 	super close
 ]
 

@@ -33,52 +33,9 @@ SeamlessRemotePeerTests >> testClosingByRemoteSideShouldNotSendCloseRequest [
 ]
 
 { #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldIgnoreConnectionTimeoutDuringClosePeerRequest [
-
-	peer stub isConnected willReturn: true.
-	(peer stub sendObject: Any) willRaise: ConnectionTimedOut new.
-	
-	peer close.
-		
-	peer should be isClosed
-]
-
-{ #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldIgnoreIdentificationFailureDuringClosePeerRequest [
-
-	peer stub isConnected willReturn: true.
-	(peer stub sendObject: Any) willRaise: BasysIdentificationFailed new.
-	
-	peer close.
-		
-	peer should be isClosed
-]
-
-{ #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldIgnoreNoConnectionErrorDuringClosePeerRequest [
-
-	peer stub isConnected willReturn: true.
-	(peer stub sendObject: Any) willRaise: BasysNoConnection new.
-	
-	peer close.
-		
-	peer should be isClosed
-]
-
-{ #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldNotSendCloseRequestWhenItIsNotConnected [
-	peer stub isConnected willReturn: false.
-		
-	peer close.
-	
-	peer should not receive sendObject: Any.
-	peer should be isClosed
-]
-
-{ #category : #tests }
 SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIsConnected [
 	peer stub isConnected willReturn: true.
-	(peer stub sendObject: Arg request) 
+	(peer stub trySendObjectIfConnected: Arg request) 
 		when: [ peer isClosed ] is: false;
 		willReturnYourself.		
 	
@@ -86,19 +43,6 @@ SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIs
 		
 	Arg request should beInstanceOf: SeamlessClosePeerRequest.
 	peer should be isClosed
-]
-
-{ #category : #tests }
-SeamlessRemotePeerTests >> testClosingShouldSignalUnexpectedProblemsDuringClosePeerRequest [
-
-	| unexpectedProblem |
-	peer stub isConnected willReturn: true.
-	unexpectedProblem := Error new.
-	(peer stub sendObject: Any) willRaise: unexpectedProblem.
-		
-	[peer close] should raise: unexpectedProblem.
-		
-	peer should not be isClosed
 ]
 
 { #category : #tests }
