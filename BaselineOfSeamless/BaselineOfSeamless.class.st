@@ -71,7 +71,7 @@ BaselineOfSeamless >> baseline: spec [
 { #category : #baselines }
 BaselineOfSeamless >> postLoad [
 
-	(self class environment classNamed: #SeamlessRequestTransporter) resetDefault
+	(self class environment classNamed: #SeamlessTransport) resetDefault
 ]
 
 { #category : #accessing }

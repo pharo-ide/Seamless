@@ -162,7 +162,7 @@ SeamlessNetwork >> initialize [
 	
 	distributedObjects := SeamlessDistributedObjects over: self.
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
-	transport := SeamlessRequestTransporter default
+	transport := SeamlessTransport default
 ]
 
 { #category : #factory }
@@ -195,10 +195,7 @@ SeamlessNetwork >> process: aSeamlessRequest receivedFrom: aRemotePeer [
 { #category : #operations }
 SeamlessNetwork >> receiveObjectBy: aBasysConnection [
 
-	| transporter |
-	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
-	
-	^transporter receiveRequestBy: aBasysConnection
+	^transport receiveObjectFrom: aBasysConnection
 ]
 
 { #category : #accessing }
@@ -240,10 +237,7 @@ SeamlessNetwork >> requestProcessingTimeout: aDuration [
 { #category : #operations }
 SeamlessNetwork >> sendObject: aSeamlessRequest by: aBasysConnection [
 
-	| transporter |
-	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
-	
-	transporter sendRequest: aSeamlessRequest by: aBasysConnection
+	transport sendObject: aSeamlessRequest to: aBasysConnection
 ]
 
 { #category : #'transfer strategies' }

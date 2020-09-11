@@ -49,7 +49,7 @@ SeamlessRealCommunicationTests >> prepareClientProxyForServerObject: serverSideO
 
 { #category : #running }
 SeamlessRealCommunicationTests >> setUp [
-	SeamlessRequestTransporter createDefault.
+	SeamlessTransport createDefault.
 	super setUp.
 	
 	

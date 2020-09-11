@@ -37,10 +37,10 @@ Class {
 }
 
 { #category : #transfer }
-SeamlessObjectReference class >> createTostInstanceWith: aTostMaterialization [
+SeamlessObjectReference class >> createTostInstanceWith: aSeamlessTransporter [
 	| reference |
-	reference := super createTostInstanceWith: aTostMaterialization.
-	aTostMaterialization readSeamlessReference: reference.
+	reference := super createTostInstanceWith: aSeamlessTransporter.
+	aSeamlessTransporter readSeamlessReference: reference.
 	^reference.
 ]
 
@@ -247,8 +247,8 @@ SeamlessObjectReference >> travelGuide [
 ]
 
 { #category : #transfer }
-SeamlessObjectReference >> writeTostBodyWith: aTostSerialization [
+SeamlessObjectReference >> writeTostBodyWith: aSeamlessTransporter [
 
-	aTostSerialization writeSeamlessReference: self
+	aSeamlessTransporter writeSeamlessReference: self
 
 ]
