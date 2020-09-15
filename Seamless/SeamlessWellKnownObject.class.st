@@ -43,11 +43,11 @@ SeamlessWellKnownObject >> name: anObject [
 ]
 
 { #category : #transfer }
-SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 
 	| global  |
 	global := self class environment at: name ifAbsent: [SeamlessMissingGlobal named: name].
-	aTostMaterialization skip: global.
+	aSeamlessTransporter skip: global.
 	^global 
 ]
 

@@ -1,9 +1,9 @@
 Extension { #name : #Array }
 
 { #category : #'*Seamless' }
-Array >> prepareMethodTransferBy: anObjectTransporter [
-	super prepareMethodTransferBy: anObjectTransporter.
+Array >> prepareMethodTransferBy: aSeamlessTransporter [
+	super prepareMethodTransferBy: aSeamlessTransporter.
 	
 	"Literal array can be complex structure. So we should forcibly transfer it as a whole thing"
-	anObjectTransporter transferByDeepCopy: self 
+	aSeamlessTransporter transferByDeepCopy: self 
 ]

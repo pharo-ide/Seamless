@@ -1,7 +1,7 @@
 Extension { #name : #HashedCollection }
 
 { #category : #'*Seamless' }
-HashedCollection >> prepareValueTransferBy: aSeamlessObjectTransporter [
+HashedCollection >> prepareValueTransferBy: aSeamlessTransporter [
 
-	aSeamlessObjectTransporter transferByValue: array	
+	aSeamlessTransporter transferByValue: array	
 ]

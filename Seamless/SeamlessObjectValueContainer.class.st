@@ -34,17 +34,17 @@ SeamlessObjectValueContainer >> content: anObject [
 ]
 
 { #category : #transfer }
-SeamlessObjectValueContainer >> prepareValueForTransferBy: anObjectTransporter [
+SeamlessObjectValueContainer >> prepareValueForTransferBy: aSeamlessTransporter [
 	"Container is always substituted by content while transferred over network.
 	it also commands transporter to transfer content by value"
 	
-	super prepareValueForTransferBy: anObjectTransporter.
+	super prepareValueForTransferBy: aSeamlessTransporter.
 	
 	^content
 ]
 
 { #category : #transfer }
-SeamlessObjectValueContainer >> prepareValueTransferBy: aSeamlessObjectTransporter [
+SeamlessObjectValueContainer >> prepareValueTransferBy: aSeamlessTransporter [
 	
-	aSeamlessObjectTransporter transferByValue: content
+	aSeamlessTransporter transferByValue: content
 ]

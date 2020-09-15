@@ -190,12 +190,12 @@ SeamlessObjectReference >> pointsToRemoteObject [
 ]
 
 { #category : #transfer }
-SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 	| localObject |
-	super prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization.
+	super prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter.
 	
 	localObject := aSeamlessNetwork objectFor: self.
-	aTostMaterialization skip: localObject.
+	aSeamlessTransporter skip: localObject.
 	^localObject
 ]
 

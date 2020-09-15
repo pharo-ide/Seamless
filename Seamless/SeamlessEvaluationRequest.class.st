@@ -39,9 +39,9 @@ SeamlessEvaluationRequest >> executeFor: senderPeer [
 ]
 
 { #category : #accessing }
-SeamlessEvaluationRequest >> prepareValueTransferBy: aSeamlessObjectTransporter [
+SeamlessEvaluationRequest >> prepareValueTransferBy: aSeamlessTransporter [
 
-	aSeamlessObjectTransporter transferByValue: valuable
+	aSeamlessTransporter transferByValue: valuable
 ]
 
 { #category : #execution }

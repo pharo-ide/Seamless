@@ -1,9 +1,9 @@
 Extension { #name : #Text }
 
 { #category : #'*Seamless' }
-Text >> prepareValueTransferBy: anObjectTransporter [
+Text >> prepareValueTransferBy: aSeamlessTransporter [
 	
-	anObjectTransporter transferByValue: runs
+	aSeamlessTransporter transferByValue: runs
 ]
 
 { #category : #'*Seamless' }

@@ -62,10 +62,10 @@ SeamlessLocalVariableState >> isUnassigned [
 ]
 
 { #category : #accessing }
-SeamlessLocalVariableState >> prepareValueTransferBy: aSeamlessObjectTransporter [
+SeamlessLocalVariableState >> prepareValueTransferBy: aSeamlessTransporter [
 
 	remoteVariable ifNotNil: [ 
-		aSeamlessObjectTransporter transferByReference: remoteVariable]
+		aSeamlessTransporter transferByReference: remoteVariable]
 ]
 
 { #category : #accessing }

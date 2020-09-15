@@ -40,13 +40,13 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"				
 			baseline: 'TostSerializer' with: [
 				spec
-					repository: 'github://pharo-ide/TostSerializer:v1.0.2';
+					repository: 'github://pharo-ide/TostSerializer:v2.0.0';
 					loads: 'Core'];
 			project: 'TostSerializerTests' copyFrom: 'TostSerializer' with: [
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://dionisiydk/Mocketry:v6.0.2' ].
+				spec repository: 'github://dionisiydk/Mocketry:v6.0.3' ].
 							
 		spec 
 			package: 'Seamless' with: [

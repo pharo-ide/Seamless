@@ -112,7 +112,7 @@ SeamlessProxy >> performRemoteMessage: aMessage [
 ]
 
 { #category : #transfer }
-SeamlessProxy >> prepareValueForTransferBy: anObjectTransporter [
+SeamlessProxy >> prepareValueForTransferBy: aSeamlessTransporter [
  	"proxies are always transferred as reference"
 	
 	^reference

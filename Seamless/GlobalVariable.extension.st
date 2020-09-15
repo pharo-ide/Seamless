@@ -6,8 +6,8 @@ GlobalVariable class >> definesWellKnownSeamlessClass [
 ]
 
 { #category : #'*Seamless' }
-GlobalVariable >> prepareMethodTransferBy: anObjectTransporter [
-	super prepareMethodTransferBy: anObjectTransporter.
+GlobalVariable >> prepareMethodTransferBy: aSeamlessTransporter [
+	super prepareMethodTransferBy: aSeamlessTransporter.
 	
-	anObjectTransporter transfer: self value byWellKnownObjectNamed: self key
+	aSeamlessTransporter transfer: self value byWellKnownObjectNamed: self key
 ]

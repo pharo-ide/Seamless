@@ -1,7 +1,7 @@
 Extension { #name : #OrderedCollection }
 
 { #category : #'*Seamless' }
-OrderedCollection >> prepareValueTransferBy: aSeamlessObjectTransporter [
+OrderedCollection >> prepareValueTransferBy: aSeamlessTransporter [
 
-	aSeamlessObjectTransporter transferByValue: array	
+	aSeamlessTransporter transferByValue: array	
 ]

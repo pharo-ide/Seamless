@@ -6,8 +6,8 @@ ByteArray class >> definesWellKnownSeamlessClass [
 ]
 
 { #category : #'*Seamless' }
-ByteArray >> prepareMethodTransferBy: anObjectTransporter [
-	super prepareMethodTransferBy: anObjectTransporter.
+ByteArray >> prepareMethodTransferBy: aSeamlessTransporter [
+	super prepareMethodTransferBy: aSeamlessTransporter.
 	
-	anObjectTransporter transferByValue: self
+	aSeamlessTransporter transferByValue: self
 ]

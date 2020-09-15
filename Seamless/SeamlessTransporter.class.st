@@ -46,7 +46,6 @@ Class {
 	#instVars : [
 		'network',
 		'connection',
-		'remotePeer',
 		'objectSubstitutions',
 		'objectsByDeepCopy'
 	],
@@ -94,8 +93,7 @@ SeamlessTransporter >> connection [
 { #category : #accessing }
 SeamlessTransporter >> connection: aBasysConnection [
 	connection := aBasysConnection.
-	network := connection network.
-	remotePeer := connection remotePeer
+	network := connection network
 ]
 
 { #category : #sending }
@@ -156,39 +154,17 @@ SeamlessTransporter >> network: anObject [
 	network := anObject
 ]
 
-{ #category : #receiving }
-SeamlessTransporter >> prepareLocalSubstitutionOf: aLoadedObject with: aTostMaterialization [
-
-	^aLoadedObject prepareLocalSubstitutionIn: network with: aTostMaterialization
-]
-
 { #category : #controlling }
-SeamlessTransporter >> prepareTransferObjectFor: anObject with: aTostSerialization [
+SeamlessTransporter >> prepareTransferObjectFor: anObject [
 
 	| strategy |
 	self activateSubstitutionFor: anObject by: [ :s | ^s ].
 	objectsByDeepCopy ifNotNil: [ 
-		aTostSerialization activateDeepCopyTransferIfNeeded ifTrue: [
-			^anObject prepareValueForTransferBy: self]].
+		self activateDeepCopyTransferIfNeeded ifTrue: [ 
+			^anObject prepareValueForTransferBy: self ]].
 	
 	strategy := network transferStrategyFor: anObject.	
 	^strategy prepareTransferObjectFor: anObject by: self
-]
-
-{ #category : #receiving }
-SeamlessTransporter >> readObjectReference: anObjectReference with: aTostMaterialization [
-	| type uuid |
-	type := aTostMaterialization readByte.
-	anObjectReference id: aTostMaterialization readPositiveInteger.
-	anObjectReference senderPeer: remotePeer.	
-	type = 0 ifTrue: [ "it is reference to my local object"
-		^anObjectReference ownerPeerId: network localPeerId].
-	type = 1 ifTrue: [ "it is reference owned by sender remote peer"
-		remotePeer id ifNil: [self error: 'it should not happen: we receive reference with type 1 from sender which is not identifyed yet'].
-		 ^anObjectReference ownerPeerId: remotePeer id].
-	
-	uuid := aTostMaterialization readBytes: 16 as: UUID.
-	anObjectReference ownerPeerId: uuid
 ]
 
 { #category : #receiving }
@@ -196,16 +172,17 @@ SeamlessTransporter >> readSeamlessReference: anObjectReference [
 	| type uuid |
 	type := self readByte.
 	anObjectReference id: self readPositiveInteger.
-	anObjectReference senderPeer: remotePeer.	
+	anObjectReference senderPeer: connection remotePeer.	
 	type = 0 ifTrue: [ "it is reference to my local object"
-		^anObjectReference ownerPeerId: network localPeerId].
+		^anObjectReference ownerPeerId: connection localPeerId].
 	type = 1 ifTrue: [ "it is reference owned by sender remote peer"
-		remotePeer id ifNil: [self error: 'it should not happen: we receive reference with type 1 from sender which is not identifyed yet'].
-		 ^anObjectReference ownerPeerId: remotePeer id].
+		connection isIdentified ifFalse: [
+			"Here a reference with type 1 was received from a sender which is not identifyed yet"
+			self error: 'it should not happen'].
+		 ^anObjectReference ownerPeerId: connection remotePeerId].
 	
 	uuid := self readBytes: 16 as: UUID.
 	^anObjectReference ownerPeerId: uuid
-	
 ]
 
 { #category : #receiving }
@@ -215,7 +192,7 @@ SeamlessTransporter >> readSeamlessSubstitution [
 	loadedObjectIndex := objectIndex.
 	loadedObject := self readObject.
 
-	localRepresentation := self prepareLocalSubstitutionOf: loadedObject with: self.
+	localRepresentation := loadedObject prepareLocalSubstitutionIn: network with: self. 
 	localRepresentation == loadedObject ifTrue: [ ^loadedObject  ].
 	
 	processedObjects at: loadedObjectIndex put: localRepresentation.
@@ -235,22 +212,12 @@ SeamlessTransporter >> referenceFor: anObject ifNewUse: refCreationBlock [
 	^network referenceFor: anObject ifNewUse: refCreationBlock.
 ]
 
-{ #category : #accessing }
-SeamlessTransporter >> remotePeer [
-	^ remotePeer
-]
-
-{ #category : #accessing }
-SeamlessTransporter >> remotePeer: anObject [
-	remotePeer := anObject
-]
-
 { #category : #api }
-SeamlessTransporter >> serialize: aSeamlessRequest [
+SeamlessTransporter >> serializeObject: aSeamlessRequest [
 	| buffer bufferSizeBytes compressedBytes compressedStream compressionType |
 	objectSubstitutions := IdentityDictionary new.	
 	transportStream := (ByteArray new: 300) writeStream. 			
-	super serialize: aSeamlessRequest.	
+	super serializeObject: aSeamlessRequest.	
 		
 	buffer := transportStream contents.
 	compressionType := 0.
@@ -329,28 +296,11 @@ SeamlessTransporter >> transfersIdentificationRequest [
 SeamlessTransporter >> tryWriteTransferObjectFor: anObject format: formatId [
 
 	| transferObject |
-	transferObject := self prepareTransferObjectFor: anObject with: self.
+	transferObject := self prepareTransferObjectFor: anObject.
 	transferObject == anObject ifTrue: [ ^false ].
 	
 	self writeSubstitution: transferObject for: anObject format: formatId.
 	^true
-]
-
-{ #category : #sending }
-SeamlessTransporter >> writeObjectReference: anObjectReference with: aTostTransporter [
-	| type |
-	type := 2 "given reference is alien. It is not belongs to sender or receiver peers".
-	
-	aTostTransporter transfersIdentificationRequest ifFalse: [
-		anObjectReference ownerPeerId = remotePeer id 
-			ifTrue: [ type := 0 ] "reference belongs to receiver"
-			ifFalse: [ anObjectReference ownerPeerId = network localPeerId 
-							ifTrue: [ type := 1 ]] "reference from this local peer" .
-	].
-	aTostTransporter writeByte: type.
-	aTostTransporter writePositiveInteger: anObjectReference id.
-	
-	type = 2 ifTrue: [ aTostTransporter writeBytes: anObjectReference ownerPeerId]
 ]
 
 { #category : #sending }
@@ -359,13 +309,12 @@ SeamlessTransporter >> writeSeamlessReference: anObjectReference [
 	type := 2 "given reference is alien. It is not belongs to sender or receiver peers".
 	
 	self transfersIdentificationRequest ifFalse: [
-		anObjectReference ownerPeerId = remotePeer id 
-			ifTrue: [ type := 0 ] "reference belongs to receiver"
-			ifFalse: [ anObjectReference ownerPeerId = network localPeerId 
-							ifTrue: [ type := 1 ]] "reference from this local peer" .
+		anObjectReference ownerPeerId = connection remotePeerId 
+			ifTrue: [ type := 0 "a reference belongs to the receiver peer" ]
+			ifFalse: [ anObjectReference ownerPeerId = connection localPeerId 
+								ifTrue: [ type := 1 "a reference is from this local peer" ]] 
 	].
 	self writeByte: type.
-	self writePositiveInteger: anObjectReference id.
-	
+	self writePositiveInteger: anObjectReference id.	
 	type = 2 ifTrue: [ self writeBytes: anObjectReference ownerPeerId]
 ]

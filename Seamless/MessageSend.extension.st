@@ -6,9 +6,9 @@ MessageSend class >> definesWellKnownSeamlessClass [
 ]
 
 { #category : #'*Seamless' }
-MessageSend >> prepareValueTransferBy: aSeamlessObjectTransporter [
+MessageSend >> prepareValueTransferBy: aSeamlessTransporter [
 
-	aSeamlessObjectTransporter transferByValue: arguments
+	aSeamlessTransporter transferByValue: arguments
 ]
 
 { #category : #'*Seamless' }
