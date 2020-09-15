@@ -52,7 +52,7 @@ Internal Representation and Key Implementation Points.
     Instance Variables
 	distributedObjects:		<SeamlessDistributedObjects>
 	transferStrategies:		<Colection of <SeamlessTransferStrategy>>
-	transporter:		<SeamlessRequestTransporter class>
+	transport:		<SeamlessTransport class>
 				
 
 "
