@@ -40,7 +40,7 @@ Class {
 SeamlessObjectReference class >> createTostInstanceWith: aSeamlessTransporter [
 	| reference |
 	reference := super createTostInstanceWith: aSeamlessTransporter.
-	aSeamlessTransporter readSeamlessReference: reference.
+	aSeamlessTransporter readObjectReference: reference.
 	^reference.
 ]
 
@@ -249,6 +249,6 @@ SeamlessObjectReference >> travelGuide [
 { #category : #transfer }
 SeamlessObjectReference >> writeTostBodyWith: aSeamlessTransporter [
 
-	aSeamlessTransporter writeSeamlessReference: self
+	aSeamlessTransporter writeObjectReference: self
 
 ]

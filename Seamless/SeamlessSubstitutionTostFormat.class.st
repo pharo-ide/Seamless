@@ -20,7 +20,7 @@ SeamlessSubstitutionTostFormat class >> network: aSeamlessNetwork [
 { #category : #operations }
 SeamlessSubstitutionTostFormat >> readObjectWith: aSeamlessTransporter [
 
-	^aSeamlessTransporter readSeamlessSubstitution 
+	^aSeamlessTransporter readObjectSubstitution 
 ]
 
 { #category : #operations }
