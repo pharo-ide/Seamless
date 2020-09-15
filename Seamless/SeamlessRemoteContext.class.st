@@ -12,7 +12,8 @@ Class {
 { #category : #operations }
 SeamlessRemoteContext >> return: aSeamlessRequestResult to: senderPeer [
 	
-	senderPeer sendDataPacket: (SeamlessDeliverResultRequest result: aSeamlessRequestResult to: self).
-	
+	| deliveryRequest |
+	deliveryRequest := SeamlessDeliverResultRequest result: aSeamlessRequestResult to: self.
+	senderPeer trySendObjectIfConnected: deliveryRequest.		
 	senderPeer network removeDistributedObject: self
 ]

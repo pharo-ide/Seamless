@@ -23,10 +23,9 @@ SeamlessPeerIdentificationRequest class >> peerId: peerId [
 { #category : #execution }
 SeamlessPeerIdentificationRequest >> executeFor: senderPeer [
 	
-	| identifiedPeer |
-	identifiedPeer := senderPeer beIdentifiedAs: peerId.
+	senderPeer ensureIdentity: peerId.
 	
-	context returnValue: senderPeer localPeerId to: identifiedPeer
+	context returnValue: senderPeer localPeerId to: senderPeer
 ]
 
 { #category : #accessing }

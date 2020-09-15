@@ -33,7 +33,20 @@ SeamlessRequestResultTimelyDelivery >> maxTime: anObject [
 
 { #category : #private }
 SeamlessRequestResultTimelyDelivery >> waitResult [
-	| timeout |
-	timeout := synchronizationSemaphore wait: maxTime.
-	timeout ifTrue: [ SeamlessRequestTimeout signal ]
+	"Instead of blindly wait for delivery result for specified maxTime 
+	we periodically check the connection status
+	and consider the deliver as unavailable when senderPeer is not connected anymore.
+	So we fail as soon as senderPeer losts connection which improves responsiveness in bad scenarios"
+	| startTime |
+	startTime := DateAndTime now.
+	
+	[DateAndTime now - startTime < maxTime 
+		and: [ requestResult isNil and: [ senderPeer isConnected ]] ]
+			whileTrue: [ synchronizationSemaphore wait: 100 milliSeconds].
+		
+	requestResult ifNil: [ 
+		DateAndTime now - startTime >= maxTime 
+			ifTrue: [ SeamlessRequestTimeout signal ]
+			ifFalse: [ SeamlessResultDeliveryUnavailable signal ]
+	]
 ]

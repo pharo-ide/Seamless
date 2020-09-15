@@ -101,39 +101,6 @@ SeamlessNetworkTests >> testAddingTransferStrategyByValueWithSmartMessage [
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testCleanDestroyedPeer [
-
-	[:peer1 :peer2 :distributedObjects |
-		network addRemotePeer: peer1; addRemotePeer: peer2 .
-		network distributedObjects: distributedObjects.
-	
-		network cleanDestroyedPeer: peer1.
-		
-		distributedObjects should receive removeObjectsDistributedBy: peer1.
-		peer1 should receive close.
-
-		network remotePeers should not include: peer1.
-		network remotePeers should include: peer2.
-	] runWithMocks 
-]
-
-{ #category : #tests }
-SeamlessNetworkTests >> testCleanDestroyedPeerWhenItIsOnlyConnectedPeer [
-
-	[:peer :distributedObjects |
-		network addRemotePeer: peer.
-		network distributedObjects: distributedObjects.
-	
-		network cleanDestroyedPeer: peer.
-		
-		distributedObjects should receive clear.
-		peer should receive close.
-
-		network remotePeers should be isEmpty.
-	] runWithMocks 
-]
-
-{ #category : #tests }
 SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsConfiguredTimeout [
 
 	| delivery |
@@ -169,33 +136,6 @@ SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
 	
 	delivery should beInstanceOf: SeamlessRequestResultDelivery.
 	delivery senderPeer should be: #remotePeer
-]
-
-{ #category : #tests }
-SeamlessNetworkTests >> testDestroying [
-
-	[:peer1 :peer2 |
-		network addRemotePeer: peer1; addRemotePeer: peer2 .
-	
-		network destroy.
-		
-		[ 	peer1 destroy. peer2 destroy ] should beDone.
-
-	] runWithMocks 
-	
-]
-
-{ #category : #tests }
-SeamlessNetworkTests >> testDestroyingShouldBeSafeForCleaningPeersCollection [
-
-	[:peer1 :peer2 |
-		network addRemotePeer: peer1; addRemotePeer: peer2 .
-		peer1 stub destroy will: [ network removeRemotePeer: peer1 ].
-		peer2 stub destroy will: [ network removeRemotePeer: peer2 ].
-		
-		network destroy.
-		
-	] runWithMocks
 ]
 
 { #category : #tests }
@@ -335,44 +275,67 @@ SeamlessNetworkTests >> testProcessingData [
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testReceivingIncomingDataPacket [
+SeamlessNetworkTests >> testReceivingRequest [
 
-	| result |
-	[:transport :transporter |
-		network transport: transport.
-		(transport stub newTransporterFor: network toTransferBy: #remotePeer) willReturn: transporter.
+	| transport result |
+	transport := Mock new.
+	network transport: transport.
+
+	result := network receiveObjectBy: #connection.
 		
-		result := network receiveIncomingDataPacketFrom: #remotePeer by: #connection.
-		
-		result should beReturnedFrom: [transporter receiveObjectBy: #connection]		
-	] runWithMocks 
+	result should beReturnedFrom: [transport receiveObjectFrom: #connection]
 ]
 
 { #category : #tests }
 SeamlessNetworkTests >> testRemoveDistributedObject [
 
-	[:distributedObjects |
-		network distributedObjects: distributedObjects.
-		[network removeDistributedObject: #object]
-			should strictly satisfy: 
-		[ distributedObjects remove: #object ]
+	network distributedObjects stub.
 	
-	] runWithMocks 
+	network removeDistributedObject: #object.
+	
+	network distributedObjects should receive remove: #object
 ]
 
 { #category : #tests }
-SeamlessNetworkTests >> testSendingDataPacket [
+SeamlessNetworkTests >> testRemoveLastRemotePeerShouldCleanDistributedObjects [
+
+	network distributedObjects stub.
 	
-	[:transporterClass :transporter :connection |
-		network transport: transporterClass.
-		connection stub remotePeer willReturn: #receiverPeer.
-		(transporterClass stub newTransporterFor: network toTransferBy:  #receiverPeer) 
-			willReturn: transporter.
+	network removeRemotePeer: #peer.
 		
-		network sendDataPacket: #dataPacket by: connection.
+	network distributedObjects should receive clear
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanDistributedObjects [
+
+	network distributedObjects stub.
+	
+	network removeRemotePeer: #peer.
+		
+	network distributedObjects should receive removeObjectsDistributedBy: #peer
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanObjectsWhichPeerDistributes [
+
+	network distributedObjects stub.
+	
+	network removeRemotePeer: #peer.
+		
+	network distributedObjects should receive removeObjectsDistributedBy: #peer
+]
+
+{ #category : #tests }
+SeamlessNetworkTests >> testSendingRequest [
+	
+	| transport |
+	transport := Mock new.
+	network transport: transport.
+	
+	network sendObject: #object by: #connection.
 		 
-		transporter should receive sendObject: #dataPacket by: connection
-	] runWithMocks 
+	transport should receive sendObject: #object to: #connection
 ]
 
 { #category : #tests }

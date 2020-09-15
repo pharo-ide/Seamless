@@ -24,7 +24,7 @@ SeamlessDistributedObjectsTests >> testGettingLocalObjectByReferenceId [
 	distributedObjects objectsToReferences 
 		at: #object1 put: (SeamlessObjectReference id: #givenId peer: BasysLocalPeer new).
 	distributedObjects objectsToReferences 
-		at: #object2 put: (SeamlessObjectReference id: #givenId peer: BasysActiveRemotePeer new).
+		at: #object2 put: (SeamlessObjectReference id: #givenId peer: SeamlessRemotePeer new).
 	distributedObjects objectsToReferences 
 		at: #object3 put: (SeamlessObjectReference id: #wrongId peer: BasysLocalPeer new).
 
@@ -162,11 +162,11 @@ SeamlessDistributedObjectsTests >> testRemoveObject [
 SeamlessDistributedObjectsTests >> testRemovingObjectsDistributedByParticularPeer [
 
 	| peer |
-	peer := BasysPassiveRemotePeer new.
+	peer := SeamlessRemotePeer new.
 	distributedObjects objectsToReferences 
 		at: #object1 put: (SeamlessObjectReference id: #id1 peer: BasysLocalPeer new).
 	distributedObjects objectsToReferences 
-		at: #object2 put: (SeamlessObjectReference id: #id2 peer: BasysActiveRemotePeer new).
+		at: #object2 put: (SeamlessObjectReference id: #id2 peer: SeamlessRemotePeer new).
 	distributedObjects objectsToReferences 
 		at: #object3 put: (SeamlessObjectReference id: #id3 peer: peer).
 	distributedObjects objectsToReferences 

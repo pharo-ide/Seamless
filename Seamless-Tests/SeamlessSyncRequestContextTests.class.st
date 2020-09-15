@@ -15,7 +15,7 @@ SeamlessSyncRequestContextTests >> contextClass [
 { #category : #specs }
 SeamlessSyncRequestContextTests >> contextShouldSend: aSeamlessRequest [
 
-	^receiverPeer should receive sendDataPacket: aSeamlessRequest
+	^receiverPeer should receive sendObject: aSeamlessRequest
 ]
 
 { #category : #running }
@@ -29,7 +29,7 @@ SeamlessSyncRequestContextTests >> setUp [
 { #category : #specs }
 SeamlessSyncRequestContextTests >> stubRequestDataSend: aSeamlessRequest [
 
-	^receiverPeer stub sendDataPacket: aSeamlessRequest
+	^receiverPeer stub sendObject: aSeamlessRequest
 ]
 
 { #category : #tests }

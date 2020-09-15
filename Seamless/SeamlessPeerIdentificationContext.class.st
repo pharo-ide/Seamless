@@ -35,5 +35,5 @@ SeamlessPeerIdentificationContext >> connection: anObject [
 
 { #category : #private }
 SeamlessPeerIdentificationContext >> performRequestSend: aSeamlessRequest [
-	connection sendDataPacket: aSeamlessRequest 
+	connection sendObject: aSeamlessRequest 
 ]

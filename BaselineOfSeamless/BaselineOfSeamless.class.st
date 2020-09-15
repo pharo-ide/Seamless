@@ -12,14 +12,14 @@ BaselineOfSeamless >> baseline: spec [
 		spec 
 			baseline: 'Basys' with: [
 				spec
-					repository: 'github://pharo-ide/Basys:v1.0.4';
+					repository: 'github://pharo-ide/Basys:v2.0.0';
 					loads: 'Core' ];
 			project: 'BasysTests' copyFrom: 'Basys' with: [
 				spec loads: 'Tests'];
 			"------------"				
 			baseline: 'ObjectStatistics' with: [
 				spec
-					repository: 'github://pharo-ide/ObjectStatistics:v1.0.2';
+					repository: 'github://pharo-ide/ObjectStatistics:v1.0.3';
 					loads: 'Core' ];
 			project: 'ObjectStatisticsTests' copyFrom: 'ObjectStatistics' with: [
 				spec loads: 'default' ];				
@@ -40,13 +40,13 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"				
 			baseline: 'TostSerializer' with: [
 				spec
-					repository: 'github://pharo-ide/TostSerializer:v1.0.2';
+					repository: 'github://pharo-ide/TostSerializer:v2.0.0';
 					loads: 'Core'];
 			project: 'TostSerializerTests' copyFrom: 'TostSerializer' with: [
 				spec loads: 'Tests'];
 			"------------"						
 			baseline: 'Mocketry' with: [
-				spec repository: 'github://dionisiydk/Mocketry:v6.0.2' ].
+				spec repository: 'github://dionisiydk/Mocketry:v6.0.3' ].
 							
 		spec 
 			package: 'Seamless' with: [
@@ -71,7 +71,7 @@ BaselineOfSeamless >> baseline: spec [
 { #category : #baselines }
 BaselineOfSeamless >> postLoad [
 
-	(self class environment classNamed: #SeamlessObjectTransporter) resetDefault
+	(self class environment classNamed: #SeamlessTransport) resetDefault
 ]
 
 { #category : #accessing }

@@ -36,48 +36,44 @@ Object >> isSeamlessProxy [
 ]
 
 { #category : #'*Seamless' }
-Object >> isSeamlessReference [
-	^false
-]
-
-{ #category : #'*Seamless' }
 Object >> nameForSeamlessStatistics [
 
 	^self class name
 ]
 
 { #category : #'*Seamless' }
-Object >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+Object >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 
-	aTostMaterialization atNextStepProcess: self
+	aSeamlessTransporter atNextStepProcess: self
 ]
 
 { #category : #'*Seamless' }
-Object >> prepareMethodTransferBy: anObjectTransporter [
-	"this method called for each method literal when method is going to be transferred by value.
-	GlobalVariable in that case (like class reference) could override this method to manage transporter to transfer class as well known object"
+Object >> prepareMethodTransferBy: aSeamlessTransporter [
+	"This method is called for each method literal when method is going to be transferred by value.
+	GlobalVariable in that case (like class reference) can override this method 
+	to manage the transporter to transfer the class as well known object"
 ]
 
 { #category : #'*Seamless' }
-Object >> prepareValueForTransferBy: anObjectTransporter [
+Object >> prepareValueForTransferBy: aSeamlessTransporter [
 	"Any object can define value object which will be transferred over network.
 	By default it is object itself. 
 	For details look at #prepareValueTransferBy: method comment"
 	
-	self prepareValueTransferBy: anObjectTransporter.
+	self prepareValueTransferBy: aSeamlessTransporter.
 	
 	^self
 ]
 
 { #category : #'*Seamless' }
-Object >> prepareValueTransferBy: aSeamlessObjectTransporter [
+Object >> prepareValueTransferBy: aSeamlessTransporter [
 	"By default transporter will send shallow copy of object to remote side.
 	And all internal state will be transferred by their own transfer strategies.
 	So we don't need to do anything here if we not have any internal state. 
 	But if we have and we think that it is logical part of receiver value
 	then we can mark this state to be transferred by value too: 
 	
-		aSeamlessObjectTransporter transferByValue: internalVariable 
+		aSeamlessTransporter transferByValue: internalVariable 
 	
 	Look for example at OrderedCollection"
 ]

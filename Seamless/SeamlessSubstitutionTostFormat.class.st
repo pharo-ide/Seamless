@@ -18,13 +18,13 @@ SeamlessSubstitutionTostFormat class >> network: aSeamlessNetwork [
 ]
 
 { #category : #operations }
-SeamlessSubstitutionTostFormat >> readObjectWith: aTostMaterialization [
+SeamlessSubstitutionTostFormat >> readObjectWith: aSeamlessTransporter [
 
-	^aTostMaterialization readSeamlessSubstitution 
+	^aSeamlessTransporter readObjectSubstitution 
 ]
 
 { #category : #operations }
-SeamlessSubstitutionTostFormat >> tryWriteObject: anObject with: aTostSerialization [
+SeamlessSubstitutionTostFormat >> tryWriteObject: anObject with: aSeamlessTransporter [
 	
-	^aTostSerialization tryWriteTransferObjectFor: anObject format: id
+	^aSeamlessTransporter tryWriteTransferObjectFor: anObject format: id
 ]

@@ -43,21 +43,21 @@ SeamlessObjectCopyReference >> objectCopy: anObject [
 ]
 
 { #category : #transfer }
-SeamlessObjectCopyReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+SeamlessObjectCopyReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 	| representation |
-	objectCopy := aTostMaterialization readNextObject.
+	objectCopy := aSeamlessTransporter readNextObject.
 	
 	self == objectCopy ifFalse: [ 
-		"It happens when Tost serialization substitutes object with another object 
-		which reference original object itself. In this case on remote side materialized object 
-		will reference itself. 
+		"It happens when aSeamlessTransporter substitutes given object with another object 
+		which references the original object itself. 
+		In this case on the remote side the materialized object will reference itself. 
 		Here it is ObjectCopyReference which references itself in objectCopy variable. 
 		So we dont need to visit objectCopy because we already here and it will broke protocol.
-		In future we need to support correct serialization of such substitutions. 
-		So inside substitution subgraph original object will be serialized without substitution. 
-		It also will allow automatic synchronization of object state on client 
-		when same object will be received from server few times".
-		aTostMaterialization atNextStepProcess: objectCopy].		
+		In future we need to support correct serialization of such substitutions:
+		- inside the substitution subgraph the original object must be serialized without substitution. 
+		It also will allow the automatic synchronization of the object state on the client 
+		when same object is received from the server multiple times".
+		aSeamlessTransporter atNextStepProcess: objectCopy].		
 	
 	representation := aSeamlessNetwork objectFor: self.	
 			
@@ -65,10 +65,10 @@ SeamlessObjectCopyReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with
 ]
 
 { #category : #transfer }
-SeamlessObjectCopyReference >> prepareValueTransferBy: anObjectTransporter [
-	super prepareValueTransferBy: anObjectTransporter.
+SeamlessObjectCopyReference >> prepareValueTransferBy: aSeamlessTransporter [
+	super prepareValueTransferBy: aSeamlessTransporter.
 	
-	anObjectTransporter transferByValue: objectCopy 
+	aSeamlessTransporter transferByValue: objectCopy 
 ]
 
 { #category : #'travel guide support' }

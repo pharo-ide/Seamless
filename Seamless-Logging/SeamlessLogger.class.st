@@ -143,7 +143,7 @@ SeamlessLogger >> logOutgoingRequest: aSeamlessRequest [
 { #category : #controlling }
 SeamlessLogger >> start [
 
-	(SeamlessNetwork>>#sendDataPacket:by:) ast link: outgoingLink.		
+	(SeamlessNetwork>>#sendObject:by:) ast link: outgoingLink.		
 	(SeamlessEvaluationRequest>>#executeFor:) ast link: incomingLink.
 	
 	isRunning := true

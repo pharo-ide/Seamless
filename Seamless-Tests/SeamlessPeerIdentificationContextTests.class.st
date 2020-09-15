@@ -15,7 +15,7 @@ SeamlessPeerIdentificationContextTests >> contextClass [
 { #category : #specs }
 SeamlessPeerIdentificationContextTests >> contextShouldSend: aSeamlessRequest [
 
-	^connection should receive sendDataPacket: aSeamlessRequest 
+	^connection should receive sendObject: aSeamlessRequest 
 ]
 
 { #category : #running }
@@ -30,5 +30,5 @@ SeamlessPeerIdentificationContextTests >> setUp [
 { #category : #specs }
 SeamlessPeerIdentificationContextTests >> stubRequestDataSend: aSeamlessRequest [
 
-	^connection stub sendDataPacket: aSeamlessRequest 
+	^connection stub sendObject: aSeamlessRequest 
 ]

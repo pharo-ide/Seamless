@@ -6,7 +6,7 @@ CompiledMethod class >> definesWellKnownSeamlessClass [
 ]
 
 { #category : #'*Seamless' }
-CompiledMethod >> prepareValueTransferBy: anObjectTransporter [
+CompiledMethod >> prepareValueTransferBy: aSeamlessTransporter [
 
-	self literalsDo: [ :each | each prepareMethodTransferBy: anObjectTransporter ]
+	self literalsDo: [ :each | each prepareMethodTransferBy: aSeamlessTransporter ]
 ]

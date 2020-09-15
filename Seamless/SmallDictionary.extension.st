@@ -1,10 +1,10 @@
 Extension { #name : #SmallDictionary }
 
 { #category : #'*Seamless' }
-SmallDictionary >> prepareValueTransferBy: aSeamlessObjectTransporter [
+SmallDictionary >> prepareValueTransferBy: aSeamlessTransporter [
 
-	aSeamlessObjectTransporter transferByValue: keys.
-	aSeamlessObjectTransporter transferByValue: values
+	aSeamlessTransporter transferByValue: keys.
+	aSeamlessTransporter transferByValue: values
 ]
 
 { #category : #'*Seamless' }

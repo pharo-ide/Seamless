@@ -82,5 +82,12 @@ SeamlessRequestResultDelivery >> shipResult: aRequestResult [
 
 { #category : #private }
 SeamlessRequestResultDelivery >> waitResult [
-	synchronizationSemaphore wait
+	"Instead of blindly wait for delivery result forever we periodically check the connection status
+	and consider the deliver as unavailable when senderPeer is not connected anymore.
+	So we fail as soon as senderPeer losts connection which improves responsiveness in bad scenarios"
+	
+	[requestResult isNil and: [ senderPeer isConnected ] ]
+		whileTrue: [ synchronizationSemaphore wait: 100 milliSeconds].
+		
+	requestResult ifNil: [ SeamlessResultDeliveryUnavailable signal ]
 ]

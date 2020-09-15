@@ -37,10 +37,10 @@ Class {
 }
 
 { #category : #transfer }
-SeamlessObjectReference class >> createTostInstanceWith: aTostMaterialization [
+SeamlessObjectReference class >> createTostInstanceWith: aSeamlessTransporter [
 	| reference |
-	reference := super createTostInstanceWith: aTostMaterialization.
-	aTostMaterialization readSeamlessReference: reference.
+	reference := super createTostInstanceWith: aSeamlessTransporter.
+	aSeamlessTransporter readObjectReference: reference.
 	^reference.
 ]
 
@@ -110,11 +110,6 @@ SeamlessObjectReference >> id: anObject [
 SeamlessObjectReference >> isConnectedToRemotePeer [
 
 	^senderPeer isConnected
-]
-
-{ #category : #testing }
-SeamlessObjectReference >> isSeamlessReference [
-	^true
 ]
 
 { #category : #operations }
@@ -195,12 +190,12 @@ SeamlessObjectReference >> pointsToRemoteObject [
 ]
 
 { #category : #transfer }
-SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 	| localObject |
-	super prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization.
+	super prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter.
 	
 	localObject := aSeamlessNetwork objectFor: self.
-	aTostMaterialization skip: localObject.
+	aSeamlessTransporter skip: localObject.
 	^localObject
 ]
 
@@ -252,8 +247,8 @@ SeamlessObjectReference >> travelGuide [
 ]
 
 { #category : #transfer }
-SeamlessObjectReference >> writeTostBodyWith: aTostSerialization [
+SeamlessObjectReference >> writeTostBodyWith: aSeamlessTransporter [
 
-	aTostSerialization writeSeamlessReference: self
+	aSeamlessTransporter writeObjectReference: self
 
 ]

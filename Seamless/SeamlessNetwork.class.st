@@ -32,9 +32,9 @@ When object should be transferred by reference I create SeamlesObjectReference f
 By default proxy is SeamlessProxy which delegates all messages to remote side. But it is possible to use specific proxy classes for specific objects. 
 For this you should implement subclass of SeamlessObjectReference which will return new kind of proxy. And you should override method #createSeamlessReference on your class to return new reference instance. For more details look at SeamlessObjectReference comments. 
 
-I contain transporterClass which defines actual protocol for sending and receiving data. It is implemented by SeamlessObjectTransforter subclasses. Look at it comments for details. Now there is only Fuel based protocol.
+I contain a transporter object, an instance of SeamlessRequestTransporter. It defines actual protocol for sending and receiving requests. Look at it comments for details.
 
-Network peers communicate with each others by sending request objects. It is subclasses of SeamlessRequest. Remote message send is just one type of it (SeamlessMessageSendRequest). 
+Network peers communicate with each others by sending request objects. They are subclasses of SeamlessRequest. Remote message send is just one type of it (SeamlessMessageSendRequest). 
 Requests are sent by contexts which represent logical sender. And requests return result to contexts.
 	context sendRequest: SeamlessRequest
 	context return: result to: senderPeer.
@@ -52,7 +52,7 @@ Internal Representation and Key Implementation Points.
     Instance Variables
 	distributedObjects:		<SeamlessDistributedObjects>
 	transferStrategies:		<Colection of <SeamlessTransferStrategy>>
-	transporterClass:		<SeamlessObjectTransporter class>
+	transport:		<SeamlessTransport class>
 				
 
 "
@@ -121,29 +121,11 @@ SeamlessNetwork >> addTransferStrategy: aTransferStrategy priority: anInteger [
 	self addTransferStrategy: aTransferStrategy
 ]
 
-{ #category : #controlling }
-SeamlessNetwork >> cleanDestroyedPeer: aRemotePeer [
-
-	aRemotePeer close.
-	distributedObjects removeObjectsDistributedBy: aRemotePeer.
-	remotePeers remove: aRemotePeer ifAbsent: [].
-	remotePeers ifEmpty: [ distributedObjects clear ]
-]
-
 { #category : #accessing }
 SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
 	^ self requestProcessingTimeout
 			ifNil: [SeamlessRequestResultDelivery from: aRemotePeer]
 			ifNotNil: [:timeout |	SeamlessRequestResultTimelyDelivery from: aRemotePeer maxTime: timeout]
-]
-
-{ #category : #controlling }
-SeamlessNetwork >> destroy [
-	"This methods supposed to be used when you really want to destroy local peer network and release all resources without thinking that they can be in use on remote peers.
-	Special request will be send to all connected peers to notify them. Then all connections and distributed objects will be cleaned.
-	Maybe it should be general #close method. But for now it is separate method (network #close only close peers with existing connections).
-	When peer is destroying it removes itself from network. That's why we need to enumeration on copy"
-	remotePeers copy do: [ :each |	each destroy]
 ]
 
 { #category : #accessing }
@@ -180,7 +162,12 @@ SeamlessNetwork >> initialize [
 	
 	distributedObjects := SeamlessDistributedObjects over: self.
 	transferStrategies := SortedCollection sortBlock: [:a :b | a priority >= b priority].
-	transport := SeamlessObjectTransporter default
+	transport := SeamlessTransport default
+]
+
+{ #category : #factory }
+SeamlessNetwork >> newRemotePeer [ 
+	^SeamlessRemotePeer inside: self
 ]
 
 { #category : #accessing }
@@ -206,12 +193,9 @@ SeamlessNetwork >> process: aSeamlessRequest receivedFrom: aRemotePeer [
 ]
 
 { #category : #operations }
-SeamlessNetwork >> receiveIncomingDataPacketFrom: aRemotePeer by: aBasysConnection [
+SeamlessNetwork >> receiveObjectBy: aBasysConnection [
 
-	| transporter |
-	transporter := transport newTransporterFor: self toTransferBy: aRemotePeer.
-	
-	^transporter receiveObjectBy: aBasysConnection
+	^transport receiveObjectFrom: aBasysConnection
 ]
 
 { #category : #accessing }
@@ -233,6 +217,14 @@ SeamlessNetwork >> removeDistributedObject: anObject [
 ]
 
 { #category : #accessing }
+SeamlessNetwork >> removeRemotePeer: aRemotePeer [
+	super removeRemotePeer: aRemotePeer.
+	
+	distributedObjects removeObjectsDistributedBy: aRemotePeer.
+	peerRegistry isEmpty ifTrue: [ distributedObjects clear ]
+]
+
+{ #category : #accessing }
 SeamlessNetwork >> requestProcessingTimeout [
 	^ requestProcessingTimeout ifNil: [self class defaultRequestProcessingTimeout]
 ]
@@ -243,12 +235,9 @@ SeamlessNetwork >> requestProcessingTimeout: aDuration [
 ]
 
 { #category : #operations }
-SeamlessNetwork >> sendDataPacket: aSeamlessRequest by: aBasysConnection [
+SeamlessNetwork >> sendObject: aSeamlessRequest by: aBasysConnection [
 
-	| transporter |
-	transporter := transport newTransporterFor: self toTransferBy: aBasysConnection remotePeer.
-	
-	transporter sendObject: aSeamlessRequest by: aBasysConnection
+	transport sendObject: aSeamlessRequest to: aBasysConnection
 ]
 
 { #category : #'transfer strategies' }

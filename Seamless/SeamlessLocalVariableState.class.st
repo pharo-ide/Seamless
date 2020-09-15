@@ -62,10 +62,10 @@ SeamlessLocalVariableState >> isUnassigned [
 ]
 
 { #category : #accessing }
-SeamlessLocalVariableState >> prepareValueTransferBy: aSeamlessObjectTransporter [
+SeamlessLocalVariableState >> prepareValueTransferBy: aSeamlessTransporter [
 
 	remoteVariable ifNotNil: [ 
-		aSeamlessObjectTransporter transferByReference: remoteVariable]
+		aSeamlessTransporter transferByReference: remoteVariable]
 ]
 
 { #category : #accessing }
@@ -123,6 +123,6 @@ SeamlessLocalVariableState >> write: anObject [
 	
 	writeMessage := MessageSend receiver: remoteVariable selector: #write: argument: anObject.
 	[remoteVariable remotePeer 
-		sendDataPacket: (SeamlessMessageSendRequest with: writeMessage)] ifError: [  ].
+		sendObject: (SeamlessMessageSendRequest with: writeMessage)] ifError: [  ].
 	^anObject.
 ]

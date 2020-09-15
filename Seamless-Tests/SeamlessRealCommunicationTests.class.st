@@ -49,40 +49,41 @@ SeamlessRealCommunicationTests >> prepareClientProxyForServerObject: serverSideO
 
 { #category : #running }
 SeamlessRealCommunicationTests >> setUp [
-	SeamlessObjectTransporter createDefault.
+	SeamlessTransport createDefault.
 	super setUp.
 	
 	
 ]
 
 { #category : #tests }
-SeamlessRealCommunicationTests >> testDestroyedNetworkShouldFailAnyRemoteRequestsOnClient [
+SeamlessRealCommunicationTests >> testClosedNetworkShouldFailAnyRemoteRequestsOnClient [
  
 	| remoteEnv |
 	 
 	self forkAndWait: [
 		remoteEnv := clientSideNetwork environmentAt: self serverAddress.
-		clientSideNetwork destroy.
+		clientSideNetwork close.
 		[ remoteEnv at: #Rectangle ] should raise: BasysRemotePeerClosed
 	]
 ]
 
 { #category : #tests }
-SeamlessRealCommunicationTests >> testDestroyingNetworkShouldCleanAllDistributedObjects [
- 
-	| remoteEnv |
+SeamlessRealCommunicationTests >> testClosedNetworkShouldHaveCleanDistributedObjects [
+ 	| remoteEnv |
 	 
 	self forkAndWait: [
 		remoteEnv := clientSideNetwork environmentAt: self serverAddress.
-		clientSideNetwork destroy.
+		clientSideNetwork distributedObjects should not be isEmpty.
+		serverSideNetwork distributedObjects should not be isEmpty.
+		
+		clientSideNetwork close.
 	].
-	100 milliSeconds wait. "destroying request is async. So we should give a time to clean objects"
+	100 milliSeconds wait. "close request is async. So we should give a time to clean objects"
 	
 	clientSideNetwork distributedObjects should be isEmpty.
 	clientSideNetwork remotePeers should be isEmpty.
 	serverSideNetwork distributedObjects should be isEmpty.
-	serverSideNetwork remotePeers should be isEmpty.
-	
+	serverSideNetwork remotePeers should be isEmpty
 ]
 
 { #category : #tests }
@@ -96,6 +97,20 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockAsynchronously [
 	]. 
  
 	result should be: remotePeer
+]
+
+{ #category : #tests }
+SeamlessRealCommunicationTests >> testEvaluatingBlockWhenConnectionLostDuringExecution [
+	| remotePeer error |
+	remotePeer := self connectToServerPeer.
+	self fork: [
+		[remotePeer evaluate: [ 200 milliSeconds wait ]] 
+			on: Error do: [:err | error := err ].
+	]. 
+
+	20 milliSeconds wait. 
+	remotePeer closeConnections.	
+	[error] should takeAWhile to beInstanceOf: SeamlessResultDeliveryUnavailable
 ]
 
 { #category : #tests }
@@ -390,10 +405,10 @@ SeamlessRealCommunicationTests >> testFirstConnectionEstablishing [
  
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
-	self forkAndWait: [remotePeer establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 1.
-	clientSideNetwork connectionsCount should be: 1
+	serverSideNetwork connectionCount should be: 1.
+	clientSideNetwork connectionCount should be: 1
 	
 ]
 
@@ -424,7 +439,7 @@ SeamlessRealCommunicationTests >> testGettingEnvironmentFromAddressWhenPassivePe
 
 	remoteEnv isSeamlessProxy should be: true.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysActiveRemotePeer.
+	serverSideNetwork remotePeers anyOne should beInstanceOf: SeamlessRemotePeer.
 	serverSideNetwork remotePeers anyOne address should equal: self serverAddress.
 	remoteEnv seamlessReference senderPeer should be: serverSideNetwork remotePeers anyOne.
 ]
@@ -456,7 +471,6 @@ SeamlessRealCommunicationTests >> testGettingLargeInteger [
 { #category : #tests }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 	| remotePeer result state |
-	self timeLimit: 10 minute.
 	remotePeer := self connectToServerPeer.
 	state := SeamlessLocalVariableState of: #remoteVar.
 	state value: #varValue.
@@ -472,7 +486,6 @@ SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 { #category : #tests }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItIsUnassigned [
 	| remotePeer result state |
-	self timeLimit: 10 minute.
 	remotePeer := self connectToServerPeer.
 	state := SeamlessLocalVariableState of: #remoteVar.
 	state should be isUnassigned.
@@ -1337,11 +1350,12 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
  
 	| remotePeer |
 	remotePeer := serverSideNetwork remotePeerAt: self serverAddress.
-	self forkAndWait: [remotePeer establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1.
-	serverSideNetwork remotePeers anyOne should beInstanceOf: BasysActiveRemotePeer 
+	serverSideNetwork remotePeers anyOne should beInstanceOf: SeamlessRemotePeer.
+	serverSideNetwork remotePeers anyOne should be isActive
 ]
 
 { #category : #tests }
@@ -1423,7 +1437,7 @@ SeamlessRealCommunicationTests >> testSendingClientProxyFromServerToClient [
 	remoteProxy := self prepareClientProxyForServerObject: transferedObject.
 	
 	self forkAndWait: [
-		remotePeer establishNewConnection.
+		remotePeer openNewConnection.
 		serverSidePeer := serverSideNetwork remotePeers anyOne.
 		clientEnv := serverSidePeer remoteEnvironment.
 		remoteArrayOnServer := (clientEnv at: #Array) with: remoteProxy. "it will lead to request from server to client with client proxy as parameter"
@@ -1481,7 +1495,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxyWhenTwoConnecti
 	proxy := self prepareClientProxyForServerObject: 'test'. 
 	
 	self forkAndWait: [
-		proxy remotePeer establishNewConnection; establishNewConnection.
+		proxy remotePeer openNewConnection; openNewConnection.
 		result := proxy , ' extra'].
 
 	result should equal: 'test extra'
@@ -1493,11 +1507,11 @@ SeamlessRealCommunicationTests >> testTwiceConnectionEstablishing [
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
 	self forkAndWait: [
-		remotePeer establishNewConnection.
-		remotePeer establishNewConnection].
+		remotePeer openNewConnection.
+		remotePeer openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
-	clientSideNetwork connectionsCount should be: 2
+	serverSideNetwork connectionCount should be: 2.
+	clientSideNetwork connectionCount should be: 2
 	
 ]
 
@@ -1508,13 +1522,13 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromDifferentLocalPe
 	remotePeerForClient1 := self connectToServerPeer.
 	client2Network := self networkClass new.
 	remotePeerForClient2 := client2Network remotePeerAt: self serverAddress.
-	self forkAndWait: [remotePeerForClient1 establishNewConnection. 
-			remotePeerForClient2 establishNewConnection].
+	self forkAndWait: [remotePeerForClient1 openNewConnection. 
+			remotePeerForClient2 openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 2.
-	serverSideNetwork remotePeers first connectionsCount should be: 1.
-	serverSideNetwork remotePeers last connectionsCount should be: 1.	
+	serverSideNetwork remotePeers first connectionCount should be: 1.
+	serverSideNetwork remotePeers last connectionCount should be: 1.	
 ]
 
 { #category : #tests }
@@ -1522,10 +1536,10 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromSameLocalPeer [
  
 	| remotePeer |
 	remotePeer := self connectToServerPeer.
-	self forkAndWait: [remotePeer establishNewConnection; establishNewConnection].
+	self forkAndWait: [remotePeer openNewConnection; openNewConnection].
 
-	serverSideNetwork connectionsCount should be: 2.
-	clientSideNetwork connectionsCount should be: 2.
+	serverSideNetwork connectionCount should be: 2.
+	clientSideNetwork connectionCount should be: 2.
 	serverSideNetwork remotePeers should haveSize: 1
 	
 ]

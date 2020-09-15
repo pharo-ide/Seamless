@@ -1,8 +1,8 @@
 Extension { #name : #RunArray }
 
 { #category : #'*Seamless' }
-RunArray >> prepareValueTransferBy: anObjectTransporter [
+RunArray >> prepareValueTransferBy: aSeamlessTransporter [
 	
-	anObjectTransporter transferByValue: runs.
-	anObjectTransporter transferByValue: values
+	aSeamlessTransporter transferByValue: runs.
+	aSeamlessTransporter transferByValue: values
 ]

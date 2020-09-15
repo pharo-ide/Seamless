@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #transfer }
-SeamlessDeepCopyContainer >> prepareValueTransferBy: anObjectTransporter [
+SeamlessDeepCopyContainer >> prepareValueTransferBy: aSeamlessTransporter [
 
-	anObjectTransporter transferByDeepCopy: content
+	aSeamlessTransporter transferByDeepCopy: content
 ]

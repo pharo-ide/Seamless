@@ -19,10 +19,10 @@ Class {
 }
 
 { #category : #transfer }
-SeamlessWellKnownObject class >> createTostInstanceWith: aTostMaterialization [
+SeamlessWellKnownObject class >> createTostInstanceWith: aSeamlessTransporter [
 	| instance |
-	instance := super createTostInstanceWith: aTostMaterialization.
-	instance name: (Symbol createTostInstanceWith: aTostMaterialization).
+	instance := super createTostInstanceWith: aSeamlessTransporter.
+	instance name: (Symbol createTostInstanceWith: aSeamlessTransporter).
 	^instance
 ]
 
@@ -43,11 +43,11 @@ SeamlessWellKnownObject >> name: anObject [
 ]
 
 { #category : #transfer }
-SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aTostMaterialization [
+SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 
 	| global  |
 	global := self class environment at: name ifAbsent: [SeamlessMissingGlobal named: name].
-	aTostMaterialization skip: global.
+	aSeamlessTransporter skip: global.
 	^global 
 ]
 
@@ -59,8 +59,8 @@ SeamlessWellKnownObject >> travelGuide [
 ]
 
 { #category : #transfer }
-SeamlessWellKnownObject >> writeTostBodyWith: aTostSerialization [
+SeamlessWellKnownObject >> writeTostBodyWith: aSeamlessTransporter [
 	
-	aTostSerialization writeString: name
+	aSeamlessTransporter writeString: name
 	
 ]
