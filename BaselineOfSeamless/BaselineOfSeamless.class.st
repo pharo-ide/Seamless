@@ -19,7 +19,7 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"				
 			baseline: 'ObjectStatistics' with: [
 				spec
-					repository: 'github://pharo-ide/ObjectStatistics:v1.0.2';
+					repository: 'github://pharo-ide/ObjectStatistics:v1.0.3';
 					loads: 'Core' ];
 			project: 'ObjectStatisticsTests' copyFrom: 'ObjectStatistics' with: [
 				spec loads: 'default' ];				
