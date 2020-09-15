@@ -12,7 +12,7 @@ BaselineOfSeamless >> baseline: spec [
 		spec 
 			baseline: 'Basys' with: [
 				spec
-					repository: 'github://pharo-ide/Basys:v1.0.4';
+					repository: 'github://pharo-ide/Basys:v2.0.0';
 					loads: 'Core' ];
 			project: 'BasysTests' copyFrom: 'Basys' with: [
 				spec loads: 'Tests'];
