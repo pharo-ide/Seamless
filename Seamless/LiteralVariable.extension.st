@@ -4,3 +4,8 @@ Extension { #name : #LiteralVariable }
 LiteralVariable class >> definesWellKnownSeamlessClass [
 	^true
 ]
+
+{ #category : #'*Seamless' }
+LiteralVariable >> seamlessDefaultTransferStrategy [
+	^SeamlessTransferStrategy defaultByValue
+]
