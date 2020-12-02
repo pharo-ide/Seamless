@@ -33,7 +33,7 @@ BaselineOfSeamless >> baseline: spec [
 			"------------"
 			baseline: 'ReadWriteLock' with: [
 				spec
-					repository: 'github://pharo-ide/ReadWriteLock:v1.0.0';
+					repository: 'github://pharo-ide/ReadWriteLock:v2.0.0';
 					loads: 'Core'];
 			project: 'ReadWriteLockTests' copyFrom: 'ReadWriteLock' with: [
 				spec loads: 'Tests'];
