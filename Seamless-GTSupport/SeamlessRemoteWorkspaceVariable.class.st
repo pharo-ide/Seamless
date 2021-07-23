@@ -19,7 +19,7 @@ Class {
 	#instVars : [
 		'state'
 	],
-	#category : 'Seamless-GTSupport'
+	#category : #'Seamless-GTSupport'
 }
 
 { #category : #'instance creation' }
@@ -33,7 +33,7 @@ SeamlessRemoteWorkspaceVariable class >> key: aKey [
 SeamlessRemoteWorkspaceVariable >> emitStore: methodBuilder [
 
 	| tempName |
-	tempName := Object new.
+	tempName := '0slotTempForStackManipulation'. 
 	methodBuilder
 		addTemp: tempName;
 		storeTemp: tempName;
