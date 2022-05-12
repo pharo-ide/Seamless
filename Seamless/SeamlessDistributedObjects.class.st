@@ -30,7 +30,7 @@ Class {
 		'referencesToObjects',
 		'lastReferenceId'
 	],
-	#category : 'Seamless-Core'
+	#category : #'Seamless-Core'
 }
 
 { #category : #'instance creation' }
@@ -155,7 +155,11 @@ SeamlessDistributedObjects >> objectsToReferences: anObject [
 { #category : #printing }
 SeamlessDistributedObjects >> printOn: aStream [
 	super printOn: aStream.
-	aStream << '(' << self size << ')'
+
+	aStream 
+		nextPutAll: '(';
+		print: self size;
+		nextPutAll: ')'
 ]
 
 { #category : #accessing }

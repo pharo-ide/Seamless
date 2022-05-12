@@ -15,7 +15,7 @@ Class {
 	#instVars : [
 		'reference'
 	],
-	#category : 'Seamless-Proxy'
+	#category : #'Seamless-Proxy'
 }
 
 { #category : #'instance creation' }
@@ -124,6 +124,14 @@ SeamlessProxy >> printForSeamlessLog [
 ]
 
 { #category : #'remote reflection' }
+SeamlessProxy >> readRemoteSlot: aSlot [
+
+	| messageSend |
+	messageSend := 	MessageSend receiver: aSlot selector: #read: argument: self.
+	^reference performRemoteMessageWithoutCache: messageSend
+]
+
+{ #category : #'remote reflection' }
 SeamlessProxy >> remoteClass [
 
 	^self performAndCacheRemoteMessage: (Message selector: #class)
@@ -161,7 +169,20 @@ SeamlessProxy >> seamlessReference: aSeamlessObjectReference [
 	reference := aSeamlessObjectReference
 ]
 
+{ #category : #printing }
+SeamlessProxy >> stDisplayString [
+	^self remotePrintString
+]
+
 { #category : #accessing }
 SeamlessProxy >> travelGuide [
 	^EmptyObjectTravelGuide 
+]
+
+{ #category : #'remote reflection' }
+SeamlessProxy >> writeRemoteSlot: aSlot value: anObject [
+
+	| messageSend |
+	messageSend := 	MessageSend receiver: aSlot selector: #write:to: arguments: { anObject. self }.
+	^reference performRemoteMessageWithoutCache: messageSend
 ]
