@@ -1,7 +1,0 @@
-language: smalltalk
-sudo: false
-os:
-  - linux
-smalltalk:
-  - Pharo32-9.0
-  - Pharo64-9.0
