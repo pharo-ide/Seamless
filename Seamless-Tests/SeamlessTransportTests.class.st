@@ -9,12 +9,6 @@ Class {
 	#category : #'Seamless-Tests'
 }
 
-{ #category : #helpers }
-SeamlessTransportTests >> methodWithPragmaForTransfer [
-	<example>
-	^1+3
-]
-
 { #category : #running }
 SeamlessTransportTests >> setUp [
 	| transferBuffer peer |
@@ -47,25 +41,6 @@ SeamlessTransportTests >> testTransferAndReceiveCompiledMethod [
 	transport sendObject: (SeamlessRequestStub with: method) to: connection.
 	transferedObject := transport receiveObjectFrom: connection.
 	
-	actual := self withArgs: #() executeMethod: transferedObject content.
-	actual should equal: expected.
-]
-
-{ #category : #tests }
-SeamlessTransportTests >> testTransferAndReceiveCompiledMethodWithPragma [
-
-	| transferedObject method expected actual |
-	method := self class >> #methodWithPragmaForTransfer.
-	method should be hasProperties.
-	method should be hasPragmaNamed: #example.
-	expected := self withArgs: #() executeMethod: method.
-	
-	network transferByValue: (Identical to: method).
-	transport sendObject: (SeamlessRequestStub with: method) to: connection.
-	transferedObject := transport receiveObjectFrom: connection.
-	
-	transferedObject content should be hasProperties.	
-	transferedObject content should be hasPragmaNamed: #example.
 	actual := self withArgs: #() executeMethod: transferedObject content.
 	actual should equal: expected.
 ]

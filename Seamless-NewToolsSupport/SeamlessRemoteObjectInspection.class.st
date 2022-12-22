@@ -7,14 +7,24 @@ Class {
 { #category : #accessing }
 SeamlessRemoteObjectInspection >> inspectorNodes [
 
-	^{ StInspectorSelfNode hostObject: self model }, self inspectorRemoteNodes 
+	^self inspectorNodesFor: self model
 ]
 
 { #category : #accessing }
-SeamlessRemoteObjectInspection >> inspectorRemoteNodes [
+SeamlessRemoteObjectInspection >> inspectorNodesFor: anObject [ 
 
-	| allSlots |
-	allSlots := self model remoteClass allSlots asLocalObject.
-	^allSlots collect: [ :each | 
-			SeamlessInspectorRemoteSlotNode hostObject: self model slot: each ]
+	| allSlots nodes |
+	allSlots := anObject remoteClass allSlots asLocalObject.
+	nodes := allSlots collect: [ :each | 
+			SeamlessInspectorRemoteSlotNode hostObject: anObject slot: each ].
+		
+	^{ StInspectorSelfNode hostObject: anObject }, nodes
+]
+
+{ #category : #accessing }
+SeamlessRemoteObjectInspection >> setAttributeTable [
+
+	attributeTable
+		roots: self inspectorNodes;
+		children: [ :node | self inspectorNodesFor: node value ]
 ]
