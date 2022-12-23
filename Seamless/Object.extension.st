@@ -82,10 +82,10 @@ Object >> prepareValueTransferBy: aSeamlessTransporter [
 Object >> printForSeamlessLog [
 	^String streamContents: [ :s | 
 		s 
-			<< self class name;
-			<< $(;
-			<< self hash;
-			<< ')>>'
+			nextPutAll: self class name;
+			nextPut: $(;
+			print: self hash;
+			nextPutAll: ')>>'
 	]
 ]
 

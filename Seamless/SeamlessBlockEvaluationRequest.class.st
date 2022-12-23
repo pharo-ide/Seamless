@@ -4,7 +4,7 @@ I am request to execute block on remote side (my valuable instance is one args b
 Class {
 	#name : #SeamlessBlockEvaluationRequest,
 	#superclass : #SeamlessEvaluationRequest,
-	#category : 'Seamless-Requests'
+	#category : #'Seamless-Requests'
 }
 
 { #category : #accessing }
@@ -19,8 +19,8 @@ SeamlessBlockEvaluationRequest >> printBlock [
 
 { #category : #printing }
 SeamlessBlockEvaluationRequest >> printMessageForLog [
-
-	^self printBlock
+	"Do not use #printBlock as it could lead to many message sends back to remote side"
+	^'Remote block request' 
 ]
 
 { #category : #printing }

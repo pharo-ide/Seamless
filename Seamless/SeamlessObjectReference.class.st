@@ -33,7 +33,7 @@ Class {
 		'ownerPeerId',
 		'senderPeer'
 	],
-	#category : 'Seamless-Core'
+	#category : #'Seamless-Core'
 }
 
 { #category : #transfer }
@@ -207,13 +207,17 @@ SeamlessObjectReference >> printForSeamlessLog [
 
 { #category : #printing }
 SeamlessObjectReference >> printOn: aStream [
-
 	| referenceName |
 	referenceName := 'an ObjectReference'.
 	senderPeer ifNotNil: [ 
-		referenceName := senderPeer class = BasysLocalPeer ifTrue: [ 'an LocalReference' ] ifFalse: [ 'an RemoteReference' ]].
-	
-	aStream << referenceName << $( << id asString << ')'.
+		referenceName := senderPeer class = BasysLocalPeer 
+			ifTrue: [ 'an LocalReference' ] ifFalse: [ 'an RemoteReference' ]
+	].
+	aStream 
+		nextPutAll: referenceName;
+		nextPut: $(;
+		nextPutAll: id asString;
+		nextPut: $)
 ]
 
 { #category : #'travel guide support' }

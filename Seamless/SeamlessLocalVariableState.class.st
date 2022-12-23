@@ -20,7 +20,7 @@ Class {
 		'value',
 		'isAssigned'
 	],
-	#category : 'Seamless-Core'
+	#category : #'Seamless-Core'
 }
 
 { #category : #'instance creation' }
@@ -86,7 +86,7 @@ SeamlessLocalVariableState >> readRemoteValue [
 	We should setup timeout in that case and ignore possible value update"
 	
 	[
-		[value := remoteVariable read] ifError: [  ]
+		[value := remoteVariable read] onErrorDo: [  ]
 	] valueWithin: 2 seconds onTimeout: [].
 	
 	^value
@@ -123,6 +123,6 @@ SeamlessLocalVariableState >> write: anObject [
 	
 	writeMessage := MessageSend receiver: remoteVariable selector: #write: argument: anObject.
 	[remoteVariable remotePeer 
-		sendObject: (SeamlessMessageSendRequest with: writeMessage)] ifError: [  ].
+		sendObject: (SeamlessMessageSendRequest with: writeMessage)] onErrorDo: [  ].
 	^anObject.
 ]

@@ -16,12 +16,33 @@ SeamlessTransportTests >> setUp [
 	
 	network := SeamlessNetwork new.
 	peer := network newRemotePeer.
+	peer ensureIdentity: #testRemotePeer.
 	connection := peer newConnection.
 	transferBuffer := ByteArray new: 10000.
 	connection stub inputStream will: [ transferBuffer readStream].
 	connection stub outputStream will: [ transferBuffer writeStream].
 	
 	transport := SeamlessTransport default.
+]
+
+{ #category : #helpers }
+SeamlessTransportTests >> simpleMethodForTransfer [
+	^1+3
+]
+
+{ #category : #tests }
+SeamlessTransportTests >> testTransferAndReceiveCompiledMethod [
+
+	| transferedObject method expected actual |
+	method := self class >> #simpleMethodForTransfer.
+	expected := self withArgs: #() executeMethod: method.
+	
+	network transferByValue: (Identical to: method).
+	transport sendObject: (SeamlessRequestStub with: method) to: connection.
+	transferedObject := transport receiveObjectFrom: connection.
+	
+	actual := self withArgs: #() executeMethod: transferedObject content.
+	actual should equal: expected.
 ]
 
 { #category : #tests }

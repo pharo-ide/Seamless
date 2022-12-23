@@ -4,7 +4,7 @@ I am request to execute remote message send (my valuable variable is MessageSend
 Class {
 	#name : #SeamlessMessageSendRequest,
 	#superclass : #SeamlessEvaluationRequest,
-	#category : 'Seamless-Requests'
+	#category : #'Seamless-Requests'
 }
 
 { #category : #accessing }
@@ -17,9 +17,9 @@ SeamlessMessageSendRequest >> printMessageForLog [
 
 	^String streamContents: [ :s | 
 		s 
-			<< self receiver printForSeamlessLog;
-			<< '>>';
-			<< self selector
+			nextPutAll: self receiver printForSeamlessLog;
+			nextPutAll: '>>';
+			nextPutAll: self selector
 	]
 ]
 
