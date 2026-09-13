@@ -10,15 +10,17 @@ SeamlessNetwork uses my #default instance as a transprot for requests:
 	transport receiveObjectFrom: aBasicConnection
 "
 Class {
-	#name : #SeamlessTransport,
-	#superclass : #TostTransport,
+	#name : 'SeamlessTransport',
+	#superclass : 'TostTransport',
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Seamless-Transport'
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #default }
+{ #category : 'default' }
 SeamlessTransport class >> collectWellKnownClasses [
 
 	| wellKnownClasses |
@@ -29,7 +31,7 @@ SeamlessTransport class >> collectWellKnownClasses [
 	^wellKnownClasses asArray
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 SeamlessTransport class >> collectWellKnownObjects [
 
 	^TostWellKnownObjectFormat default objects, 
@@ -40,7 +42,7 @@ SeamlessTransport class >> collectWellKnownObjects [
 		allInstVarNames allSlots) asSet asArray
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 SeamlessTransport class >> createDefault [
 
 	^default := self new 
@@ -53,25 +55,25 @@ SeamlessTransport class >> createDefault [
 			TostNewObjectOfNewClassFormat new }
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 SeamlessTransport class >> default [
 	^default ifNil: [self createDefault]
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessTransport class >> forTransferOver: aSeamlessNetwork by: aRemotePeer [
 	^self new
 		network: aSeamlessNetwork;
 		remotePeer: aRemotePeer
 ]
 
-{ #category : #default }
+{ #category : 'default' }
 SeamlessTransport class >> resetDefault [
 
 	^default := nil
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 SeamlessTransport >> newTransporterOn: aBasysConnection [
 
 	^SeamlessTransporter using: self onConnection: aBasysConnection

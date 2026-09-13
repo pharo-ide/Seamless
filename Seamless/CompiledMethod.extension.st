@@ -1,6 +1,6 @@
-Extension { #name : #CompiledMethod }
+Extension { #name : 'CompiledMethod' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 CompiledMethod class >> definesWellKnownSeamlessClass [
 	^true
 ]

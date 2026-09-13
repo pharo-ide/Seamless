@@ -6,19 +6,21 @@ I can be created by
 	SeamlessRemoteException for: originalException
 "
 Class {
-	#name : #SeamlessRemoteException,
-	#superclass : #Error,
-	#category : 'Seamless-Core'
+	#name : 'SeamlessRemoteException',
+	#superclass : 'Error',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRemoteException class >> for: anException [
 
 	^self new 	
 		messageText: anException printString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteException >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

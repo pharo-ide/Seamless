@@ -4,27 +4,29 @@ I am root class for objects which are used for transfer and substitute other nor
 I define that my subclasses should always and only transferred by value
 "
 Class {
-	#name : #SeamlessTransferObject,
-	#superclass : #Object,
-	#category : 'Seamless-Core'
+	#name : 'SeamlessTransferObject',
+	#superclass : 'Object',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransferObject class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransferObject class >> definesWellKnownSeamlessClassHierarchy [ 
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransferObject >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferObject >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue 
 ]

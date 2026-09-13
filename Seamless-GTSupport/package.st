@@ -1,1 +1,1 @@
-Package { #name : #'Seamless-GTSupport' }
+Package { #name : 'Seamless-GTSupport' }

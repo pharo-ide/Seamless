@@ -1,6 +1,6 @@
-Extension { #name : #HashedCollection }
+Extension { #name : 'HashedCollection' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 HashedCollection >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByValue: array	

@@ -9,31 +9,33 @@ Internal Representation and Key Implementation Points.
 	content:		<Object>
 "
 Class {
-	#name : #SeamlessObjectValueContainer,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessObjectValueContainer',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'content'
 	],
-	#category : 'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessObjectValueContainer class >> with: anObject [
 	^self new 
 		content: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectValueContainer >> content [
 	^ content
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectValueContainer >> content: anObject [
 	content := anObject
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectValueContainer >> prepareValueForTransferBy: aSeamlessTransporter [
 	"Container is always substituted by content while transferred over network.
 	it also commands transporter to transfer content by value"
@@ -43,7 +45,7 @@ SeamlessObjectValueContainer >> prepareValueForTransferBy: aSeamlessTransporter 
 	^content
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectValueContainer >> prepareValueTransferBy: aSeamlessTransporter [
 	
 	aSeamlessTransporter transferByValue: content

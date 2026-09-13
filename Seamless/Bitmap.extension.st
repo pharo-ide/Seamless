@@ -1,6 +1,6 @@
-Extension { #name : #Bitmap }
+Extension { #name : 'Bitmap' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Bitmap >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

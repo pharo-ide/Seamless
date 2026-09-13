@@ -1,20 +1,21 @@
 Class {
-	#name : #SeamlessNetworkTests,
-	#superclass : #TestCase,
+	#name : 'SeamlessNetworkTests',
+	#superclass : 'TestCase',
 	#instVars : [
 		'network'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessNetworkTests >> setUp [
 	super setUp.
 	
 	network := SeamlessNetwork new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingDefaultTransferStrategyWithPriority [
 
 	| actual |
@@ -27,7 +28,7 @@ SeamlessNetworkTests >> testAddingDefaultTransferStrategyWithPriority [
 	actual where priority should be: 200
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingDefaultTransferStrategyWithSmartMessage [
 
 	| actual |
@@ -39,7 +40,7 @@ SeamlessNetworkTests >> testAddingDefaultTransferStrategyWithSmartMessage [
 	actual where criteria should be: #criteria
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingTransferStrategyByDeepCopyWithSmartMessage [
 
 	| actual |
@@ -51,7 +52,7 @@ SeamlessNetworkTests >> testAddingTransferStrategyByDeepCopyWithSmartMessage [
 	actual where criteria should be: #criteria
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingTransferStrategyByReferenceWithCacheWithSmartMessage [
 
 	| actual |
@@ -64,7 +65,7 @@ SeamlessNetworkTests >> testAddingTransferStrategyByReferenceWithCacheWithSmartM
 	actual where cachedMessages should be: #messageSelectors
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingTransferStrategyByReferenceWithSmartMessage [
 
 	| actual |
@@ -76,7 +77,7 @@ SeamlessNetworkTests >> testAddingTransferStrategyByReferenceWithSmartMessage [
 	actual where criteria should be: #criteria
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingTransferStrategyByReferencedCopyWithSmartMessage [
 
 	| actual |
@@ -88,7 +89,7 @@ SeamlessNetworkTests >> testAddingTransferStrategyByReferencedCopyWithSmartMessa
 	actual where criteria should be: #criteria
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testAddingTransferStrategyByValueWithSmartMessage [
 
 	| actual |
@@ -100,7 +101,7 @@ SeamlessNetworkTests >> testAddingTransferStrategyByValueWithSmartMessage [
 	actual where criteria should be: #criteria
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsConfiguredTimeout [
 
 	| delivery |
@@ -113,7 +114,7 @@ SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsConfiguredTimeout 
 	delivery maxTime should equal: 10 seconds
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsDefaultTimeout [
 
 	| delivery current |
@@ -126,7 +127,7 @@ SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsDefaultTimeout [
 		ensure: [ SeamlessNetwork defaultRequestProcessingTimeout: current ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
 
 	| delivery |
@@ -138,7 +139,7 @@ SeamlessNetworkTests >> testCreateDeliveryForResultWhenThereIsNoTimeout [
 	delivery senderPeer should be: #remotePeer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingObjectForReference [
 
 	| actual distributedObjects |
@@ -152,7 +153,7 @@ SeamlessNetworkTests >> testGettingObjectForReference [
 	actual should be: #object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingObjectForReferenceToMissingLocalObject [
 
 	| actual reference |
@@ -164,7 +165,7 @@ SeamlessNetworkTests >> testGettingObjectForReferenceToMissingLocalObject [
 	actual reference should be: reference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingProxyForReferenceToNewRemoteObject [
 
 	| actual distributedObjects reference |
@@ -181,7 +182,7 @@ SeamlessNetworkTests >> testGettingProxyForReferenceToNewRemoteObject [
 	actual should be: #proxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingReferenceForObject [
 
 	| actual distributedObjects |
@@ -197,7 +198,7 @@ SeamlessNetworkTests >> testGettingReferenceForObject [
 	Arg creationBlock where value should beInstanceOf: SeamlessObjectReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingTransferStrategyWhenItExistsForGivenObject [
 
 	[:strategy1 :strategy2 |
@@ -210,7 +211,7 @@ SeamlessNetworkTests >> testGettingTransferStrategyWhenItExistsForGivenObject [
 	] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingTransferStrategyWhenItExistsForGivenObjectButObjectNotAllowIt [
 
 	| actual |
@@ -225,7 +226,7 @@ SeamlessNetworkTests >> testGettingTransferStrategyWhenItExistsForGivenObjectBut
 	] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testGettingTransferStrategyWhenItNotSpecifiedForGivenObject [
 
 	| actual object |
@@ -236,19 +237,19 @@ SeamlessNetworkTests >> testGettingTransferStrategyWhenItNotSpecifiedForGivenObj
 	actual should beReturnedFrom: [object seamlessDefaultTransferStrategy]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testHasDefaultRequestProcessingTimeoutByDefault [
 
 	network requestProcessingTimeout should equal: SeamlessNetwork defaultRequestProcessingTimeout
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testHasEmptyTransferStrategiesByDefault [
 
 	network transferStrategies should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testIdentifyingConnection [
 
 	| sentRequest |
@@ -264,7 +265,7 @@ SeamlessNetworkTests >> testIdentifyingConnection [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testProcessingData [
 
 	[ :request |
@@ -274,7 +275,7 @@ SeamlessNetworkTests >> testProcessingData [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testReceivingRequest [
 
 	| transport result |
@@ -286,7 +287,7 @@ SeamlessNetworkTests >> testReceivingRequest [
 	result should beReturnedFrom: [transport receiveObjectFrom: #connection]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testRemoveDistributedObject [
 
 	network distributedObjects stub.
@@ -296,7 +297,7 @@ SeamlessNetworkTests >> testRemoveDistributedObject [
 	network distributedObjects should receive remove: #object
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testRemoveLastRemotePeerShouldCleanDistributedObjects [
 
 	network distributedObjects stub.
@@ -306,7 +307,7 @@ SeamlessNetworkTests >> testRemoveLastRemotePeerShouldCleanDistributedObjects [
 	network distributedObjects should receive clear
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanDistributedObjects [
 
 	network distributedObjects stub.
@@ -316,7 +317,7 @@ SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanDistributedObjects [
 	network distributedObjects should receive removeObjectsDistributedBy: #peer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanObjectsWhichPeerDistributes [
 
 	network distributedObjects stub.
@@ -326,7 +327,7 @@ SeamlessNetworkTests >> testRemoveRemotePeerShouldCleanObjectsWhichPeerDistribut
 	network distributedObjects should receive removeObjectsDistributedBy: #peer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testSendingRequest [
 	
 	| transport |
@@ -338,7 +339,7 @@ SeamlessNetworkTests >> testSendingRequest [
 	transport should receive sendObject: #object to: #connection
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testShouldFollowDefaultRequestProcessingTimeoutChangesWhenInstanceIsNotConfigured [
 
 	| current |
@@ -350,7 +351,7 @@ SeamlessNetworkTests >> testShouldFollowDefaultRequestProcessingTimeoutChangesWh
 	] ensure: [ SeamlessNetwork defaultRequestProcessingTimeout: current ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testStrategiesShouldBeInDeclarationOrderWhenNoPriorityWasSpecified [
 
 	| actual strategy1 strategy2 |
@@ -366,7 +367,7 @@ SeamlessNetworkTests >> testStrategiesShouldBeInDeclarationOrderWhenNoPriorityWa
 	actual last should be: strategy2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNetworkTests >> testStrategiesShouldBeSortedByPriorityFromHighToLowDirection [
 
 	| actual strategy1 strategy2 |

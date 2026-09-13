@@ -1,6 +1,6 @@
-Extension { #name : #SeamlessRealCommunicationTests }
+Extension { #name : 'SeamlessRealCommunicationTests' }
 
-{ #category : #'*Seamless-NewToolsSupport' }
+{ #category : '*Seamless-NewToolsSupport' }
 SeamlessRealCommunicationTests >> testExecutingDoItWithGlobalReferenceOnRemoteObjectByRemoteCompiler [
  
 	| remoteEnv remotePoint compiler result localResult |
@@ -20,7 +20,7 @@ SeamlessRealCommunicationTests >> testExecutingDoItWithGlobalReferenceOnRemoteOb
 	localResult should equal: 1@3
 ]
 
-{ #category : #'*Seamless-NewToolsSupport' }
+{ #category : '*Seamless-NewToolsSupport' }
 SeamlessRealCommunicationTests >> testExecutingDoItWithInstVarAssignmentOnRemoteObject [
  
 	| remoteEnv remotePoint compiler result |
@@ -41,7 +41,7 @@ SeamlessRealCommunicationTests >> testExecutingDoItWithInstVarAssignmentOnRemote
 	result should equal: 4003
 ]
 
-{ #category : #'*Seamless-NewToolsSupport' }
+{ #category : '*Seamless-NewToolsSupport' }
 SeamlessRealCommunicationTests >> testExecutingDoItWithInstVarAssignmentOnRemoteObjectWhenRequestorIsSpecified [
  
 	| remoteEnv remotePoint compiler result requestor |

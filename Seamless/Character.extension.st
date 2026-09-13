@@ -1,6 +1,6 @@
-Extension { #name : #Character }
+Extension { #name : 'Character' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Character >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #Color }
+Extension { #name : 'Color' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Color >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

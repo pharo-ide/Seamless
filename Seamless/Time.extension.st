@@ -1,6 +1,6 @@
-Extension { #name : #Time }
+Extension { #name : 'Time' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Time >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

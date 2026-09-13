@@ -15,40 +15,42 @@ Public API and Key Messages
 
 "
 Class {
-	#name : #SeamlessRequestContext,
-	#superclass : #Object,
+	#name : 'SeamlessRequestContext',
+	#superclass : 'Object',
 	#classVars : [
 		'Default'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestContext class >> default [
 	^Default ifNil: [ Default := SeamlessDefaultRequestContext new ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestContext class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestContext class >> definesWellKnownSeamlessClassHierarchy [ 
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestContext >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRequestContext >> return: aSeamlessRequestResult to: senderPeer [
 	self subclassResponsibility 
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRequestContext >> returnValue: anObject to: senderPeer [
 
 	self return: (SeamlessReturnValueResult with: anObject) to: senderPeer

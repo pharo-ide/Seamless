@@ -8,38 +8,40 @@ Internal Representation and Key Implementation Points.
 	reference:		<SeamlessObjectReference>
 "
 Class {
-	#name : #SeamlessMissingObject,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessMissingObject',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'reference'
 	],
-	#category : 'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessMissingObject class >> referencedBy: aSeamlessObjectReference [
 	^self new 
 		reference: aSeamlessObjectReference 
 ]
 
-{ #category : #'messages processing' }
+{ #category : 'messages processing' }
 SeamlessMissingObject >> perform: aSelector [
 
 	SeamlessReferencedObjectIsLost signal
 ]
 
-{ #category : #'messages processing' }
+{ #category : 'messages processing' }
 SeamlessMissingObject >> perform: selector withArguments: arguments [
 
 	SeamlessReferencedObjectIsLost signal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMissingObject >> reference [
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMissingObject >> reference: anObject [
 	reference := anObject
 ]

@@ -1,13 +1,13 @@
-Extension { #name : #SmallDictionary }
+Extension { #name : 'SmallDictionary' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 SmallDictionary >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByValue: keys.
 	aSeamlessTransporter transferByValue: values
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 SmallDictionary >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

@@ -5,12 +5,14 @@ In that case this such subset of objects we could apply me as strategy.
 
 "
 Class {
-	#name : #SeamlessDefaultTransferStrategy,
-	#superclass : #SeamlessTransferStrategy,
-	#category : 'Seamless-Transport'
+	#name : 'SeamlessDefaultTransferStrategy',
+	#superclass : 'SeamlessTransferStrategy',
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessDefaultTransferStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
 	
 	^anObject seamlessDefaultTransferStrategy 

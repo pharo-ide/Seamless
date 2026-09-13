@@ -1,24 +1,25 @@
 Class {
-	#name : #SeamlessRequestResultTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessRequestResultTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'result'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestResultTestCase class >> isAbstract [
 	^self == SeamlessRequestResultTestCase
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultTestCase >> testHasTransferByValueStrategyByDefault [
 
 	result seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultTestCase >> testShouldOnlyAllowDefaultTransferStraegy [
 
 	result should be isOnlyDefaultTransferStrategyAllowed

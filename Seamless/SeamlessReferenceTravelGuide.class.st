@@ -11,27 +11,29 @@ Seamless references should define following protocol:
 I skip any other native references by inst vars. For example senderPeer variable will not be traversed. To support Tost serialization references encode internal state directly to stream in optimized way
 "
 Class {
-	#name : #SeamlessReferenceTravelGuide,
-	#superclass : #ObjectTravelGuide,
-	#category : 'Seamless-Core'
+	#name : 'SeamlessReferenceTravelGuide',
+	#superclass : 'ObjectTravelGuide',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 SeamlessReferenceTravelGuide class >> isNode: aSeamlessObjectReference hasLastReferenceAt: referenceIndex [
 	^referenceIndex > 0 and: [aSeamlessObjectReference remotePropertiesSize = referenceIndex]
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 SeamlessReferenceTravelGuide class >> isNodeEmpty: aSeamlessObjectReference [
 	^aSeamlessObjectReference hasRemoteProperties not
 ]
 
-{ #category : #navigation }
+{ #category : 'navigation' }
 SeamlessReferenceTravelGuide class >> referenceOf: aSeamlessObjectReference atIndex: referenceIndex [
 	^aSeamlessObjectReference remotePropertyAt: referenceIndex
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessReferenceTravelGuide class >> replaceReferenceOf: aSeamlessObjectReference at: referenceIndex with: replacementObject [
 	^aSeamlessObjectReference remotePropertyAt: referenceIndex put: replacementObject 
 ]

@@ -1,11 +1,11 @@
-Extension { #name : #LiteralVariable }
+Extension { #name : 'LiteralVariable' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 LiteralVariable class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 LiteralVariable >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

@@ -1,16 +1,17 @@
 Class {
-	#name : #SeamlessRemoteObjectInspection,
-	#superclass : #GHGhostRawInspection,
-	#category : #'Seamless-NewToolsSupport'
+	#name : 'SeamlessRemoteObjectInspection',
+	#superclass : 'GHGhostRawInspection',
+	#category : 'Seamless-NewToolsSupport',
+	#package : 'Seamless-NewToolsSupport'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteObjectInspection >> inspectorNodes [
 
 	^self inspectorNodesFor: self model
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteObjectInspection >> inspectorNodesFor: anObject [ 
 
 	| allSlots nodes |
@@ -21,7 +22,7 @@ SeamlessRemoteObjectInspection >> inspectorNodesFor: anObject [
 	^{ StInspectorSelfNode hostObject: anObject }, nodes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteObjectInspection >> setAttributeTable [
 
 	attributeTable

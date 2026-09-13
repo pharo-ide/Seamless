@@ -57,8 +57,8 @@ Internal Representation and Key Implementation Points.
 
 "
 Class {
-	#name : #SeamlessNetwork,
-	#superclass : #BasysNetwork,
+	#name : 'SeamlessNetwork',
+	#superclass : 'BasysNetwork',
 	#instVars : [
 		'distributedObjects',
 		'transferStrategies',
@@ -68,25 +68,27 @@ Class {
 	#classInstVars : [
 		'defaultRequestProcessingTimeout'
 	],
-	#category : #'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork class >> defaultRequestProcessingTimeout [
 	^defaultRequestProcessingTimeout
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork class >> defaultRequestProcessingTimeout: aDuration [
 	defaultRequestProcessingTimeout := aDuration
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 SeamlessNetwork class >> defaultRequestProcessingTimeoutSecs [
 	^self defaultRequestProcessingTimeout ifNil: [ 0 ] ifNotNil: [:timeout | timeout asSeconds]
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 SeamlessNetwork class >> defaultRequestProcessingTimeoutSecs: aNumber [
 
 	| timeout |
@@ -95,7 +97,7 @@ SeamlessNetwork class >> defaultRequestProcessingTimeoutSecs: aNumber [
 	self defaultRequestProcessingTimeout: timeout
 ]
 
-{ #category : #settings }
+{ #category : 'settings' }
 SeamlessNetwork class >> settingOn: aBuilder [
 	<systemsettings>
 	(aBuilder group: #seamless)
@@ -109,36 +111,36 @@ SeamlessNetwork class >> settingOn: aBuilder [
 				] 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> addTransferStrategy: aTransferStrategy [
 
 	transferStrategies add: aTransferStrategy 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> addTransferStrategy: aTransferStrategy priority: anInteger [ 
 	aTransferStrategy priority: anInteger.
 	self addTransferStrategy: aTransferStrategy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> createDeliveryForResultFrom: aRemotePeer [
 	^ self requestProcessingTimeout
 			ifNil: [SeamlessRequestResultDelivery from: aRemotePeer]
 			ifNotNil: [:timeout |	SeamlessRequestResultTimelyDelivery from: aRemotePeer maxTime: timeout]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> distributedObjects [
 	^ distributedObjects
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> distributedObjects: anObject [
 	distributedObjects := anObject
 ]
 
-{ #category : #requests }
+{ #category : 'requests' }
 SeamlessNetwork >> environmentAt: anAddress [ 
 
 	| remotePeer |
@@ -146,7 +148,7 @@ SeamlessNetwork >> environmentAt: anAddress [
 	^remotePeer remoteEnvironment
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessNetwork >> identifyLocalPeerOn: aConnection [
 
 	| context |
@@ -156,7 +158,7 @@ SeamlessNetwork >> identifyLocalPeerOn: aConnection [
 	
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessNetwork >> initialize [
 	super initialize.
 	
@@ -165,12 +167,12 @@ SeamlessNetwork >> initialize [
 	transport := SeamlessTransport default
 ]
 
-{ #category : #factory }
+{ #category : 'factory' }
 SeamlessNetwork >> newRemotePeer [ 
 	^SeamlessRemotePeer inside: self
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> objectFor: aSeamlessObjectReference [
 
 	^distributedObjects 
@@ -178,7 +180,7 @@ SeamlessNetwork >> objectFor: aSeamlessObjectReference [
 		ifAbsentUseProxy: [ aSeamlessObjectReference createProxy]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> objectFor: aSeamlessObjectReference ifNotNew: presentBlock [
 
 	^distributedObjects 
@@ -187,36 +189,36 @@ SeamlessNetwork >> objectFor: aSeamlessObjectReference ifNotNew: presentBlock [
 		ifAbsentUseProxy: [ aSeamlessObjectReference createProxy]
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessNetwork >> process: aSeamlessRequest receivedFrom: aRemotePeer [
 	aSeamlessRequest executeFor: aRemotePeer
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessNetwork >> receiveObjectBy: aBasysConnection [
 
 	^transport receiveObjectFrom: aBasysConnection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> referenceFor: anObject [
 
 	^self referenceFor: anObject ifNewUse: [ anObject createSeamlessReference]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> referenceFor: anObject ifNewUse: refCreationBlock [
 
 	^distributedObjects referenceFor: anObject ifNewUse: refCreationBlock
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> removeDistributedObject: anObject [
 
 	distributedObjects remove: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> removeRemotePeer: aRemotePeer [
 	super removeRemotePeer: aRemotePeer.
 	
@@ -224,35 +226,35 @@ SeamlessNetwork >> removeRemotePeer: aRemotePeer [
 	peerRegistry isEmpty ifTrue: [ distributedObjects clear ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> requestProcessingTimeout [
 	^ requestProcessingTimeout ifNil: [self class defaultRequestProcessingTimeout]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> requestProcessingTimeout: aDuration [
 	requestProcessingTimeout := aDuration
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessNetwork >> sendObject: aSeamlessRequest by: aBasysConnection [
 
 	transport sendObject: aSeamlessRequest to: aBasysConnection
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByDeepCopy: objectsCriteria [
 
 	self addTransferStrategy: (SeamlessTransferByDeepCopyStrategy for: objectsCriteria)
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByDefaultStrategy: objectsCriteria [
 
 	self addTransferStrategy: (SeamlessDefaultTransferStrategy for: objectsCriteria)
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByDefaultStrategy: objectsCriteria priority: anInteger [
 
 	self
@@ -260,42 +262,42 @@ SeamlessNetwork >> transferByDefaultStrategy: objectsCriteria priority: anIntege
 		priority: anInteger
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByReference: objectsCriteria [
 
 	self addTransferStrategy: (SeamlessTransferByReferenceStrategy for: objectsCriteria)
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByReference: objectsCriteria withCacheFor: selectors [
 
 	self addTransferStrategy: (
 		SeamlessTransferByReferenceStrategy for: objectsCriteria withCacheFor: selectors)
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByReferencedCopy: objectsCriteria [
 
 	self addTransferStrategy: (SeamlessTransferByReferencedCopyStrategy for: objectsCriteria)
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessNetwork >> transferByValue: objectsCriteria [
 
 	self addTransferStrategy: (SeamlessTransferByValueStrategy for: objectsCriteria)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> transferStrategies [
 	^ transferStrategies
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> transferStrategies: anObject [
 	transferStrategies := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> transferStrategyFor: anObject [
 
 	anObject isOnlyDefaultTransferStrategyAllowed ifTrue: [ ^anObject seamlessDefaultTransferStrategy ].
@@ -303,12 +305,12 @@ SeamlessNetwork >> transferStrategyFor: anObject [
 	^transferStrategies detect: [ :each | each isAppliedTo: anObject ] ifNone: [ anObject seamlessDefaultTransferStrategy ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> transport [
 	^ transport
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNetwork >> transport: anObject [
 	transport := anObject
 ]

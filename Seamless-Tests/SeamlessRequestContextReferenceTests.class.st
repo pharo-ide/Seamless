@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessRequestContextReferenceTests,
-	#superclass : #SeamlessObjectReferenceTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessRequestContextReferenceTests',
+	#superclass : 'SeamlessObjectReferenceTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestContextReferenceTests >> referenceClass [
 	^SeamlessRequestContextReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestContextReferenceTests >> testProxyCreation [
 
 	| proxy |

@@ -1,6 +1,6 @@
-Extension { #name : #BasysConnection }
+Extension { #name : 'BasysConnection' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BasysConnection >> createIdentificationContext [ 
 	^SeamlessPeerIdentificationContext for: self
 ]

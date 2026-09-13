@@ -8,32 +8,34 @@ Internal Representation and Key Implementation Points.
 	connection:		<BasysConnection>
 "
 Class {
-	#name : #SeamlessPeerIdentificationContext,
-	#superclass : #SeamlessSyncRequestContext,
+	#name : 'SeamlessPeerIdentificationContext',
+	#superclass : 'SeamlessSyncRequestContext',
 	#instVars : [
 		'connection'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessPeerIdentificationContext class >> for: aBasysConnection [
 
 	^(self receiverPeer: aBasysConnection remotePeer)
 		connection: aBasysConnection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessPeerIdentificationContext >> connection [
 	^ connection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessPeerIdentificationContext >> connection: anObject [
 	connection := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessPeerIdentificationContext >> performRequestSend: aSeamlessRequest [
 	connection sendObject: aSeamlessRequest 
 ]

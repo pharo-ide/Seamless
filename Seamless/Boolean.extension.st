@@ -1,11 +1,11 @@
-Extension { #name : #Boolean }
+Extension { #name : 'Boolean' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Boolean >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Boolean >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

@@ -1,16 +1,16 @@
-Extension { #name : #UUID }
+Extension { #name : 'UUID' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UUID class >> definesWellKnownSeamlessClass [ 
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UUID >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UUID >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

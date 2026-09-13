@@ -6,24 +6,26 @@ By default it is objects themselfs. And in such cases I pass given object furthe
 In other cases it could be SeamlessObjectReference which I will write on stream instead of original objects. It is the way how transfer by reference strategy is executed
 "
 Class {
-	#name : #SeamlessSubstitutionTostFormat,
-	#superclass : #TostFormat,
-	#category : 'Seamless-Transport'
+	#name : 'SeamlessSubstitutionTostFormat',
+	#superclass : 'TostFormat',
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessSubstitutionTostFormat class >> network: aSeamlessNetwork [
 	^self new 
 		network: aSeamlessNetwork
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessSubstitutionTostFormat >> readObjectWith: aSeamlessTransporter [
 
 	^aSeamlessTransporter readObjectSubstitution 
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessSubstitutionTostFormat >> tryWriteObject: anObject with: aSeamlessTransporter [
 	
 	^aSeamlessTransporter tryWriteTransferObjectFor: anObject format: id

@@ -1,29 +1,30 @@
 Class {
-	#name : #SeamlessRemoteScriptPresentation,
-	#superclass : #GLMPharoScriptPresentation,
+	#name : 'SeamlessRemoteScriptPresentation',
+	#superclass : 'GLMPharoScriptPresentation',
 	#instVars : [
 		'remotePeer'
 	],
-	#category : 'Seamless-GTSupport'
+	#category : 'Seamless-GTSupport',
+	#package : 'Seamless-GTSupport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRemoteScriptPresentation class >> remotePeer: aRemotePeer [
 	^self new 
 		remotePeer: aRemotePeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteScriptPresentation >> remotePeer [
 	^ remotePeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteScriptPresentation >> remotePeer: anObject [
 	remotePeer := anObject
 ]
 
-{ #category : #rendering }
+{ #category : 'rendering' }
 SeamlessRemoteScriptPresentation >> renderGlamorouslyOn: aRenderer [
 	self registerAnnouncements.
 	^ SeamlessRemoteScriptRenderer render: self from: aRenderer

@@ -5,12 +5,14 @@ I command transporter to transfer my content by deep copy
 
 "
 Class {
-	#name : #SeamlessDeepCopyContainer,
-	#superclass : #SeamlessObjectValueContainer,
-	#category : 'Seamless-Core'
+	#name : 'SeamlessDeepCopyContainer',
+	#superclass : 'SeamlessObjectValueContainer',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessDeepCopyContainer >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByDeepCopy: content

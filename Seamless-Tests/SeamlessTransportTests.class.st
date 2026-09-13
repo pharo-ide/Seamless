@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessTransportTests,
-	#superclass : #TestCase,
+	#name : 'SeamlessTransportTests',
+	#superclass : 'TestCase',
 	#instVars : [
 		'network',
 		'connection',
 		'transport'
 	],
-	#category : #'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessTransportTests >> setUp [
 	| transferBuffer peer |
 	super setUp.
@@ -25,12 +26,12 @@ SeamlessTransportTests >> setUp [
 	transport := SeamlessTransport default.
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 SeamlessTransportTests >> simpleMethodForTransfer [
 	^1+3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransportTests >> testTransferAndReceiveCompiledMethod [
 
 	| transferedObject method expected actual |
@@ -45,7 +46,7 @@ SeamlessTransportTests >> testTransferAndReceiveCompiledMethod [
 	actual should equal: expected.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReference [
 
 	| transferedObject |
@@ -60,7 +61,7 @@ SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReference [
 	transferedObject content value should equal: #value
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReferencedCopy [
 
 	| transferedObject |
@@ -75,7 +76,7 @@ SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReferencedCopy [
 	transferedObject content value should equal: #value
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReferencedCopyAndValueObject [
 
 	| transferedObject |
@@ -90,7 +91,7 @@ SeamlessTransportTests >> testTransferAndReceiveObjectWithOneReferencedCopyAndVa
 	transferedObject content should equal: { #value. 10@20 }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransportTests >> testTransferAndReceiveObjectWithTwoSameReferences [
 
 	| transferedObject |

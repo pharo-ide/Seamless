@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessRemoteClassCompiler,
-	#superclass : #OpalCompiler,
-	#category : #'Seamless-NewToolsSupport'
+	#name : 'SeamlessRemoteClassCompiler',
+	#superclass : 'OpalCompiler',
+	#category : 'Seamless-NewToolsSupport',
+	#package : 'Seamless-NewToolsSupport'
 }
 
-{ #category : #evaluation }
+{ #category : 'evaluation' }
 SeamlessRemoteClassCompiler >> evaluate [
 	"Compiles the sourceStream into a parse tree, then generates code into
 	 a method. If aContext is not nil, the text can refer to temporaries in that

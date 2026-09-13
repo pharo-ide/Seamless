@@ -1,6 +1,6 @@
-Extension { #name : #RunArray }
+Extension { #name : 'RunArray' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 RunArray >> prepareValueTransferBy: aSeamlessTransporter [
 	
 	aSeamlessTransporter transferByValue: runs.

@@ -9,31 +9,33 @@ Internal Representation and Key Implementation Points.
 	name:		<String>
 "
 Class {
-	#name : #SeamlessMissingGlobal,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessMissingGlobal',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'name'
 	],
-	#category : 'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessMissingGlobal class >> named: aString [
 	^self new 
 		name: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMissingGlobal >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMissingGlobal >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessMissingGlobal >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
@@ -41,7 +43,7 @@ SeamlessMissingGlobal >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
-{ #category : #'transfer strategies' }
+{ #category : 'transfer strategies' }
 SeamlessMissingGlobal >> seamlessDefaultTransferStrategy [ 
 
 	^SeamlessTransferStrategy defaultByGlobalName 

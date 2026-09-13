@@ -1,6 +1,6 @@
-Extension { #name : #Array }
+Extension { #name : 'Array' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Array >> prepareMethodTransferBy: aSeamlessTransporter [
 	super prepareMethodTransferBy: aSeamlessTransporter.
 	

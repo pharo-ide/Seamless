@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessPeerIdentificationRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessPeerIdentificationRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessPeerIdentificationRequestTests >> requestClass [
 	^SeamlessPeerIdentificationRequest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessPeerIdentificationRequestTests >> testExecution [
 
 	| senderPeer |

@@ -1,6 +1,6 @@
-Extension { #name : #ClassVariable }
+Extension { #name : 'ClassVariable' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 ClassVariable class >> definesWellKnownSeamlessClass [
 	^true
 ]

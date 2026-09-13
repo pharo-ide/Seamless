@@ -1,29 +1,30 @@
 Class {
-	#name : #SeamlessRemoteScriptResult,
-	#superclass : #Object,
+	#name : 'SeamlessRemoteScriptResult',
+	#superclass : 'Object',
 	#instVars : [
 		'value'
 	],
-	#category : #'Seamless-NewToolsSupport'
+	#category : 'Seamless-NewToolsSupport',
+	#package : 'Seamless-NewToolsSupport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRemoteScriptResult class >> value: anObjectOrProxy [
 	^self new 
 		value: anObjectOrProxy
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessRemoteScriptResult >> printString [
 	^value remotePrintString 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteScriptResult >> value [
 	^ value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteScriptResult >> value: anObject [
 	value := anObject
 ]

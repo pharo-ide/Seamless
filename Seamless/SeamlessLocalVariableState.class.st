@@ -13,23 +13,25 @@ Internal Representation and Key Implementation Points.
 	value:		<Object>
 "
 Class {
-	#name : #SeamlessLocalVariableState,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessLocalVariableState',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'remoteVariable',
 		'value',
 		'isAssigned'
 	],
-	#category : #'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessLocalVariableState class >> of: aRemoteVariable [
 	^self new 
 		remoteVariable: aRemoteVariable
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessLocalVariableState >> checkConnection [
 	remoteVariable ifNil: [ ^false].
 	
@@ -38,37 +40,37 @@ SeamlessLocalVariableState >> checkConnection [
 	^false
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessLocalVariableState >> initialize [
 	super initialize.
 	
 	isAssigned := false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> isAssigned [
 	^ isAssigned
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> isAssigned: anObject [
 	isAssigned := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessLocalVariableState >> isUnassigned [
 
 	^isAssigned not
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> prepareValueTransferBy: aSeamlessTransporter [
 
 	remoteVariable ifNotNil: [ 
 		aSeamlessTransporter transferByReference: remoteVariable]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> read [
 
 	self checkConnection ifFalse: [ ^value].
@@ -80,7 +82,7 @@ SeamlessLocalVariableState >> read [
 	^self readRemoteValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> readRemoteValue [
 	"It is possible that remote request will be delivered to remote side but response will hangs.
 	We should setup timeout in that case and ignore possible value update"
@@ -92,30 +94,30 @@ SeamlessLocalVariableState >> readRemoteValue [
 	^value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> remoteVariable [
 	^ remoteVariable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> remoteVariable: anObject [
 	remoteVariable := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> value [
 
 	^value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> value: anObject [
 
 	value := anObject.
 	isAssigned := true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLocalVariableState >> write: anObject [
 	| writeMessage |
 	self value: anObject.

@@ -9,31 +9,33 @@ Internal Representation and Key Implementation Points.
 	value:		<Object>
 "
 Class {
-	#name : #SeamlessReturnValueResult,
-	#superclass : #SeamlessRequestResult,
+	#name : 'SeamlessReturnValueResult',
+	#superclass : 'SeamlessRequestResult',
 	#instVars : [
 		'value'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessReturnValueResult class >> with: anObject [ 
 	^self new 
 		value: anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 SeamlessReturnValueResult >> returnValue [
 	^value
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 SeamlessReturnValueResult >> value [
 	^value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessReturnValueResult >> value: anObject [
 	value := anObject
 ]

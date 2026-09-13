@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessMessageSendTests,
-	#superclass : #TestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessMessageSendTests',
+	#superclass : 'TestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessMessageSendTests >> testValueTransferPreparation [
 
 	| messageSend transporter |

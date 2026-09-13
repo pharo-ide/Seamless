@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessReturnValueResultTests,
-	#superclass : #SeamlessRequestResultTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessReturnValueResultTests',
+	#superclass : 'SeamlessRequestResultTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessReturnValueResultTests >> testReturningValue [
 
 	result := SeamlessReturnValueResult with: #returnedValue.

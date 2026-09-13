@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessClosePeerRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessClosePeerRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessClosePeerRequestTests >> requestClass [
 	^SeamlessClosePeerRequest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessClosePeerRequestTests >> testExecution [
 
 	| senderPeer |

@@ -5,12 +5,14 @@ I have default instance:
 	SeamlessTransferStrategy defaultByDeepCopy
 "
 Class {
-	#name : #SeamlessTransferByDeepCopyStrategy,
-	#superclass : #SeamlessTransferStrategy,
-	#category : 'Seamless-Transport'
+	#name : 'SeamlessTransferByDeepCopyStrategy',
+	#superclass : 'SeamlessTransferStrategy',
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessTransferByDeepCopyStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
 
 	anObjectTransporter transferByDeepCopy: anObject.

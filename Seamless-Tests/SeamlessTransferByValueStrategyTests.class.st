@@ -1,17 +1,18 @@
 Class {
-	#name : #SeamlessTransferByValueStrategyTests,
-	#superclass : #SeamlessTransferStrategyTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessTransferByValueStrategyTests',
+	#superclass : 'SeamlessTransferStrategyTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessTransferByValueStrategyTests >> setUp [
 	super setUp.
 	
 	strategy := SeamlessTransferByValueStrategy new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByValueStrategyTests >> testTransferPreparation [
 
 	| object transferObject |

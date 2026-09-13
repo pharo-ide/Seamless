@@ -2,12 +2,14 @@
 I return remote Smalltalk instance to sender
 "
 Class {
-	#name : #SeamlessGetEnvironmentRequest,
-	#superclass : #SeamlessRequest,
-	#category : 'Seamless-Requests'
+	#name : 'SeamlessGetEnvironmentRequest',
+	#superclass : 'SeamlessRequest',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessGetEnvironmentRequest >> executeFor: senderPeer [
 
 	context returnValue: Smalltalk to: senderPeer

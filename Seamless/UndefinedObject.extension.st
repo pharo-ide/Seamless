@@ -1,16 +1,16 @@
-Extension { #name : #UndefinedObject }
+Extension { #name : 'UndefinedObject' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UndefinedObject class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UndefinedObject >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 UndefinedObject >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

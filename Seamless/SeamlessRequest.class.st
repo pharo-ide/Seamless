@@ -16,42 +16,44 @@ Public API and Key Messages
 	resultBytes:	<Integer>
 "
 Class {
-	#name : #SeamlessRequest,
-	#superclass : #Object,
+	#name : 'SeamlessRequest',
+	#superclass : 'Object',
 	#instVars : [
 		'context',
 		'resultBytes',
 		'ownBytes'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequest class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequest class >> definesWellKnownSeamlessClassHierarchy [ 
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> context: anObject [
 	context := anObject
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessRequest >> executeFor: senderPeer [
 	self subclassResponsibility 
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessRequest >> initialize [
 	super initialize.
 	
@@ -59,52 +61,52 @@ SeamlessRequest >> initialize [
 	ownBytes := resultBytes := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequest >> isIncoming [
 	^self isOutgoing not
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequest >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequest >> isOutgoing [
 	^context isKindOf: SeamlessRequestSendingContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> ownBytes [
 	^ ownBytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> ownBytes: anObject [
 	ownBytes := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessRequest >> printMessageForLog [
 	^self printString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> resultBytes [
 	^ resultBytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> resultBytes: anObject [
 	resultBytes := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequest >> transferredBytes [
 	^ ownBytes + resultBytes
 ]

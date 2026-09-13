@@ -1,6 +1,6 @@
-Extension { #name : #Association }
+Extension { #name : 'Association' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Association class >> definesWellKnownSeamlessClass [
 	^true
 ]

@@ -6,21 +6,23 @@ For more details look at BasysNetwork comments
 	peerId:		<Object>
 "
 Class {
-	#name : #SeamlessPeerIdentificationRequest,
-	#superclass : #SeamlessRequest,
+	#name : 'SeamlessPeerIdentificationRequest',
+	#superclass : 'SeamlessRequest',
 	#instVars : [
 		'peerId'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessPeerIdentificationRequest class >> peerId: peerId [
 	^self new 
 		peerId: peerId
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessPeerIdentificationRequest >> executeFor: senderPeer [
 	
 	senderPeer ensureIdentity: peerId.
@@ -28,12 +30,12 @@ SeamlessPeerIdentificationRequest >> executeFor: senderPeer [
 	context returnValue: senderPeer localPeerId to: senderPeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessPeerIdentificationRequest >> peerId [
 	^ peerId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessPeerIdentificationRequest >> peerId: anObject [
 	peerId := anObject
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #WorkspaceVariable }
+Extension { #name : 'WorkspaceVariable' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 WorkspaceVariable class >> definesWellKnownSeamlessClass [
 	^true
 ]

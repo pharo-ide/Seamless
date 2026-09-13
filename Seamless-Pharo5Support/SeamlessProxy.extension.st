@@ -1,6 +1,6 @@
-Extension { #name : #SeamlessProxy }
+Extension { #name : 'SeamlessProxy' }
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 SeamlessProxy >> gtInspectorPresentationsFromPragmas: aCollection In: composite inContext: aGTInspector [
 
 	aCollection

@@ -14,48 +14,50 @@ Public API and Key Messages
 	receiverPeer:		<BasysRemotePeer>
 "
 Class {
-	#name : #SeamlessRequestSendingContext,
-	#superclass : #SeamlessRequestContext,
+	#name : 'SeamlessRequestSendingContext',
+	#superclass : 'SeamlessRequestContext',
 	#instVars : [
 		'receiverPeer'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRequestSendingContext class >> receiverPeer: aRemotePeer [
 
 	^self new 
 		receiverPeer: aRemotePeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestSendingContext >> network [
 	^receiverPeer network
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestSendingContext >> receiverPeer [
 	^ receiverPeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestSendingContext >> receiverPeer: anObject [
 	receiverPeer := anObject
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRequestSendingContext >> return: aSeamlessRequestResult [
 	self subclassResponsibility 
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRequestSendingContext >> return: aSeamlessRequestResult to: senderPeer [
 
 	self return: aSeamlessRequestResult
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRequestSendingContext >> sendRequest: aSeamlessRequest [
 	self subclassResponsibility 
 ]

@@ -21,8 +21,8 @@ returnes reference for given object. If not found I create it and bound it to gi
 	referencesToObjects:		<Dictionary>
 "
 Class {
-	#name : #SeamlessDistributedObjects,
-	#superclass : #Object,
+	#name : 'SeamlessDistributedObjects',
+	#superclass : 'Object',
 	#instVars : [
 		'network',
 		'lock',
@@ -30,17 +30,19 @@ Class {
 		'referencesToObjects',
 		'lastReferenceId'
 	],
-	#category : #'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessDistributedObjects class >> over: aSeamlessNetwork [
 
 	^self new 
 		network: aSeamlessNetwork 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> at: aSeamlessObjectReference ifAbsentUseProxy: proxyBlock [
 	| object |
 	object := lock criticalRead: [ referencesToObjects at: aSeamlessObjectReference ifAbsent: [ nil ] ].
@@ -57,7 +59,7 @@ SeamlessDistributedObjects >> at: aSeamlessObjectReference ifAbsentUseProxy: pro
 	^object
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> at: aSeamlessObjectReference ifPresent: presentBlock ifAbsentUseProxy: proxyBlock [
 	| object |
 	object := lock criticalRead: [ referencesToObjects at: aSeamlessObjectReference ifAbsent: [ nil ] ].
@@ -76,14 +78,14 @@ SeamlessDistributedObjects >> at: aSeamlessObjectReference ifPresent: presentBlo
 	^object
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> clear [
 	lock criticalWrite: [ 
 		objectsToReferences removeAll.
 		referencesToObjects removeAll]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessDistributedObjects >> createNewReferenceFor: anObject by: refCreationBlock [
 	"it should be called inside lock critical section"
 	
@@ -102,12 +104,12 @@ SeamlessDistributedObjects >> createNewReferenceFor: anObject by: refCreationBlo
 	^reference
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessDistributedObjects >> includesReference: aSeamlessObjectReference [ 
 	^lock criticalRead: [ referencesToObjects includesKey: aSeamlessObjectReference]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessDistributedObjects >> initialize [
 	super initialize.
 	
@@ -117,12 +119,12 @@ SeamlessDistributedObjects >> initialize [
 	referencesToObjects := Dictionary new.
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessDistributedObjects >> isEmpty [
 	^referencesToObjects isEmpty
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> localForReferenceId: id [ 
 	| reference |
 	reference := objectsToReferences keysAndValuesDo: [ :o :ref | 
@@ -132,27 +134,27 @@ SeamlessDistributedObjects >> localForReferenceId: id [
 	KeyNotFound signalFor: id in: self 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> network [
 	^ network
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> network: anObject [
 	network := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> objectsToReferences [
 	^ objectsToReferences
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> objectsToReferences: anObject [
 	objectsToReferences := anObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessDistributedObjects >> printOn: aStream [
 	super printOn: aStream.
 
@@ -162,7 +164,7 @@ SeamlessDistributedObjects >> printOn: aStream [
 		nextPutAll: ')'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> referenceFor: anObject ifNewUse: refCreationBlock [
 	| reference |
 	(anObject isSeamlessProxy and: [ anObject seamlessReference ownerPeerId = network localPeerId])
@@ -180,17 +182,17 @@ SeamlessDistributedObjects >> referenceFor: anObject ifNewUse: refCreationBlock 
 	^reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> referencesToObjects [
 	^ referencesToObjects
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> referencesToObjects: anObject [
 	referencesToObjects := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> remove: anObject [ 
 	| reference |
 	lock criticalWrite: [ 
@@ -198,7 +200,7 @@ SeamlessDistributedObjects >> remove: anObject [
 		referencesToObjects removeKey: reference]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> removeAt: aSeamlessObjectReference [ 
 	| object |
 	lock criticalWrite: [
@@ -206,7 +208,7 @@ SeamlessDistributedObjects >> removeAt: aSeamlessObjectReference [
 		objectsToReferences removeKey: object]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> removeObjectsDistributedBy: aRemotePeer [
 	
 	| references |
@@ -220,7 +222,7 @@ SeamlessDistributedObjects >> removeObjectsDistributedBy: aRemotePeer [
 	]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDistributedObjects >> size [
 	^referencesToObjects size
 ]

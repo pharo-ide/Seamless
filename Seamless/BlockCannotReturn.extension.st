@@ -1,11 +1,11 @@
-Extension { #name : #BlockCannotReturn }
+Extension { #name : 'BlockCannotReturn' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockCannotReturn class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockCannotReturn >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 	| seamlessResult |
 	seamlessResult := SeamlessNonLocalReturnResult with: result homeContext: home.

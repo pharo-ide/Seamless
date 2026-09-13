@@ -7,31 +7,33 @@ Internal Representation and Key Implementation Points.
 	maxTime:		<Duration>
 "
 Class {
-	#name : #SeamlessRequestResultTimelyDelivery,
-	#superclass : #SeamlessRequestResultDelivery,
+	#name : 'SeamlessRequestResultTimelyDelivery',
+	#superclass : 'SeamlessRequestResultDelivery',
 	#instVars : [
 		'maxTime'
 	],
-	#category : #'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRequestResultTimelyDelivery class >> from: aRemotePeer maxTime: aDuration [
 	^(self from: aRemotePeer)
 		maxTime: aDuration
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResultTimelyDelivery >> maxTime [
 	^ maxTime
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResultTimelyDelivery >> maxTime: anObject [
 	maxTime := anObject
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessRequestResultTimelyDelivery >> waitResult [
 	"Instead of blindly wait for delivery result for specified maxTime 
 	we periodically check the connection status

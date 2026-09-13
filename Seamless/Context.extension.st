@@ -1,6 +1,6 @@
-Extension { #name : #Context }
+Extension { #name : 'Context' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Context class >> definesWellKnownSeamlessClass [ 
 	^true
 ]

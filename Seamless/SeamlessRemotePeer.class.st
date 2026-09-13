@@ -5,12 +5,14 @@ I extend a BasysRemotePeer with Seamless specific functionality:
 - evaluate a block on remote side
 "
 Class {
-	#name : #SeamlessRemotePeer,
-	#superclass : #BasysRemotePeer,
-	#category : #'Seamless-Core'
+	#name : 'SeamlessRemotePeer',
+	#superclass : 'BasysRemotePeer',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessRemotePeer >> close [
 	"This method is supposed to be used when you really want to close (destroy) the peer and release all resources independently if they are used anywhere in the network.
 	Special request is sent here to remote side to notify it. Then local and remote sides will clean all related resources, close connections and clean distributed objects.
@@ -19,37 +21,37 @@ SeamlessRemotePeer >> close [
 	super close
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessRemotePeer >> closeByRemoteSide [
 
 	super close
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessRemotePeer >> createResultDeliveryForRequests [
 
 	^network createDeliveryForResultFrom: self
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessRemotePeer >> createSyncRequestContext [
 
 	^SeamlessSyncRequestContext receiverPeer: self
 ]
 
-{ #category : #requests }
+{ #category : 'requests' }
 SeamlessRemotePeer >> evaluate: aBlock [
 
 	^self createSyncRequestContext sendRequest: (SeamlessBlockEvaluationRequest with: aBlock)
 ]
 
-{ #category : #requests }
+{ #category : 'requests' }
 SeamlessRemotePeer >> evaluateAsync: aBlock [
 
 	self sendObject: (SeamlessBlockEvaluationRequest with: aBlock)
 ]
 
-{ #category : #requests }
+{ #category : 'requests' }
 SeamlessRemotePeer >> remoteEnvironment [
 
 	^self createSyncRequestContext sendRequest: SeamlessGetEnvironmentRequest new

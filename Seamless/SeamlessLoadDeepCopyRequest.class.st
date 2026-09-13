@@ -3,12 +3,14 @@ I am special kind of loading remote object request.
 I force deep copy loading strategy which will transfer full object graph by value to sender
 "
 Class {
-	#name : #SeamlessLoadDeepCopyRequest,
-	#superclass : #SeamlessLoadObjectRequest,
-	#category : 'Seamless-Requests'
+	#name : 'SeamlessLoadDeepCopyRequest',
+	#superclass : 'SeamlessLoadObjectRequest',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessLoadDeepCopyRequest >> executeFor: senderPeer [
 "On sender peer my objectProxy is SeamlessProxy which points to requested remote object.
 But on receiver peer my objectProxy will contain real distributed object. 

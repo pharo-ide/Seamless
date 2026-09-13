@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessGetEnvironmentRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessGetEnvironmentRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessGetEnvironmentRequestTests >> requestClass [
 	^SeamlessGetEnvironmentRequest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessGetEnvironmentRequestTests >> testExecution [
 
 	request executeFor: #senderPeer.

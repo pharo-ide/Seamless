@@ -5,12 +5,14 @@ I have default instance:
 	SeamlessTransferStrategy defaultByGlobalName
 "
 Class {
-	#name : #SeamlessTransferByGlobalNameStrategy,
-	#superclass : #SeamlessTransferStrategy,
-	#category : 'Seamless-Transport'
+	#name : 'SeamlessTransferByGlobalNameStrategy',
+	#superclass : 'SeamlessTransferStrategy',
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessTransferByGlobalNameStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
 	
 	^SeamlessWellKnownObject named: anObject name

@@ -1,22 +1,22 @@
-Extension { #name : #SeamlessProxy }
+Extension { #name : 'SeamlessProxy' }
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy class >> compilerClass [
 
 	^SeamlessRemoteClassCompiler
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> findGlobalVariable: lookupBlock ifNone: notFoundBlock [
 	^notFoundBlock value
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> findVariable: lookupBlock ifNone: notFoundBlock [
 	^notFoundBlock value
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtConstructDebuggerInspectorIn: composite for: aDebugger [
 	
 	^composite custom: ((GTDebuggerInspector new  
@@ -30,7 +30,7 @@ SeamlessProxy >> gtConstructDebuggerInspectorIn: composite for: aDebugger [
 			startOn: self)
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtDebuggerEvaluatorIn: composite [
 	<gtDebuggerPresentationOrder: 10>
 	
@@ -38,7 +38,7 @@ SeamlessProxy >> gtDebuggerEvaluatorIn: composite [
 		title: 'Evaluator'
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtDebuggerPresentationsIn: composite inContext: aGTInspector [
 	| pragmas |
 	pragmas := (Pragma 
@@ -50,7 +50,7 @@ SeamlessProxy >> gtDebuggerPresentationsIn: composite inContext: aGTInspector [
 
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtDebuggerRawIn: composite [
 	<gtDebuggerPresentationOrder: 15>
 	
@@ -63,7 +63,7 @@ SeamlessProxy >> gtDebuggerRawIn: composite [
 		send: #value
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtInspectorPresentationsFromPragmas: aCollection In: composite inContext: aGTInspector [
 
 	aCollection
@@ -84,7 +84,7 @@ SeamlessProxy >> gtInspectorPresentationsFromPragmas: aCollection In: composite 
 						inClass: self class ] ]
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtInspectorPresentationsIn: composite inContext: aGTInspector [
 	"This is a utility method that collects all presentations for the current object.
 	By default, it simply looks for the #gtInspectorPresentationOrder: pragma.
@@ -103,7 +103,7 @@ SeamlessProxy >> gtInspectorPresentationsIn: composite inContext: aGTInspector [
 	self gtInspectorPresentationsFromPragmas: pragmas In: composite inContext: aGTInspector
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> gtInspectorRawIn: composite [
 	"This is the most basic presentation showing the state of the object"
 	<gtInspectorPresentationOrder: 10>
@@ -117,12 +117,12 @@ SeamlessProxy >> gtInspectorRawIn: composite [
 	browsers do: [ :each | composite custom: each ]
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> inspect [
 	^ Smalltalk tools inspector inspect: self
 ]
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 SeamlessProxy >> isRemoteDoItReceiver [
 	^true
 ]

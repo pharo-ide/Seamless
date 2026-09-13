@@ -1,6 +1,6 @@
-Extension { #name : #BlockCannotReturn }
+Extension { #name : 'BlockCannotReturn' }
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 BlockCannotReturn >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 	| seamlessResult |
 	seamlessResult := SeamlessNonLocalReturnResult with: result homeContext: deadHome.
@@ -8,17 +8,17 @@ BlockCannotReturn >> handleSeamlessRequest: anEvaluationRequest receivedFrom: se
 	anEvaluationRequest returnResult: seamlessResult to: senderPeer
 ]
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 BlockCannotReturn >> home [
 	^deadHome 
 ]
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 BlockCannotReturn >> home: aContext [
 	deadHome := aContext
 ]
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 BlockCannotReturn class >> result: anObject from: homeContext [
  	^ self new
 		result: anObject;

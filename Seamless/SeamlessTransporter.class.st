@@ -33,8 +33,8 @@ Internal Representation and Key Implementation Points.
 	objectsByDeepCopy:		<IdentityDictionary>
 "
 Class {
-	#name : #SeamlessTransporter,
-	#superclass : #TostTransporter,
+	#name : 'SeamlessTransporter',
+	#superclass : 'TostTransporter',
 	#instVars : [
 		'network',
 		'connection',
@@ -44,17 +44,19 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Seamless-Transport'
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessTransporter class >> using: aSeamlessTransport onConnection: aBasysConnection [
 	^self new
 		transport: aSeamlessTransport;
 		connection: aBasysConnection
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> activateDeepCopyTransferIfNeeded [
 	| activeNode |
 	activeNode := self findActiveDeepCopyNodeAndIndex.
@@ -69,7 +71,7 @@ SeamlessTransporter >> activateDeepCopyTransferIfNeeded [
 	^false
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> activateSubstitutionFor: anObject by: aBlock [
 
 	| substitution |
@@ -77,31 +79,31 @@ SeamlessTransporter >> activateSubstitutionFor: anObject by: aBlock [
 	aBlock value: substitution
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> connection [
 	^ connection
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> connection: aBasysConnection [
 	connection := aBasysConnection.
 	network := connection network
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> deepCopyTransferFinishedFor: anObject [
 
 	objectsByDeepCopy removeKey: anObject.
 	objectsByDeepCopy ifEmpty: [ objectsByDeepCopy := nil ]
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> deepCopyTransferStartedFor: anObject at: pathIndex [
 
 	objectsByDeepCopy at: anObject put: pathIndex
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> findActiveDeepCopyNodeAndIndex [
 	
 	objectsByDeepCopy associationsDo: [ :objectAndIndex |
@@ -110,13 +112,13 @@ SeamlessTransporter >> findActiveDeepCopyNodeAndIndex [
 	^nil
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransporter >> isDeepCopyTransferRequiredFor: anObject [
 
 	^objectsByDeepCopy includesKey: anObject
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 SeamlessTransporter >> materializeObject [
 	| request in sizeSize size buffer compressionType compressionStream |
 	in := connection inputStream.
@@ -136,17 +138,17 @@ SeamlessTransporter >> materializeObject [
 	^request
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> network [
 	^ network
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> network: anObject [
 	network := anObject
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> prepareTransferObjectFor: anObject [
 
 	| strategy |
@@ -159,7 +161,7 @@ SeamlessTransporter >> prepareTransferObjectFor: anObject [
 	^strategy prepareTransferObjectFor: anObject by: self
 ]
 
-{ #category : #receiving }
+{ #category : 'receiving' }
 SeamlessTransporter >> readObjectReference: anObjectReference [
 	| type uuid |
 	type := self readByte.
@@ -177,7 +179,7 @@ SeamlessTransporter >> readObjectReference: anObjectReference [
 	^anObjectReference ownerPeerId: uuid
 ]
 
-{ #category : #receiving }
+{ #category : 'receiving' }
 SeamlessTransporter >> readObjectSubstitution [
 
 	| loadedObjectIndex loadedObject localRepresentation |
@@ -192,19 +194,19 @@ SeamlessTransporter >> readObjectSubstitution [
 	^localRepresentation
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> referenceFor: anObject [
 
 	^self referenceFor: anObject ifNewUse: [anObject createSeamlessReference]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransporter >> referenceFor: anObject ifNewUse: refCreationBlock [
 	
 	^network referenceFor: anObject ifNewUse: refCreationBlock.
 ]
 
-{ #category : #api }
+{ #category : 'api' }
 SeamlessTransporter >> serializeObject: aSeamlessRequest [
 	| buffer bufferSizeBytes compressedBytes compressedStream compressionType |
 	objectSubstitutions := IdentityDictionary new.	
@@ -232,7 +234,7 @@ SeamlessTransporter >> serializeObject: aSeamlessRequest [
 		flush
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transfer: anObject byReference: refCreationBlock [
 
 	| reference |
@@ -241,19 +243,19 @@ SeamlessTransporter >> transfer: anObject byReference: refCreationBlock [
 	objectSubstitutions at: anObject put: reference.
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transfer: anObject byReplacement: replacementObject [
 	
 	objectSubstitutions at: anObject put: replacementObject
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transfer: anObject byWellKnownObjectNamed: globalName [
 
 	objectSubstitutions at: anObject put: (SeamlessWellKnownObject named: globalName)
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transferByDeepCopy: anObject [
 
 	self transferByValue: anObject.
@@ -262,13 +264,13 @@ SeamlessTransporter >> transferByDeepCopy: anObject [
 	objectsByDeepCopy at: anObject put: 0
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transferByReference: anObject [
 
 	self transfer: anObject byReference: [anObject createSeamlessReference ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessTransporter >> transferByValue: anObject [
 
 	| transferObject |
@@ -278,13 +280,13 @@ SeamlessTransporter >> transferByValue: anObject [
 	objectSubstitutions at: anObject put: transferObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransporter >> transfersIdentificationRequest [
 
 	^traveler startNode class = SeamlessPeerIdentificationRequest 
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> tryWriteTransferObjectFor: anObject format: formatId [
 
 	| transferObject |
@@ -295,7 +297,7 @@ SeamlessTransporter >> tryWriteTransferObjectFor: anObject format: formatId [
 	^true
 ]
 
-{ #category : #sending }
+{ #category : 'sending' }
 SeamlessTransporter >> writeObjectReference: anObjectReference [
 	| type |
 	type := 2 "given reference is alien. It is not belongs to sender or receiver peers".
