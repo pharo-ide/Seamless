@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfSeamless }
+Package { #name : 'BaselineOfSeamless' }
