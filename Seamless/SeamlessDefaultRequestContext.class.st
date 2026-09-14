@@ -12,16 +12,18 @@ To stop this communication ""return request"" is sent with default context (whic
 This approach allows reuse SeamlessMessageSendRequest to implement request return. Instead some kind of ReturnMessageResultRequest will be needed
 "
 Class {
-	#name : #SeamlessDefaultRequestContext,
-	#superclass : #SeamlessRequestContext,
-	#category : 'Seamless-Requests'
+	#name : 'SeamlessDefaultRequestContext',
+	#superclass : 'SeamlessRequestContext',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessDefaultRequestContext >> return: aSeamlessRequestResult to: senderPeer [
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDefaultRequestContext >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

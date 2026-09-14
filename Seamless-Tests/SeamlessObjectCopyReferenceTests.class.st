@@ -1,22 +1,23 @@
 Class {
-	#name : #SeamlessObjectCopyReferenceTests,
-	#superclass : #SeamlessObjectReferenceTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessObjectCopyReferenceTests',
+	#superclass : 'SeamlessObjectReferenceTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessObjectCopyReferenceTests >> referenceClass [
 	^SeamlessObjectCopyReference 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessObjectCopyReferenceTests >> setUp [
 	super setUp.
 	
 	reference objectCopy: 'object' copy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectCopyReferenceTests >> testProxyCreation [
 
 	| proxy |
@@ -26,7 +27,7 @@ SeamlessObjectCopyReferenceTests >> testProxyCreation [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectCopyReferenceTests >> testTravelingWhenThereAreCachedMessages [
 
 	| guide |

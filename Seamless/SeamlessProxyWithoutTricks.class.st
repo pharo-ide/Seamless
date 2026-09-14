@@ -7,49 +7,51 @@ But I delegate all message sends to my reference object which resend all them to
 	reference:		<SeamlessObjectReference>
 "
 Class {
-	#name : #SeamlessProxyWithoutTricks,
-	#superclass : #Object,
+	#name : 'SeamlessProxyWithoutTricks',
+	#superclass : 'Object',
 	#instVars : [
 		'reference'
 	],
-	#category : 'Seamless-Proxy'
+	#category : 'Seamless-Proxy',
+	#package : 'Seamless',
+	#tag : 'Proxy'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessProxyWithoutTricks class >> for: aSeamlessObjectReference [ 
 
 	^self new 
 		reference: aSeamlessObjectReference 
 ]
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 SeamlessProxyWithoutTricks >> at: keyObject [
 
 	^self performRemoteMessage: (Message selector: #at: argument: keyObject)
 ]
 
-{ #category : #'reflective operations' }
+{ #category : 'reflective operations' }
 SeamlessProxyWithoutTricks >> doesNotUnderstand: aMessage [
 
 	^self performRemoteMessage: aMessage
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessProxyWithoutTricks >> isSeamlessProxy [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxyWithoutTricks >> reference [
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxyWithoutTricks >> reference: anObject [
 	reference := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxyWithoutTricks >> seamlessReference [
 	^ reference
 ]

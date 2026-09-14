@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessWellKnownObjectTests,
-	#superclass : #TestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessWellKnownObjectTests',
+	#superclass : 'TestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessWellKnownObjectTests >> testLocalRepresentationOfNamedClass [
 
 	| wellKnownObject localObject |
@@ -18,7 +19,7 @@ SeamlessWellKnownObjectTests >> testLocalRepresentationOfNamedClass [
 	] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessWellKnownObjectTests >> testLocalRepresentationOfNamedGlobalWhichIsNotClass [
 
 	| wellKnownObject localObject |
@@ -32,7 +33,7 @@ SeamlessWellKnownObjectTests >> testLocalRepresentationOfNamedGlobalWhichIsNotCl
 	] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessWellKnownObjectTests >> testLocalRepresentationOfUnknownGlobal [
 
 	| wellKnownObject localObject |

@@ -12,42 +12,44 @@ Internal Representation and Key Implementation Points.
 	resultDelivery		<SeamlessRequestResultDelivery>
 "
 Class {
-	#name : #SeamlessSyncRequestContext,
-	#superclass : #SeamlessRequestSendingContext,
+	#name : 'SeamlessSyncRequestContext',
+	#superclass : 'SeamlessRequestSendingContext',
 	#instVars : [
 		'senderProcess',
 		'resultDelivery'
 	],
-	#category : #'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> createSeamlessReference [
 	^SeamlessRequestContextReference new
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessSyncRequestContext >> performRequestSend: aSeamlessRequest [
 	receiverPeer sendObject: aSeamlessRequest 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> receiverPeer: anObject [
 	super receiverPeer: anObject.
 	resultDelivery := receiverPeer createResultDeliveryForRequests 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> resultDelivery [
 	^ resultDelivery
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> resultDelivery: anObject [
 	resultDelivery := anObject
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessSyncRequestContext >> return: aSeamlessRequestResult [
 
 	resultDelivery shipResult: aSeamlessRequestResult.
@@ -55,13 +57,13 @@ SeamlessSyncRequestContext >> return: aSeamlessRequestResult [
 	self network removeDistributedObject: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessSyncRequestContext >> sendMessage: aMessageSend [
 
 	^self sendRequest: (SeamlessMessageSendRequest with: aMessageSend)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessSyncRequestContext >> sendRequest: aSeamlessRequest [ 
 
 	aSeamlessRequest context: self.
@@ -72,12 +74,12 @@ SeamlessSyncRequestContext >> sendRequest: aSeamlessRequest [
 	^resultDelivery deliverResultFor: aSeamlessRequest
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> senderProcess [
 	^ senderProcess
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessSyncRequestContext >> senderProcess: anObject [
 	senderProcess := anObject
 ]

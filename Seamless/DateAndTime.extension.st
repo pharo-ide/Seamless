@@ -1,11 +1,11 @@
-Extension { #name : #DateAndTime }
+Extension { #name : 'DateAndTime' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 DateAndTime class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 DateAndTime >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

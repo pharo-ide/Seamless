@@ -1,12 +1,12 @@
-Extension { #name : #Text }
+Extension { #name : 'Text' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Text >> prepareValueTransferBy: aSeamlessTransporter [
 	
 	aSeamlessTransporter transferByValue: runs
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Text >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

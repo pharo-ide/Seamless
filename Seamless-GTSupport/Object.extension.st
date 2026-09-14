@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Seamless-GTSupport' }
+{ #category : '*Seamless-GTSupport' }
 Object >> isRemoteDoItReceiver [
 	^false
 ]

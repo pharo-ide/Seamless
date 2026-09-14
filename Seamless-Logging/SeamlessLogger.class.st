@@ -20,8 +20,8 @@ Internal Representation and Key Implementation Points.
     Implementation Points
 "
 Class {
-	#name : #SeamlessLogger,
-	#superclass : #Object,
+	#name : 'SeamlessLogger',
+	#superclass : 'Object',
 	#instVars : [
 		'incomingLink',
 		'outgoingLink',
@@ -31,36 +31,37 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : 'Seamless-Logging'
+	#category : 'Seamless-Logging',
+	#package : 'Seamless-Logging'
 }
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger class >> collectStatistics [
 	^default collectStatistics
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLogger class >> default [
 	^ default
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLogger class >> default: anObject [
 	default := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessLogger class >> isRunning [
 	^default notNil and: [default isRunning]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger class >> start [
 	default ifNil: [ default := SeamlessLogger new].
 	default start
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger class >> startAfresh [
 
 	self stop.
@@ -69,18 +70,18 @@ SeamlessLogger class >> startAfresh [
 	self start.
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger class >> stop [
 	default ifNotNil: [ default stop ]
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger class >> stopAndClean [
 	self stop.
 	self default: nil
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger >> collectStatistics [
 
 	| needsResume stat |
@@ -93,7 +94,7 @@ SeamlessLogger >> collectStatistics [
 	^stat
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessLogger >> initialize [
 	super initialize.
 	isRunning := false.
@@ -108,19 +109,19 @@ SeamlessLogger >> initialize [
 		arguments: #(receiver)
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 SeamlessLogger >> interceptOutgoingRequest: requestAndConnection [
 
 	self logOutgoingRequest: requestAndConnection first
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessLogger >> isRunning [
 
 	^isRunning
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 SeamlessLogger >> log: aSeamlessRequest [
 	aSeamlessRequest class = SeamlessDeliverResultRequest ifTrue: [ ^self ].
 	
@@ -128,19 +129,19 @@ SeamlessLogger >> log: aSeamlessRequest [
 	Transcript crShow: aSeamlessRequest printMessageForLog; flush.
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 SeamlessLogger >> logIncomingRequest: aSeamlessRequest [
 	
 	self log: aSeamlessRequest
 ]
 
-{ #category : #logging }
+{ #category : 'logging' }
 SeamlessLogger >> logOutgoingRequest: aSeamlessRequest [
 
 	self log: aSeamlessRequest
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger >> start [
 
 	(SeamlessNetwork>>#sendObject:by:) ast link: outgoingLink.		
@@ -149,7 +150,7 @@ SeamlessLogger >> start [
 	isRunning := true
 ]
 
-{ #category : #controlling }
+{ #category : 'controlling' }
 SeamlessLogger >> stop [
 
 	incomingLink ifNotNil: [ incomingLink uninstall ].

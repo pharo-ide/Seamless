@@ -9,12 +9,14 @@ I have default instance:
 	SeamlessTransferStrategy defaultByValue
 "
 Class {
-	#name : #SeamlessTransferByValueStrategy,
-	#superclass : #SeamlessTransferStrategy,
-	#category : 'Seamless-Transport'
+	#name : 'SeamlessTransferByValueStrategy',
+	#superclass : 'SeamlessTransferStrategy',
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessTransferByValueStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
 	"By default transporter transfer given object by value. So we don't need to do anything here.
 	But we allow objects to specify default meaning of value transfer. 

@@ -1,11 +1,11 @@
-Extension { #name : #GlobalVariable }
+Extension { #name : 'GlobalVariable' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 GlobalVariable class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 GlobalVariable >> prepareMethodTransferBy: aSeamlessTransporter [
 	super prepareMethodTransferBy: aSeamlessTransporter.
 	

@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessRequestResultDeliveryTests,
-	#superclass : #SeamlessRequestResultDeliveryTestCase,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessRequestResultDeliveryTests',
+	#superclass : 'SeamlessRequestResultDeliveryTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestResultDeliveryTests >> createDelivery [
 	^SeamlessRequestResultDelivery from: senderPeer
 ]

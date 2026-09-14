@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessObjectReferenceTests,
-	#superclass : #SeamlessObjectReferenceTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessObjectReferenceTests',
+	#superclass : 'SeamlessObjectReferenceTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessObjectReferenceTests >> referenceClass [
 	^SeamlessObjectReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testFillingMessagesCache [
 
 	reference cacheMessage: #someMessage with: #result.
@@ -17,7 +18,7 @@ SeamlessObjectReferenceTests >> testFillingMessagesCache [
 	reference messagesCache should include: #result at: #someMessage
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testLoadingRealObject [
 
 	[ :requestContext |
@@ -32,7 +33,7 @@ SeamlessObjectReferenceTests >> testLoadingRealObject [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testLoadingRealObjectAsDeepCopy [
 
 	[ :requestContext |
@@ -47,7 +48,7 @@ SeamlessObjectReferenceTests >> testLoadingRealObjectAsDeepCopy [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testPerformAndCacheRemoteMessage [
 
 	| messageSend |
@@ -62,7 +63,7 @@ SeamlessObjectReferenceTests >> testPerformAndCacheRemoteMessage [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testPerformAndCacheRemoteMessageWhenItCached [
 
 	reference cacheMessage: #someMessage with: #result.
@@ -70,7 +71,7 @@ SeamlessObjectReferenceTests >> testPerformAndCacheRemoteMessageWhenItCached [
 	(reference performAndCacheRemoteMessage: (Message selector: #someMessage)) should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testPerformRemoteMessage [
 
 	[ :requestContext |
@@ -82,7 +83,7 @@ SeamlessObjectReferenceTests >> testPerformRemoteMessage [
 	 ] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testPerformRemoteMessageWhenItCached [
 
 	reference cacheMessage: #someMessage with: #result.
@@ -90,7 +91,7 @@ SeamlessObjectReferenceTests >> testPerformRemoteMessageWhenItCached [
 	(reference performRemoteMessage: (Message selector: #someMessage)) should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testProxyCreation [
 
 	| proxy |
@@ -99,7 +100,7 @@ SeamlessObjectReferenceTests >> testProxyCreation [
 	proxy isSeamlessProxy should be: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testTravelingWhenAbsentCache [
 
 	| guide |
@@ -110,7 +111,7 @@ SeamlessObjectReferenceTests >> testTravelingWhenAbsentCache [
 	guide should not be isNode: reference hasLastReferenceAt: 0.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testTravelingWhenEmptyCache [
 
 	| guide |
@@ -122,7 +123,7 @@ SeamlessObjectReferenceTests >> testTravelingWhenEmptyCache [
 	guide should be isNode: reference hasLastReferenceAt: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTests >> testTravelingWhenThereAreCachedMessages [
 
 	| guide |

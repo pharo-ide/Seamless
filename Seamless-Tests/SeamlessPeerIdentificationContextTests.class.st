@@ -1,24 +1,25 @@
 Class {
-	#name : #SeamlessPeerIdentificationContextTests,
-	#superclass : #SeamlessSyncRequestContextTests,
+	#name : 'SeamlessPeerIdentificationContextTests',
+	#superclass : 'SeamlessSyncRequestContextTests',
 	#instVars : [
 		'connection'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessPeerIdentificationContextTests >> contextClass [
 	^SeamlessPeerIdentificationContext 
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 SeamlessPeerIdentificationContextTests >> contextShouldSend: aSeamlessRequest [
 
 	^connection should receive sendObject: aSeamlessRequest 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessPeerIdentificationContextTests >> setUp [
 	super setUp.
 	
@@ -27,7 +28,7 @@ SeamlessPeerIdentificationContextTests >> setUp [
 	context connection: connection
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 SeamlessPeerIdentificationContextTests >> stubRequestDataSend: aSeamlessRequest [
 
 	^connection stub sendObject: aSeamlessRequest 

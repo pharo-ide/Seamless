@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessDeliverResultRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessDeliverResultRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessDeliverResultRequestTests >> requestClass [
 	^SeamlessDeliverResultRequest  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDeliverResultRequestTests >> testExecution [
 
 	request result: #result.
@@ -19,7 +20,7 @@ SeamlessDeliverResultRequestTests >> testExecution [
 	context should receive return: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDeliverResultRequestTests >> testSettingResultTransferredBytes [
 
 	request result: SeamlessRequestResult new.

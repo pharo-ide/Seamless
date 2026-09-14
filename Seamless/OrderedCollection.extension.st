@@ -1,6 +1,6 @@
-Extension { #name : #OrderedCollection }
+Extension { #name : 'OrderedCollection' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 OrderedCollection >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByValue: array	

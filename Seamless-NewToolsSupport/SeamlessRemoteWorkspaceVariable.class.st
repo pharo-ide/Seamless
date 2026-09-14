@@ -14,22 +14,23 @@ Internal Representation and Key Implementation Points.
 	state:		<SeamlessLocalVariableState>
 "
 Class {
-	#name : #SeamlessRemoteWorkspaceVariable,
-	#superclass : #WorkspaceVariable,
+	#name : 'SeamlessRemoteWorkspaceVariable',
+	#superclass : 'WorkspaceVariable',
 	#instVars : [
 		'state'
 	],
-	#category : #'Seamless-NewToolsSupport'
+	#category : 'Seamless-NewToolsSupport',
+	#package : 'Seamless-NewToolsSupport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRemoteWorkspaceVariable class >> key: aKey [ 
 
 	^self new
 		 key: aKey
 ]
 
-{ #category : #'code generation' }
+{ #category : 'code generation' }
 SeamlessRemoteWorkspaceVariable >> emitStore: methodBuilder [
 
 	| tempName |
@@ -43,7 +44,7 @@ SeamlessRemoteWorkspaceVariable >> emitStore: methodBuilder [
 		send: #write:
 ]
 
-{ #category : #'code generation' }
+{ #category : 'code generation' }
 SeamlessRemoteWorkspaceVariable >> emitValue: methodBuilder [
 
 	methodBuilder 
@@ -51,24 +52,24 @@ SeamlessRemoteWorkspaceVariable >> emitValue: methodBuilder [
 		send: #read
 ]
 
-{ #category : #'code generation' }
+{ #category : 'code generation' }
 SeamlessRemoteWorkspaceVariable >> initialize [
 	super initialize.
 	
 	state := SeamlessLocalVariableState of: self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRemoteWorkspaceVariable >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRemoteWorkspaceVariable >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByReference 
 ]
 
-{ #category : #'code generation' }
+{ #category : 'code generation' }
 SeamlessRemoteWorkspaceVariable >> write: anObject [
 	super write: anObject.
 	state value: anObject.

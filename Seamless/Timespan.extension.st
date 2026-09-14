@@ -1,6 +1,6 @@
-Extension { #name : #Timespan }
+Extension { #name : 'Timespan' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Timespan >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

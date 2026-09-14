@@ -2,12 +2,13 @@
 I am represent statistics over sent seamless requests. I define structire of metrics and dimensions suitable from analysis
 "
 Class {
-	#name : #SeamlessStatistics,
-	#superclass : #ObjectStatistics,
-	#category : 'Seamless-Logging'
+	#name : 'SeamlessStatistics',
+	#superclass : 'ObjectStatistics',
+	#category : 'Seamless-Logging',
+	#package : 'Seamless-Logging'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SeamlessStatistics class >> buildOn: requests [
 
 	| stat |

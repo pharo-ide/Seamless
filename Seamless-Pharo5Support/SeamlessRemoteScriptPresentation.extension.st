@@ -1,6 +1,6 @@
-Extension { #name : #SeamlessRemoteScriptPresentation }
+Extension { #name : 'SeamlessRemoteScriptPresentation' }
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 SeamlessRemoteScriptPresentation >> smalltalkClass: aBlockClosure [ 
 
 ]

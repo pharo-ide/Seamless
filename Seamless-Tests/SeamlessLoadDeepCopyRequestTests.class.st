@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessLoadDeepCopyRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessLoadDeepCopyRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessLoadDeepCopyRequestTests >> requestClass [
 	^SeamlessLoadDeepCopyRequest 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessLoadDeepCopyRequestTests >> testExecution [
 
 	| objectReference |

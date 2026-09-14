@@ -1,26 +1,27 @@
 Class {
-	#name : #SeamlessTransferStrategyTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessTransferStrategyTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'strategy',
 		'transporter'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransferStrategyTestCase class >> isAbstract [
 	^self == SeamlessTransferStrategyTestCase 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessTransferStrategyTestCase >> setUp [
 	super setUp.
 	
 	transporter := Mock new.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferStrategyTestCase >> testAppliedToObject [
 
 	| criteria |
@@ -35,7 +36,7 @@ SeamlessTransferStrategyTestCase >> testAppliedToObject [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferStrategyTestCase >> testNotAppliedToAnyObjectWhenCriteriaAbsent [
 
 	strategy criteria: nil.

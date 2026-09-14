@@ -1,17 +1,18 @@
 Class {
-	#name : #SeamlessTransferByReferenceStrategyTests,
-	#superclass : #SeamlessTransferStrategyTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessTransferByReferenceStrategyTests',
+	#superclass : 'SeamlessTransferStrategyTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessTransferByReferenceStrategyTests >> setUp [
 	super setUp.
 	
 	strategy := SeamlessTransferByReferenceStrategy new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByReferenceStrategyTests >> testCreationWithMessagesCache [
 
 	| selectors |
@@ -22,13 +23,13 @@ SeamlessTransferByReferenceStrategyTests >> testCreationWithMessagesCache [
 	strategy where cachedMessages should be: selectors
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByReferenceStrategyTests >> testHasEmptyCachedMessagesByDefault [
 
 	strategy where cachedMessages should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByReferenceStrategyTests >> testTransferPreparation [
 
 	| transferObject |
@@ -37,7 +38,7 @@ SeamlessTransferByReferenceStrategyTests >> testTransferPreparation [
 	transferObject should beReturnedFrom: [ transporter referenceFor: #object]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByReferenceStrategyTests >> testTransferPreparationShouldIgnoreCacheWhenReferenceIsRemote [
 
 	| transferObject reference |
@@ -50,7 +51,7 @@ SeamlessTransferByReferenceStrategyTests >> testTransferPreparationShouldIgnoreC
 	transferObject should be: reference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByReferenceStrategyTests >> testTransferPreparationWhenThereIsCachedMessages [
 
 	| transferObject |

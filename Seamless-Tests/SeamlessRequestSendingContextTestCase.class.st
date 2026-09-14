@@ -1,19 +1,20 @@
 Class {
-	#name : #SeamlessRequestSendingContextTestCase,
-	#superclass : #SeamlessRequestContextTestCase,
+	#name : 'SeamlessRequestSendingContextTestCase',
+	#superclass : 'SeamlessRequestContextTestCase',
 	#instVars : [
 		'receiverPeer',
 		'network'
 	],
-	#category : #'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestSendingContextTestCase class >> isAbstract [
 	^self == SeamlessRequestSendingContextTestCase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestSendingContextTestCase >> setUp [
 	super setUp.
 	

@@ -1,1 +1,1 @@
-Package { #name : #'Seamless-Pharo5Support' }
+Package { #name : 'Seamless-Pharo5Support' }

@@ -1,6 +1,6 @@
-Extension { #name : #Metaclass }
+Extension { #name : 'Metaclass' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Metaclass class >> definesWellKnownSeamlessClass [ 
 	^true
 ]

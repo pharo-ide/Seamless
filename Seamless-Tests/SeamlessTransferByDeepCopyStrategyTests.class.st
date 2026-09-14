@@ -1,17 +1,18 @@
 Class {
-	#name : #SeamlessTransferByDeepCopyStrategyTests,
-	#superclass : #SeamlessTransferStrategyTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessTransferByDeepCopyStrategyTests',
+	#superclass : 'SeamlessTransferStrategyTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessTransferByDeepCopyStrategyTests >> setUp [
 	super setUp.
 	
 	strategy := SeamlessTransferByDeepCopyStrategy new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessTransferByDeepCopyStrategyTests >> testTransferPreparation [
 
 	transporter := Mock new.

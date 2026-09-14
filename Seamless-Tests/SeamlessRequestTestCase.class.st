@@ -1,25 +1,26 @@
 Class {
-	#name : #SeamlessRequestTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessRequestTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'request',
 		'context'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestTestCase class >> isAbstract [
 	^self == SeamlessRequestTestCase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestTestCase >> requestClass [
 	
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestTestCase >> setUp [
 	super setUp.
 	
@@ -29,14 +30,14 @@ SeamlessRequestTestCase >> setUp [
 	request context: context.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestTestCase >> testHasDefaultContext [
 
 	request := self requestClass new.
 	request context should be: SeamlessRequestContext default
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestTestCase >> testIncomingRequestCheck [
 
 	(context stub isKindOf: SeamlessRequestSendingContext) willReturn: true.
@@ -48,7 +49,7 @@ SeamlessRequestTestCase >> testIncomingRequestCheck [
 	request should be isIncoming.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestTestCase >> testOutgoingRequestCheck [
 
 	(context stub isKindOf: SeamlessRequestSendingContext) willReturn: true.
@@ -60,13 +61,13 @@ SeamlessRequestTestCase >> testOutgoingRequestCheck [
 	request should not be isOutgoing.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestTestCase >> testShouldAllowOnlyDefaultTransferStrategy [
 
 	request should be isOnlyDefaultTransferStrategyAllowed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestTestCase >> testShouldBePassedByValue [
 
 	request seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue 

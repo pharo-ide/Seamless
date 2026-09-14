@@ -25,23 +25,25 @@ Internal Representation and Key Implementation Points.
 	synchronizationSemaphore:		<Semaphore>
 "
 Class {
-	#name : #SeamlessRequestResultDelivery,
-	#superclass : #Object,
+	#name : 'SeamlessRequestResultDelivery',
+	#superclass : 'Object',
 	#instVars : [
 		'senderPeer',
 		'synchronizationSemaphore',
 		'requestResult'
 	],
-	#category : #'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRequestResultDelivery class >> from: aRemotePeer [
 	^self new 
 		senderPeer: aRemotePeer
 ]
 
-{ #category : #delivery }
+{ #category : 'delivery' }
 SeamlessRequestResultDelivery >> deliverResultFor: aRequest [
 
 	self waitResult.
@@ -51,36 +53,36 @@ SeamlessRequestResultDelivery >> deliverResultFor: aRequest [
 	^requestResult returnValue
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessRequestResultDelivery >> initialize [
 	super initialize.
 	
 	synchronizationSemaphore := Semaphore new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResultDelivery >> requestResult [
 	^ requestResult
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResultDelivery >> senderPeer [
 	^ senderPeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResultDelivery >> senderPeer: anObject [
 	senderPeer := anObject
 ]
 
-{ #category : #delivery }
+{ #category : 'delivery' }
 SeamlessRequestResultDelivery >> shipResult: aRequestResult [
 
 	requestResult := aRequestResult.
 	synchronizationSemaphore signal
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessRequestResultDelivery >> waitResult [
 	"Instead of blindly wait for delivery result forever we periodically check the connection status
 	and consider the deliver as unavailable when senderPeer is not connected anymore.

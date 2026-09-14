@@ -1,24 +1,25 @@
 Class {
-	#name : #SeamlessSyncRequestContextTests,
-	#superclass : #SeamlessRequestSendingContextTestCase,
+	#name : 'SeamlessSyncRequestContextTests',
+	#superclass : 'SeamlessRequestSendingContextTestCase',
 	#instVars : [
 		'resultDelivery'
 	],
-	#category : #'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessSyncRequestContextTests >> contextClass [
 	^SeamlessSyncRequestContext 
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 SeamlessSyncRequestContextTests >> contextShouldSend: aSeamlessRequest [
 
 	^receiverPeer should receive sendObject: aSeamlessRequest
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessSyncRequestContextTests >> setUp [
 	super setUp.
 	
@@ -26,13 +27,13 @@ SeamlessSyncRequestContextTests >> setUp [
 	context resultDelivery: resultDelivery
 ]
 
-{ #category : #specs }
+{ #category : 'specs' }
 SeamlessSyncRequestContextTests >> stubRequestDataSend: aSeamlessRequest [
 
 	^receiverPeer stub sendObject: aSeamlessRequest
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testCreatesDeliveryForRequestResult [
 	
 	context receiverPeer: receiverPeer.
@@ -40,7 +41,7 @@ SeamlessSyncRequestContextTests >> testCreatesDeliveryForRequestResult [
 	context resultDelivery should beReturnedFrom: [ receiverPeer createResultDeliveryForRequests ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testReferenceCreation [
 	
 	| actual |
@@ -49,7 +50,7 @@ SeamlessSyncRequestContextTests >> testReferenceCreation [
 	actual should beInstanceOf: SeamlessRequestContextReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testReturningResult [
 	
 	context return: #result.
@@ -57,7 +58,7 @@ SeamlessSyncRequestContextTests >> testReturningResult [
 	resultDelivery should receive shipResult: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testReturningResultShouldRemoveContextFromDistributedObjects [
 			
 	context return: #result.
@@ -65,7 +66,7 @@ SeamlessSyncRequestContextTests >> testReturningResultShouldRemoveContextFromDis
 	network should receive removeDistributedObject: context
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testReturningResultToGivenPeer [
 	
 	context stub.
@@ -75,7 +76,7 @@ SeamlessSyncRequestContextTests >> testReturningResultToGivenPeer [
 	context should receive return: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingMessage [
 	
 	(context stub sendRequest: Arg request) willReturn: #result.
@@ -87,7 +88,7 @@ SeamlessSyncRequestContextTests >> testSendingMessage [
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingRequest [
 	
 	| request |
@@ -98,7 +99,7 @@ SeamlessSyncRequestContextTests >> testSendingRequest [
 	self contextShouldSend: request
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingRequestShouldAssignItToContext [
 	
 	| request |
@@ -109,7 +110,7 @@ SeamlessSyncRequestContextTests >> testSendingRequestShouldAssignItToContext [
 	request should receive context: context
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingRequestShouldHoldSenderProcess [
 	
 	| request |
@@ -120,7 +121,7 @@ SeamlessSyncRequestContextTests >> testSendingRequestShouldHoldSenderProcess [
 	context senderProcess should be: Processor activeProcess
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingRequestShouldReturnResultUsingDelivery [
 	
 	| request |
@@ -131,7 +132,7 @@ SeamlessSyncRequestContextTests >> testSendingRequestShouldReturnResultUsingDeli
 	resultDelivery should receive deliverResultFor: request
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessSyncRequestContextTests >> testSendingRequestWhenSendIsFailed [
 	
 	| sendFailure request |

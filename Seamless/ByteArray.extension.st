@@ -1,11 +1,11 @@
-Extension { #name : #ByteArray }
+Extension { #name : 'ByteArray' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 ByteArray class >> definesWellKnownSeamlessClass [ 
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 ByteArray >> prepareMethodTransferBy: aSeamlessTransporter [
 	super prepareMethodTransferBy: aSeamlessTransporter.
 	

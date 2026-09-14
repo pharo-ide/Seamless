@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessNonLocalReturnResultTests,
-	#superclass : #SeamlessRequestResultTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessNonLocalReturnResultTests',
+	#superclass : 'SeamlessRequestResultTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNonLocalReturnResultTests >> testReturningValueToLocalContext [
 
 	[:homeContext |	
@@ -16,7 +17,7 @@ SeamlessNonLocalReturnResultTests >> testReturningValueToLocalContext [
 	] runWithMocks 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessNonLocalReturnResultTests >> testReturningValueToRemoteContext [
 
 	| homeContext |

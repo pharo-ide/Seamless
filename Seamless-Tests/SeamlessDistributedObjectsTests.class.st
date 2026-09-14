@@ -1,14 +1,15 @@
 Class {
-	#name : #SeamlessDistributedObjectsTests,
-	#superclass : #TestCase,
+	#name : 'SeamlessDistributedObjectsTests',
+	#superclass : 'TestCase',
 	#instVars : [
 		'distributedObjects',
 		'network'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessDistributedObjectsTests >> setUp [
 	super setUp.
 	
@@ -16,7 +17,7 @@ SeamlessDistributedObjectsTests >> setUp [
 	distributedObjects := SeamlessDistributedObjects over: network
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingLocalObjectByReferenceId [
 
 	| actual |
@@ -33,13 +34,13 @@ SeamlessDistributedObjectsTests >> testGettingLocalObjectByReferenceId [
 	actual should be: #object1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingLocalObjectByReferenceIdWhenItNotExists [
 
 	[distributedObjects localForReferenceId: #givenId] should raise: KeyNotFound
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingNewReferencesShouldGenerateNewReferenceIds [
 
 	| reference1 reference2 |
@@ -50,7 +51,7 @@ SeamlessDistributedObjectsTests >> testGettingNewReferencesShouldGenerateNewRefe
 	reference1 id should not equal: reference2 id
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingObjectByReferenceWhenItAbsent [
 
 	| actual reference |
@@ -62,7 +63,7 @@ SeamlessDistributedObjectsTests >> testGettingObjectByReferenceWhenItAbsent [
 	distributedObjects referencesToObjects should include: #proxy at: reference.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingObjectByReferenceWhenItExists [
 
 	| actual |
@@ -77,7 +78,7 @@ SeamlessDistributedObjectsTests >> testGettingObjectByReferenceWhenItExists [
 	actual should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingReferenceForExistedObject [
 
 	| object reference |
@@ -90,7 +91,7 @@ SeamlessDistributedObjectsTests >> testGettingReferenceForExistedObject [
 	reference should be: #reference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingReferenceForNewObject [
 
 	| object reference  actual |
@@ -106,7 +107,7 @@ SeamlessDistributedObjectsTests >> testGettingReferenceForNewObject [
 	distributedObjects referencesToObjects should include: object at: reference.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testGettingSize [
 
 	| object |
@@ -118,19 +119,19 @@ SeamlessDistributedObjectsTests >> testGettingSize [
 	distributedObjects should haveSize: 1
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testHasEmptyObjectsToReferencesMapByDefault [
 
 	distributedObjects objectsToReferences should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testHasEmptyReferencesToObjectsMapByDefault [
 
 	distributedObjects referencesToObjects should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testRemoveAbsentObject [
 
 	| object |
@@ -143,7 +144,7 @@ SeamlessDistributedObjectsTests >> testRemoveAbsentObject [
 	distributedObjects referencesToObjects should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testRemoveObject [
 
 	| object |
@@ -158,7 +159,7 @@ SeamlessDistributedObjectsTests >> testRemoveObject [
 	distributedObjects referencesToObjects should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDistributedObjectsTests >> testRemovingObjectsDistributedByParticularPeer [
 
 	| peer |

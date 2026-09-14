@@ -8,41 +8,43 @@ Internal Representation and Key Implementation Points.
 	objectCopy:		<Object>
 "
 Class {
-	#name : #SeamlessObjectCopyReference,
-	#superclass : #SeamlessObjectReference,
+	#name : 'SeamlessObjectCopyReference',
+	#superclass : 'SeamlessObjectReference',
 	#instVars : [
 		'objectCopy'
 	],
-	#category : 'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessObjectCopyReference class >> to: anObject [
 	^self new 
 		objectCopy: anObject copy
 ]
 
-{ #category : #'proxy creation' }
+{ #category : 'proxy creation' }
 SeamlessObjectCopyReference >> createProxy [
 	^objectCopy
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectCopyReference >> hasRemoteProperties [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectCopyReference >> objectCopy [
 	^ objectCopy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectCopyReference >> objectCopy: anObject [
 	objectCopy := anObject
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectCopyReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 	| representation |
 	objectCopy := aSeamlessTransporter readNextObject.
@@ -64,24 +66,24 @@ SeamlessObjectCopyReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with
 	^representation
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectCopyReference >> prepareValueTransferBy: aSeamlessTransporter [
 	super prepareValueTransferBy: aSeamlessTransporter.
 	
 	aSeamlessTransporter transferByValue: objectCopy 
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectCopyReference >> remotePropertiesSize [
 	^1
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectCopyReference >> remotePropertyAt: index [
 	^objectCopy
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectCopyReference >> remotePropertyAt: index put: newObject [
 	objectCopy := newObject
 ]

@@ -1,20 +1,21 @@
 Class {
-	#name : #SeamlessRemotePeerTests,
-	#superclass : #BasysRemotePeerTests,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessRemotePeerTests',
+	#superclass : 'BasysRemotePeerTests',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRemotePeerTests class >> shouldInheritSelectors [ 
 	^true
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRemotePeerTests >> peerClass [
 	^SeamlessRemotePeer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testClosingByRemoteSide [
 
 	peer closeByRemoteSide.
@@ -22,7 +23,7 @@ SeamlessRemotePeerTests >> testClosingByRemoteSide [
 	peer should be isClosed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testClosingByRemoteSideShouldNotSendCloseRequest [
 
 	peer stub.
@@ -32,7 +33,7 @@ SeamlessRemotePeerTests >> testClosingByRemoteSideShouldNotSendCloseRequest [
 	peer should not receive sendObject: Any
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIsConnected [
 	peer stub isConnected willReturn: true.
 	(peer stub trySendObjectIfConnected: Arg request) 
@@ -45,7 +46,7 @@ SeamlessRemotePeerTests >> testClosingShouldSendCloseRequestToRemoteSideWhenItIs
 	peer should be isClosed
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testCreateResultDeliveryForRequests [
 
 	| delivery |
@@ -54,7 +55,7 @@ SeamlessRemotePeerTests >> testCreateResultDeliveryForRequests [
 	delivery should beReturnedFrom: [ network createDeliveryForResultFrom: peer ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testCreateSyncRequestContext [
 
 	| context |
@@ -64,7 +65,7 @@ SeamlessRemotePeerTests >> testCreateSyncRequestContext [
 	context receiverPeer should be: peer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testRemoteBlockAsyncEvaluation [
 
 	(peer stub sendObject: Arg request) will: [].
@@ -75,7 +76,7 @@ SeamlessRemotePeerTests >> testRemoteBlockAsyncEvaluation [
 	Arg request where valuable should be: #block.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testRemoteBlockEvaluationShouldReturnResultOfRequestSend [
 
 	| context result |
@@ -87,7 +88,7 @@ SeamlessRemotePeerTests >> testRemoteBlockEvaluationShouldReturnResultOfRequestS
 	result should beReturnedFrom: [ context sendRequest: Any ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemotePeerTests >> testRemoteBlockEvaluationShouldSendEvaluationRequestToSyncContext [
 
 	| context |

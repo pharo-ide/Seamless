@@ -2,12 +2,14 @@
 I am error for case when client send message to object which is not anymore exists on server
 "
 Class {
-	#name : #SeamlessReferencedObjectIsLost,
-	#superclass : #Error,
-	#category : 'Seamless-Core'
+	#name : 'SeamlessReferencedObjectIsLost',
+	#superclass : 'Error',
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #converting }
+{ #category : 'converting' }
 SeamlessReferencedObjectIsLost >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 	| result |
 	result := SeamlessThrowExceptionResult with: self.
@@ -15,12 +17,12 @@ SeamlessReferencedObjectIsLost >> handleSeamlessRequest: anEvaluationRequest rec
 	anEvaluationRequest returnResult: result to: senderPeer
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessReferencedObjectIsLost >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessReferencedObjectIsLost >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

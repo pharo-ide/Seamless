@@ -1,23 +1,24 @@
 Class {
-	#name : #SeamlessDebuggerVariablesBrowser,
-	#superclass : #GTDebuggerVariablesBrowser,
-	#category : 'Seamless-GTSupport'
+	#name : 'SeamlessDebuggerVariablesBrowser',
+	#superclass : 'GTDebuggerVariablesBrowser',
+	#category : 'Seamless-GTSupport',
+	#package : 'Seamless-GTSupport'
 }
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessDebuggerVariablesBrowser >> compareVariableTypeOf: x withVariable: y in: aContext [
 
 	^ (self variableTypeOf: x in: aContext) < (self variableTypeOf: y in: aContext)
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessDebuggerVariablesBrowser >> tagsForVariable: aString from: aContext [
 	^ (#( 'self' 'thisContext' 'stack top') includes: aString) 
 		ifTrue: [ 'implicit' ]
 		ifFalse: [ self variableTypeOf: aString in: aContext ]
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessDebuggerVariablesBrowser >> variableTypeOf: aString in: aContext [
 	^ (aContext receiver class classThatDefinesInstanceVariable: aString) notNil
 			ifTrue: [ 'attribute' ]
@@ -28,7 +29,7 @@ SeamlessDebuggerVariablesBrowser >> variableTypeOf: aString in: aContext [
 	
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessDebuggerVariablesBrowser >> variablesIn: composite [
 	^ composite table
 		showOnly: 50;

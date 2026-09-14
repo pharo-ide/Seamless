@@ -1,6 +1,6 @@
-Extension { #name : #Context }
+Extension { #name : 'Context' }
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 Context >> cannotReturn: result [
 	closureOrNil ifNotNil: [ ^ self cannotReturn: result to: self home ].
 	Processor activeProcess 

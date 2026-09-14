@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessThrowExceptionResultTests,
-	#superclass : #SeamlessRequestResultTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessThrowExceptionResultTests',
+	#superclass : 'SeamlessRequestResultTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessThrowExceptionResultTests >> testReturningValue [
 
 	| error |

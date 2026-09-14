@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessRemoteContextTests,
-	#superclass : #SeamlessRequestContextTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessRemoteContextTests',
+	#superclass : 'SeamlessRequestContextTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRemoteContextTests >> contextClass [
 	^SeamlessRemoteContext 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemoteContextTests >> testRemovesItselfFromDistributedObjectsWhenCompletesResultReturn [
 	
 	| senderPeer network |
@@ -23,7 +24,7 @@ SeamlessRemoteContextTests >> testRemovesItselfFromDistributedObjectsWhenComplet
 	network removeDistributedObject: context] should beDoneInOrder 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRemoteContextTests >> testSendsRequestToReturnResult [
 	
 	| senderPeer |

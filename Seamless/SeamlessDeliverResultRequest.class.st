@@ -11,39 +11,41 @@ Internal Representation and Key Implementation Points.
 	result:		<SeamlessRequestResult>
 "
 Class {
-	#name : #SeamlessDeliverResultRequest,
-	#superclass : #SeamlessRequest,
+	#name : 'SeamlessDeliverResultRequest',
+	#superclass : 'SeamlessRequest',
 	#instVars : [
 		'result'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessDeliverResultRequest class >> result: aSeamlessRequestResult to: aSeamlessRemoteContext [
 	^self new 
 		context: aSeamlessRemoteContext;
 		result: aSeamlessRequestResult 
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessDeliverResultRequest >> executeFor: senderPeer [
 	
 	context return: result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDeliverResultRequest >> ownBytes: aNumber [
 
 	result transferredBytes: aNumber
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDeliverResultRequest >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessDeliverResultRequest >> result: anObject [
 	result := anObject
 ]

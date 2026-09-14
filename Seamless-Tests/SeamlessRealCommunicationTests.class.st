@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessRealCommunicationTests,
-	#superclass : #BasysRealCommunicationTestCase,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessRealCommunicationTests',
+	#superclass : 'BasysRealCommunicationTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 SeamlessRealCommunicationTests >> calculateFirstRectAreaByNonLocalReturn: rectanglesArray from: remotePeer [ 
 
 	| sendingContext |
@@ -14,13 +15,13 @@ SeamlessRealCommunicationTests >> calculateFirstRectAreaByNonLocalReturn: rectan
 			receiver: rectanglesArray selector: #do: arguments: {[ :each | ^each area ]})
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 SeamlessRealCommunicationTests >> evaluateBlockWithNonLocalReturn: resultObject by: aRemotePeer [
 
 	^aRemotePeer evaluate: [(1 to: 10) do: [ :i | i = 5 ifTrue: [ ^resultObject ] ]  ]
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 SeamlessRealCommunicationTests >> evaluateRecursiveBlockWithNonLocalReturn: resultObject by: aRemotePeer [
 
 	^aRemotePeer evaluate: [
@@ -29,12 +30,12 @@ SeamlessRealCommunicationTests >> evaluateRecursiveBlockWithNonLocalReturn: resu
 	]
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRealCommunicationTests >> networkClass [
 	^SeamlessNetwork
 ]
 
-{ #category : #helpers }
+{ #category : 'helpers' }
 SeamlessRealCommunicationTests >> prepareClientProxyForServerObject: serverSideObject [
 
 	| serverSideReference clientSideReference |
@@ -47,7 +48,7 @@ SeamlessRealCommunicationTests >> prepareClientProxyForServerObject: serverSideO
 	^clientSideNetwork objectFor: clientSideReference
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRealCommunicationTests >> setUp [
 	SeamlessTransport createDefault.
 	super setUp.
@@ -55,7 +56,7 @@ SeamlessRealCommunicationTests >> setUp [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testClosedNetworkShouldFailAnyRemoteRequestsOnClient [
  
 	| remoteEnv |
@@ -67,7 +68,7 @@ SeamlessRealCommunicationTests >> testClosedNetworkShouldFailAnyRemoteRequestsOn
 	]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testClosedNetworkShouldHaveCleanDistributedObjects [
  	| remoteEnv |
 	 
@@ -86,7 +87,7 @@ SeamlessRealCommunicationTests >> testClosedNetworkShouldHaveCleanDistributedObj
 	serverSideNetwork remotePeers should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockAsynchronously [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -99,7 +100,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockAsynchronously [
 	result should be: remotePeer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhenConnectionLostDuringExecution [
 	| remotePeer error |
 	remotePeer := self connectToServerPeer.
@@ -113,7 +114,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhenConnectionLostDuringExe
 	[error] should takeAWhile to beInstanceOf: SeamlessResultDeliveryUnavailable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichAccessLocalTempWhichTransferedByReference [
 	| remotePeer result rect |
 	remotePeer := self connectToServerPeer.
@@ -127,7 +128,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichAccessLocalTempWhichTr
 	result should be: 6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEvaluationToSenderPeer [
 	| remotePeer result |
 	
@@ -139,7 +140,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEval
 	result should equal: 6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEvaluationToSenderPeerWithNonLocalReturn [
 	| remotePeer result |
 	<expectedFailure>
@@ -152,7 +153,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEval
 	result should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEvaluationToSenderPeerWithNonLocalReturn2 [
 	| remotePeer result |
 	<expectedFailure>
@@ -167,7 +168,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichCallRecursiveBlockEval
 	result should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsLocalSelf [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -179,7 +180,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsLocalSelf [
 	result should be: self
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsLocalSelfInstVar [
 	| remotePeer result |
 	<expectedFailure>
@@ -193,7 +194,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsLocalSelfInstVa
 	result should equal: testSelector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsResultOfRecursiveMessageToClient [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -205,7 +206,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWhichReturnsResultOfRecursi
 	result should equal: testSelector
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithComplexLiteralArray [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -223,7 +224,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithComplexLiteralArray [
 	result should be: true
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithGlobalsReferencesOnRemoteSide [
 	| remotePeer result localResult |
 	remotePeer := self connectToServerPeer.
@@ -238,7 +239,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithGlobalsReferencesOnRemo
 	localResult should equal: 10 @ 20
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithLiteralArray [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -254,7 +255,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithLiteralArray [
 	result should be: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithLiteralByteArray [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -270,7 +271,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithLiteralByteArray [
 	result should be: false
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithNonLocalReturnOnRemoteSide [
 	| remotePeer result |
 	
@@ -282,7 +283,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithNonLocalReturnOnRemoteS
 	result should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingBlockWithoutAnyReferencesOnRemoteSide [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -294,7 +295,7 @@ SeamlessRealCommunicationTests >> testEvaluatingBlockWithoutAnyReferencesOnRemot
 	result should equal: 40
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testEvaluatingCleanBlockTwice [
 	| remotePeer result result2 |
 	remotePeer := self connectToServerPeer.
@@ -308,7 +309,7 @@ SeamlessRealCommunicationTests >> testEvaluatingCleanBlockTwice [
 	result2 should equal: 4
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testExecutingDoItWithGlobalReferenceOnRemoteObject [
  
 	| remoteEnv remotePoint compiler result localResult |
@@ -330,7 +331,7 @@ SeamlessRealCommunicationTests >> testExecutingDoItWithGlobalReferenceOnRemoteOb
 	localResult should equal: 1@3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testExecutingReflectiveRemoteExecuteMethodWithProxyMethod [
  
 	| remoteSmalltalk remoteString actual localResult method |
@@ -349,7 +350,7 @@ SeamlessRealCommunicationTests >> testExecutingReflectiveRemoteExecuteMethodWith
 	actual should equal: 'String'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testExecutingReflectiveRemoteExecuteMethodWithProxyMethodAndProxyArgs [
  
 	| remoteSmalltalk remoteString actual args localResult method |
@@ -369,7 +370,7 @@ SeamlessRealCommunicationTests >> testExecutingReflectiveRemoteExecuteMethodWith
 	actual should equal: 'ss'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testExecutingReflectiveRemotePerformMethodWithProxyArgumentsForInternalSelector [
  
 	| args remoteSmalltalk remoteString actual localResult |
@@ -390,7 +391,7 @@ SeamlessRealCommunicationTests >> testExecutingReflectiveRemotePerformMethodWith
 	actual should equal: 'ss'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testExecutingRequestWhenConnectionCantBeEstablished [
 	
 	self skip. "was failing, needs to be checked"
@@ -401,7 +402,7 @@ SeamlessRealCommunicationTests >> testExecutingRequestWhenConnectionCantBeEstabl
 	]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testFirstConnectionEstablishing [
  
 	| remotePeer |
@@ -413,7 +414,7 @@ SeamlessRealCommunicationTests >> testFirstConnectionEstablishing [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingArrayClassFromRemoteEnvironment [
  
 	| result remoteClass remoteCollection remoteEnv |
@@ -427,7 +428,7 @@ SeamlessRealCommunicationTests >> testGettingArrayClassFromRemoteEnvironment [
 	result should be: #testValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingEnvironmentFromAddressWhenPassivePeerAlreadyExistsForIt [
  		
 	| remoteEnv |
@@ -445,7 +446,7 @@ SeamlessRealCommunicationTests >> testGettingEnvironmentFromAddressWhenPassivePe
 	remoteEnv seamlessReference senderPeer should be: serverSideNetwork remotePeers anyOne.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingFalseClassFromRemoteEnvironment [
  
 			
@@ -457,7 +458,7 @@ SeamlessRealCommunicationTests >> testGettingFalseClassFromRemoteEnvironment [
 	remoteClass should beInstanceOf: SeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingLargeInteger [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -469,7 +470,7 @@ SeamlessRealCommunicationTests >> testGettingLargeInteger [
 	result should equal: 3575740990698772000111222
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 	| remotePeer result state |
 	remotePeer := self connectToServerPeer.
@@ -484,7 +485,7 @@ SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItHasValue [
 	result remoteVariable should be isSeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItIsUnassigned [
 	| remotePeer result state |
 	remotePeer := self connectToServerPeer.
@@ -498,7 +499,7 @@ SeamlessRealCommunicationTests >> testGettingLocalVariableStateWhenItIsUnassigne
 	result remoteVariable should be isSeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingMissingGlobal [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -511,7 +512,7 @@ SeamlessRealCommunicationTests >> testGettingMissingGlobal [
 	result name should be: #unknownGlobalName
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingMissingGlobalBackToClientWhereItExists [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -523,7 +524,7 @@ SeamlessRealCommunicationTests >> testGettingMissingGlobalBackToClientWhereItExi
 	result should be: Point
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingMissingObjectAsPartOfAnotherObject [
 	| remoteEnv point array |
 	serverSideNetwork transferByReference: (Instance of: Point).
@@ -541,7 +542,7 @@ SeamlessRealCommunicationTests >> testGettingMissingObjectAsPartOfAnotherObject 
 	serverSideNetwork distributedObjects should not be includesReference: point seamlessReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingMissingObjectWhenServerLostReferencedOne [
  
 	| remoteEnv actual |
@@ -558,7 +559,7 @@ SeamlessRealCommunicationTests >> testGettingMissingObjectWhenServerLostReferenc
 	actual reference should equal: remoteEnv seamlessReference
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteArrayByValueWhenItContentsShouldBeTransferedByReference [
  
 	| remoteClass remoteCollection remoteEnv remoteRect |
@@ -576,7 +577,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteArrayByValueWhenItContentsSho
 	remoteCollection first should beInstanceOf: SeamlessProxy 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteBlockWithGlobalsReferencesByValue [
 	| remoteBlock localBlock transferedBlock |
 	transferedBlock := [OrderedCollection with: 10].
@@ -592,7 +593,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteBlockWithGlobalsReferencesByV
 	localBlock value should equal: #(10) asOrderedCollection 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteBlockWithoutObjectReferencesByValue [
 	| remoteBlock localBlock transferedBlock |
 	transferedBlock := [ 1 + 2 ].
@@ -607,7 +608,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteBlockWithoutObjectReferencesB
 	localBlock value should equal: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteClassBinding [
  
 	| result remoteClass remoteEnv |
@@ -622,7 +623,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteClassBinding [
 	result value should beInstanceOf: SeamlessProxy 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteCleanBlockByValueShouldProxifyOuterContextSender [
 	| remoteBlock localBlock transferredBlock |
 	transferredBlock := [ 1 + 2 ].
@@ -638,7 +639,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteCleanBlockByValueShouldProxif
 	localBlock home should be: localBlock outerContext outerMostContext.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteCleanBlockWithNestedOuterContextsByValue [
 	| remoteBlock localBlock |
 	[remoteBlock := self prepareClientProxyForServerObject: [ 1 + 2 ] ] value.
@@ -656,7 +657,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteCleanBlockWithNestedOuterCont
 	localBlock home should be: localBlock outerContext outerMostContext.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteFormByValue [
  
 	| remoteClass remoteEnv form |
@@ -671,7 +672,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteFormByValue [
 	form bits should beInstanceOf: Bitmap 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteNotCleanBlockByValueShouldPassOuterContextsAsValueButItSenderAsReference [
 	| remoteBlock localBlock transferredBlock |
 	transferredBlock := [ true ifFalse: [^self]. 1 + 2 ].
@@ -688,7 +689,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteNotCleanBlockByValueShouldPas
 	localBlock home should be: localBlock outerContext outerMostContext.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteNotCleanBlockWithNestedOuterContextsByValue [
 	| remoteBlock localBlock |
 	[remoteBlock := self prepareClientProxyForServerObject: [true ifFalse: [^self]. 1 + 2 ] ] value.
@@ -705,7 +706,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteNotCleanBlockWithNestedOuterC
 	localBlock home should be: localBlock outerContext outerMostContext.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsDeepCopy [
  
 	| remoteEnv result remoteClass |
@@ -722,7 +723,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsDeepCopy [
 	result corner should beInstanceOf: Point.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsDeepCopyWhichReferencesProxyToClientObject [
  
 	| result remoteObject localPoint remoteObjectProxy wrapperProxy |
@@ -744,7 +745,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsDeepCopyWhichReferenc
 	result last should be: localPoint.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopy [
  
 	| remoteEnv point remoteArray returnedOriginalPoint serverSideArray remoteClass |
@@ -765,7 +766,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopy [
 	serverSideArray first should not be: point
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenByDefaultSuchClassesTransferredByReference [
  
 	| remoteEnv point remoteArray returnedOriginalPoint serverSideArray remoteClass |
@@ -787,7 +788,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenByD
 	serverSideArray first should not be: point
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenInternalIncludedReferenceHasCachedData [
  
 	| remoteEnv point remoteContainer serverSideContainer remoteClass array returnedOriginalArray serverSideArray |
@@ -813,7 +814,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenInt
 	serverSideArray first seamlessReference messagesCache should includeKey: #abs
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenInternalObjectsShouldBeTransferredByValue [
  
 	| remoteEnv point remoteContainer serverSideContainer remoteClass array returnedOriginalArray serverSideArray |
@@ -841,7 +842,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenInt
 	serverSideArray first should not be: point.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenItHasInternalReferenceToItself [
  
 	| remoteEnv remoteArray serverSideArray remoteClass child original returnedOriginal serverSideCopy |
@@ -872,7 +873,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenItH
 	serverSideCopy content content should be: serverSideCopy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenItIncludesOtherReferences [
  
 	| remoteEnv point remoteContainer serverSideContainer remoteClass array returnedOriginalArray serverSideArray |
@@ -899,7 +900,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenItI
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenNextReferenceIsValue [
  
 	| remoteEnv point remoteArray remoteClass returnedOriginalArray |
@@ -918,7 +919,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectAsReferencedCopyWhenNex
 	returnedOriginalArray last should be: #secondValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectWithDeepCopyReferenceAndNormalOne [
  
 	| result proxy |	
@@ -935,7 +936,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectWithDeepCopyReferenceAn
 	result last should beInstanceOf: SeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteObjectWithDeepCopyReferenceWhenFirstItAppearsInsideAnotherRoute [
  
 	| result proxy target |
@@ -956,7 +957,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteObjectWithDeepCopyReferenceWh
 	result first first should be: result last
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByReference [
  
 	| remoteClass remoteCollection remoteEnv |
@@ -971,7 +972,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByReference 
 	remoteCollection should beInstanceOf: SeamlessProxy 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByValueWhenItContentsPrimitiveObjects [
  
 	| remoteClass remoteCollection remoteEnv |
@@ -989,7 +990,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByValueWhenI
 	remoteCollection should equal: #(testValue testValue testValue)
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByValueWhenItContentsShouldBeTransferedByReference [
  
 	| remoteClass remoteCollection remoteEnv remoteRect |	
@@ -1006,7 +1007,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteOrderedCollectionByValueWhenI
 	remoteCollection first should beInstanceOf: SeamlessProxy 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingRemoteSetByValueWhenItContentsShouldBeTransferedByReference [
  
 	| remoteClass remoteCollection remoteEnv remoteRect |
@@ -1024,7 +1025,7 @@ SeamlessRealCommunicationTests >> testGettingRemoteSetByValueWhenItContentsShoul
 	remoteCollection anyOne should beInstanceOf: SeamlessProxy 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingSmallInteger [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -1036,7 +1037,7 @@ SeamlessRealCommunicationTests >> testGettingSmallInteger [
 	result should equal: 357574
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingTrueClassFromRemoteEnvironment [
  
 			
@@ -1048,7 +1049,7 @@ SeamlessRealCommunicationTests >> testGettingTrueClassFromRemoteEnvironment [
 	remoteClass should beInstanceOf: SeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingUndefinedObjectClassFromRemoteEnvironment [
  
 			
@@ -1060,7 +1061,7 @@ SeamlessRealCommunicationTests >> testGettingUndefinedObjectClassFromRemoteEnvir
 	remoteClass should beInstanceOf: SeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testGettingWellKnownGlobal [
 	| remotePeer result |
 	remotePeer := self connectToServerPeer.
@@ -1073,7 +1074,7 @@ SeamlessRealCommunicationTests >> testGettingWellKnownGlobal [
 	result should be: Point
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testLoadingRemoteObjectByProxyAsLocalDeepCopy [
  
 	| proxy result distributedObject |
@@ -1086,7 +1087,7 @@ SeamlessRealCommunicationTests >> testLoadingRemoteObjectByProxyAsLocalDeepCopy 
 	result should equal: distributedObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testLoadingRemoteObjectByProxyAsLocalOne [
  
 	| proxy result distributedObject |
@@ -1098,7 +1099,7 @@ SeamlessRealCommunicationTests >> testLoadingRemoteObjectByProxyAsLocalOne [
 	result should equal: distributedObject
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testMessageSelfSendShouldUnregisterContextObjectsAtTheEnd [
  
 	| remotePeer sendingContext  |
@@ -1111,7 +1112,7 @@ SeamlessRealCommunicationTests >> testMessageSelfSendShouldUnregisterContextObje
 	serverSideNetwork distributedObjects should be isEmpty
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testMessageSelfSendWithArgumentProxy [
  
 	| remotePeer sendingContext result proxy |
@@ -1125,7 +1126,7 @@ SeamlessRealCommunicationTests >> testMessageSelfSendWithArgumentProxy [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testMessageSelfSendWithReceiverProxy [
  
 	| remotePeer sendingContext result reference |
@@ -1139,7 +1140,7 @@ SeamlessRealCommunicationTests >> testMessageSelfSendWithReceiverProxy [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testMessageSelfSendWithoutProxies [
  
 	| remotePeer sendingContext result |
@@ -1152,7 +1153,7 @@ SeamlessRealCommunicationTests >> testMessageSelfSendWithoutProxies [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteEnvironmentInteraction [
  
 	| result remoteClass remoteCollection remoteEnv |
@@ -1166,7 +1167,7 @@ SeamlessRealCommunicationTests >> testRemoteEnvironmentInteraction [
 	result should be: #testValue
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageShouldNotDistributeLocalPeerInstance [
  	
 	| remoteEnv |
@@ -1179,7 +1180,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageShouldNotDistributeLocalPeerI
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageShouldNotDistributeRemotePeerInstance [
  	
 	| remoteEnv |
@@ -1192,7 +1193,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageShouldNotDistributeRemotePeer
 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageShouldUnregisterContextObjectsAtTheEnd [
  
 	| remotePeer sendingContext  |
@@ -1206,7 +1207,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageShouldUnregisterContextObject
 	clientSideNetwork distributedObjects should be isEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageToRemoteCollectionWithBlockWithNonLocalReturn [
 	| remotePeer result remoteArray |
 	
@@ -1220,7 +1221,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageToRemoteCollectionWithBlockWi
 	result should equal: 6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageToRemoteCollectionWithCleanBlock [
 	| remotePeer sendingContext result remoteArray |
 	
@@ -1236,7 +1237,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageToRemoteCollectionWithCleanBl
 	result should equal: 1 + 6
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWhichProducesNonLocalReturn [
 	"Printing contents by stream with limited size is implemented by non local return from block like [^stream contents]. 
 	In this test we pass local block to remote proxy. On remote side limited stream will be created and passed as proxy to our local block. 
@@ -1256,7 +1257,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWhichProducesNonLocalReturn [
 	result should equal: '123'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWhichRaisesError [ 
 	| remotePeer sendingContext error localError proxy |
 	
@@ -1272,7 +1273,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWhichRaisesError [
 	localError messageText should equal: error printString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWithArgumentProxy [
  
 	| remotePeer sendingContext result clientSideProxy |
@@ -1286,7 +1287,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWithArgumentProxy [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWithExplicitArgumentByDeepCopy [
  	
 	| remoteEnv remoteArray createdArray remoteClass |
@@ -1305,7 +1306,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWithExplicitArgumentByDeepCop
 	createdArray should equal: { {10@30} }
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWithExplicitArgumentByValue [
  	
 	| remoteEnv remoteArray localArray |
@@ -1319,7 +1320,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWithExplicitArgumentByValue [
 	localArray first should beInstanceOf: SeamlessProxy
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWithReceiverProxy [
  
 	| remotePeer sendingContext result clientSideProxy |
@@ -1333,7 +1334,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWithReceiverProxy [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testRemoteMessageWithoutProxies [
  
 	| remotePeer sendingContext result |
@@ -1346,7 +1347,7 @@ SeamlessRealCommunicationTests >> testRemoteMessageWithoutProxies [
 	result should be: 3
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
  
 	| remotePeer |
@@ -1359,7 +1360,7 @@ SeamlessRealCommunicationTests >> testSelfConnectingToLocalPeer [
 	serverSideNetwork remotePeers anyOne should be isActive
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxy [
  
 	| proxy result1 result2 rnd |
@@ -1375,7 +1376,7 @@ SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxy [
 	result1 should be: result2
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyShouldConvertCachedResultReferencesIntoProxy [
  
 	| proxy rnd result |
@@ -1393,7 +1394,7 @@ SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyShouldCon
 	result should be: rnd
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyShouldScanCachedResultsForTransfer [
  
 	| proxy result testString |
@@ -1412,7 +1413,7 @@ SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyShouldSca
 	result asLocalObject should equal: 'TEST STRING'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyWhenAllConnectionsAreClosed [
  
 	| proxy result rnd |
@@ -1428,7 +1429,7 @@ SeamlessRealCommunicationTests >> testSendingCachedMessageToRemoteProxyWhenAllCo
 	result should not be: nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingClientProxyFromServerToClient [
 	"this tests cover case when we have two network instances on same image
 	and we try to send client side proxy from server to client"
@@ -1450,7 +1451,7 @@ SeamlessRealCommunicationTests >> testSendingClientProxyFromServerToClient [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingMessageToProxyWhichIsNotExistsAnymoreInsideClientDistributedObjects [
  
 	| remoteEnv |
@@ -1464,7 +1465,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToProxyWhichIsNotExistsAnymo
 	]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingMessageToProxyWhichIsNotExistsAnymoreInsideServerDistributedObjects [
  
 	| remoteEnv |
@@ -1478,7 +1479,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToProxyWhichIsNotExistsAnymo
 	]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxy [
  
 	| proxy result |	
@@ -1489,7 +1490,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxy [
 	result should equal: 'test extra'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxyWhenTwoConnectionsExist [
  
 	| proxy result |	
@@ -1502,7 +1503,7 @@ SeamlessRealCommunicationTests >> testSendingMessageToRemoteProxyWhenTwoConnecti
 	result should equal: 'test extra'
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testTwiceConnectionEstablishing [
  
 	| remotePeer |
@@ -1516,7 +1517,7 @@ SeamlessRealCommunicationTests >> testTwiceConnectionEstablishing [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromDifferentLocalPeers [
  
 	| remotePeerForClient1 client2Network remotePeerForClient2 |
@@ -1532,7 +1533,7 @@ SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromDifferentLocalPe
 	serverSideNetwork remotePeers last connectionCount should be: 1.	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRealCommunicationTests >> testTwoConnectionsToServerFromSameLocalPeer [
  
 	| remotePeer |

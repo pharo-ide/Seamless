@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessRemoteScriptRenderer,
-	#superclass : #GLMMorphicPharoScriptRenderer,
-	#category : 'Seamless-GTSupport'
+	#name : 'SeamlessRemoteScriptRenderer',
+	#superclass : 'GLMMorphicPharoScriptRenderer',
+	#category : 'Seamless-GTSupport',
+	#package : 'Seamless-GTSupport'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessRemoteScriptRenderer >> findCustomBindingFor: aString in: anObject existing: currentBindings [
 
 	(anObject seamlessIsBindingVisible: aString) ifTrue: [ ^nil ].
@@ -15,7 +16,7 @@ SeamlessRemoteScriptRenderer >> findCustomBindingFor: aString in: anObject exist
 	^currentBindings associationAt: aString
 ]
 
-{ #category : #'events-alarms' }
+{ #category : 'events-alarms' }
 SeamlessRemoteScriptRenderer >> popupPrint [
 	"Evaluates selected code and prints it in a popper"
 	textMorph textArea editor highlightEvaluateAndDo: [ :result | 
@@ -24,7 +25,7 @@ SeamlessRemoteScriptRenderer >> popupPrint [
 			openFromRubric: textMorph textArea withResult: (SeamlessRemoteScriptResult value: result) ]
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 SeamlessRemoteScriptRenderer >> workspaceBindingsStrategy [
 	^ [ :currentBindings :aString :aTextModel | 
 		self findCustomBindingFor: aString in: aTextModel doItReceiver existing: currentBindings ]

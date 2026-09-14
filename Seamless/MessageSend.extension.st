@@ -1,17 +1,17 @@
-Extension { #name : #MessageSend }
+Extension { #name : 'MessageSend' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 MessageSend class >> definesWellKnownSeamlessClass [ 
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 MessageSend >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByValue: arguments
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 MessageSend >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]

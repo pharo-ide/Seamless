@@ -31,8 +31,8 @@ Internal Representation and Key Implementation Points.
 	criteria:		<Object>	which understands #matches: message. It can be StateSpecs objects
 "
 Class {
-	#name : #SeamlessTransferStrategy,
-	#superclass : #Object,
+	#name : 'SeamlessTransferStrategy',
+	#superclass : 'Object',
 	#instVars : [
 		'criteria',
 		'priority'
@@ -40,40 +40,42 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : 'Seamless-Transport'
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferStrategy class >> default [
 	^default ifNil: [ default := self new ]
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SeamlessTransferStrategy class >> defaultByDeepCopy [
 	^ SeamlessTransferByDeepCopyStrategy default
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SeamlessTransferStrategy class >> defaultByGlobalName [
 	^ SeamlessTransferByGlobalNameStrategy default
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SeamlessTransferStrategy class >> defaultByReference [
 	^ SeamlessTransferByReferenceStrategy default
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SeamlessTransferStrategy class >> defaultByReferencedCopy [
 	^ SeamlessTransferByReferencedCopyStrategy default
 ]
 
-{ #category : #defaults }
+{ #category : 'defaults' }
 SeamlessTransferStrategy class >> defaultByValue [
 	^ SeamlessTransferByValueStrategy default
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessTransferStrategy class >> for: criteriaObjectSpec [
 
 	^self new 
@@ -81,40 +83,40 @@ SeamlessTransferStrategy class >> for: criteriaObjectSpec [
 	
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferStrategy >> criteria [
 	^ criteria
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferStrategy >> criteria: anObject [
 	criteria := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessTransferStrategy >> initialize [
 	super initialize.
 	priority := 0
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessTransferStrategy >> isAppliedTo: anObject [
 	criteria ifNil: [ ^false ].
 	
 	^criteria matches: anObject
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessTransferStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
 	self subclassResponsibility 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferStrategy >> priority [
 	^ priority
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferStrategy >> priority: anObject [
 	priority := anObject
 ]

@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*Seamless-NewToolsSupport' }
+{ #category : '*Seamless-NewToolsSupport' }
 Object >> isRemoteDoItReceiver [
 	^false
 ]

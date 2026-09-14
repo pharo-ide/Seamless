@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessObjectContainerTests,
-	#superclass : #TestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessObjectContainerTests',
+	#superclass : 'TestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectContainerTests >> testShouldAllowOnlyDefaultTransferStrategy [
 	
 	| container |
@@ -13,7 +14,7 @@ SeamlessObjectContainerTests >> testShouldAllowOnlyDefaultTransferStrategy [
 	container should be isOnlyDefaultTransferStrategyAllowed 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectContainerTests >> testValueTransferPreparation [
 	| container transporter |
 	

@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfSeamless,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfSeamless
+	#name : 'BaselineOfSeamless',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfSeamless',
+	#package : 'BaselineOfSeamless'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfSeamless >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
@@ -62,13 +63,13 @@ BaselineOfSeamless >> baseline: spec [
 
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfSeamless >> postLoad [
 
 	(self class environment classNamed: #SeamlessTransport) resetDefault
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 BaselineOfSeamless >> projectClass [
 	^ [ self class environment at: #MetacelloCypressBaselineProject ]
 		on: NotFound

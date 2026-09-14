@@ -5,31 +5,32 @@ I am created with object as my content:
 	SeamlessRequestStub with: 10->20
 "
 Class {
-	#name : #SeamlessRequestStub,
-	#superclass : #SeamlessRequest,
+	#name : 'SeamlessRequestStub',
+	#superclass : 'SeamlessRequest',
 	#instVars : [
 		'content'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestStub class >> definesWellKnownSeamlessClass [
 	^false
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessRequestStub class >> with: anObject [
 	^self new 
 		content: anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestStub >> content [
 	^ content
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestStub >> content: anObject [
 	content := anObject
 ]

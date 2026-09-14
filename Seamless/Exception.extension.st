@@ -1,6 +1,6 @@
-Extension { #name : #Exception }
+Extension { #name : 'Exception' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Exception >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 
 	| remoteError result |

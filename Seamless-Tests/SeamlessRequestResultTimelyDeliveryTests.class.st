@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessRequestResultTimelyDeliveryTests,
-	#superclass : #SeamlessRequestResultDeliveryTestCase,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessRequestResultTimelyDeliveryTests',
+	#superclass : 'SeamlessRequestResultDeliveryTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestResultTimelyDeliveryTests >> createDelivery [
 	^SeamlessRequestResultTimelyDelivery from: senderPeer maxTime: 10 seconds
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultTimelyDeliveryTests >> testDeliveringResultForGivenRequestShouldFailWhenMaxTimeIsExceeded [
 
 	| request |

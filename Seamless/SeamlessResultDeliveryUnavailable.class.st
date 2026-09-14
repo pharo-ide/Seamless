@@ -6,7 +6,9 @@ Delivery requires a ready connection with senderPeer. When it does not exist or 
 I am signalled by SeamlessRequestResultDelivery and subclasses during #waitResult logic.
 "
 Class {
-	#name : #SeamlessResultDeliveryUnavailable,
-	#superclass : #Error,
-	#category : #'Seamless-Requests'
+	#name : 'SeamlessResultDeliveryUnavailable',
+	#superclass : 'Error',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }

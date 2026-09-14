@@ -1,24 +1,25 @@
 Class {
-	#name : #SeamlessRequestResultDeliveryTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessRequestResultDeliveryTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'delivery',
 		'senderPeer'
 	],
-	#category : #'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestResultDeliveryTestCase class >> isAbstract [ 
 	^self = SeamlessRequestResultDeliveryTestCase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestResultDeliveryTestCase >> createDelivery [
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestResultDeliveryTestCase >> setUp [
 	super setUp.
 	
@@ -28,7 +29,7 @@ SeamlessRequestResultDeliveryTestCase >> setUp [
 	delivery := self createDelivery
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testDeliveringResult [
 
 	| request result resultValue |
@@ -41,7 +42,7 @@ SeamlessRequestResultDeliveryTestCase >> testDeliveringResult [
 	resultValue should beReturnedFrom: [ result returnValue ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldFailAtTheMiddleWhenSenderPeerBecameDisconnected [ 
 	| deliveryIsStarted deliveryIsDone |
 	[deliveryIsStarted := true. 
@@ -55,7 +56,7 @@ SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldFailAtTheMidd
 	[deliveryIsDone] should takeAWhile to be: true.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldFailWhenSenderPeerIsNotConnected [
 
 	senderPeer stub isConnected willReturn: false. 
@@ -63,7 +64,7 @@ SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldFailWhenSende
 	[delivery deliverResultFor: #request] should raise: SeamlessResultDeliveryUnavailable
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldKeepTransferredBytesInGivenRequest [
 
 	| request result |
@@ -76,7 +77,7 @@ SeamlessRequestResultDeliveryTestCase >> testDeliveringResultShouldKeepTransferr
 	request resultBytes should beReturnedFrom: [ result transferredBytes ]
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testShipingGivenResult [
 
 	delivery shipResult: #result.
@@ -84,7 +85,7 @@ SeamlessRequestResultDeliveryTestCase >> testShipingGivenResult [
 	delivery requestResult should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestResultDeliveryTestCase >> testShipingResultShouldBeSynchronousWithDelivering [
 
 	| request result receiverProcess receiverStarted |

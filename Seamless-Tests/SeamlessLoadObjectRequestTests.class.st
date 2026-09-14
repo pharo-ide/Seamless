@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessLoadObjectRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessLoadObjectRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessLoadObjectRequestTests >> requestClass [
 	^SeamlessLoadObjectRequest 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessLoadObjectRequestTests >> testExecution [
 
 	| objectReference |

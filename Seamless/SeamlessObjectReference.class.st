@@ -25,18 +25,20 @@ Public API and Key Messages
 	senderPeer:		<BasysPeer>
 "
 Class {
-	#name : #SeamlessObjectReference,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessObjectReference',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'id',
 		'messagesCache',
 		'ownerPeerId',
 		'senderPeer'
 	],
-	#category : #'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectReference class >> createTostInstanceWith: aSeamlessTransporter [
 	| reference |
 	reference := super createTostInstanceWith: aSeamlessTransporter.
@@ -44,14 +46,14 @@ SeamlessObjectReference class >> createTostInstanceWith: aSeamlessTransporter [
 	^reference.
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessObjectReference class >> id: idObject peer: aBasysPeer [
 
 	^(self 	id: idObject peerId: aBasysPeer id)
 		senderPeer: aBasysPeer
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessObjectReference class >> id: objectId peerId: peerId [
 
 	^self new 
@@ -59,7 +61,7 @@ SeamlessObjectReference class >> id: objectId peerId: peerId [
 		ownerPeerId: peerId
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SeamlessObjectReference >> = anObject [
 	"Answer whether the receiver and anObject represent the same object."
 
@@ -71,7 +73,7 @@ SeamlessObjectReference >> = anObject [
 		and: [ ownerPeerId = anObject ownerPeerId ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> cacheMessage: selector with: resultObject [
 
 	messagesCache ifNil: [ messagesCache := SmallIdentityDictionary new].
@@ -79,40 +81,40 @@ SeamlessObjectReference >> cacheMessage: selector with: resultObject [
 	messagesCache at: selector put: resultObject	
 ]
 
-{ #category : #'proxy creation' }
+{ #category : 'proxy creation' }
 SeamlessObjectReference >> createProxy [
 	^SeamlessProxy for: self
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectReference >> hasRemoteProperties [ 
 	^true
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 SeamlessObjectReference >> hash [
 	"Answer an integer value that is related to the identity of the receiver."
 
 	^ id hash bitXor: ownerPeerId hash
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> id [
 	^ id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> id: anObject [
 	id := anObject
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessObjectReference >> isConnectedToRemotePeer [
 
 	^senderPeer isConnected
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessObjectReference >> loadDeepCopy: aSeamlessProxy [
 
 	| context |
@@ -121,7 +123,7 @@ SeamlessObjectReference >> loadDeepCopy: aSeamlessProxy [
 	^context sendRequest: (SeamlessLoadDeepCopyRequest proxy: aSeamlessProxy)
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessObjectReference >> loadObject: aSeamlessProxy [
 
 	| context |
@@ -130,27 +132,27 @@ SeamlessObjectReference >> loadObject: aSeamlessProxy [
 	^context sendRequest: (SeamlessLoadObjectRequest proxy: aSeamlessProxy)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> messagesCache [
 	^ messagesCache
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> messagesCache: anObject [
 	messagesCache := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> ownerPeerId [
 	^ ownerPeerId
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> ownerPeerId: anObject [
 	ownerPeerId := anObject
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessObjectReference >> performAndCacheRemoteMessage: aMessageSend [
 
 	| result |
@@ -164,7 +166,7 @@ SeamlessObjectReference >> performAndCacheRemoteMessage: aMessageSend [
 	^result
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessObjectReference >> performRemoteMessage: aMessageSend [
 
 	messagesCache ifNotNil: [ 
@@ -173,7 +175,7 @@ SeamlessObjectReference >> performRemoteMessage: aMessageSend [
 	^self performRemoteMessageWithoutCache: aMessageSend
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessObjectReference >> performRemoteMessageWithoutCache: aMessageSend [
 
 	|  context |
@@ -183,13 +185,13 @@ SeamlessObjectReference >> performRemoteMessageWithoutCache: aMessageSend [
 	^context sendMessage: aMessageSend
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessObjectReference >> pointsToRemoteObject [
 
 	^senderPeer class ~~ BasysLocalPeer
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 	| localObject |
 	super prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter.
@@ -199,13 +201,13 @@ SeamlessObjectReference >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aS
 	^localObject
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessObjectReference >> printForSeamlessLog [
 
 	^'ObjectReference(', id asString, ')' 
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessObjectReference >> printOn: aStream [
 	| referenceName |
 	referenceName := 'an ObjectReference'.
@@ -220,37 +222,37 @@ SeamlessObjectReference >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectReference >> remotePropertiesSize [
 	^1
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectReference >> remotePropertyAt: propertyIndex [
 	^messagesCache
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectReference >> remotePropertyAt: propertyIndex put: newObject [
 	messagesCache := newObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> senderPeer [
 	^ senderPeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectReference >> senderPeer: anObject [
 	senderPeer := anObject
 ]
 
-{ #category : #'travel guide support' }
+{ #category : 'travel guide support' }
 SeamlessObjectReference >> travelGuide [
 	^SeamlessReferenceTravelGuide
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessObjectReference >> writeTostBodyWith: aSeamlessTransporter [
 
 	aSeamlessTransporter writeObjectReference: self

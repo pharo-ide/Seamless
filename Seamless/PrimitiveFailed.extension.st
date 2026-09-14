@@ -1,6 +1,6 @@
-Extension { #name : #PrimitiveFailed }
+Extension { #name : 'PrimitiveFailed' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 PrimitiveFailed >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 
 	anEvaluationRequest processPrimitiveFailure: self

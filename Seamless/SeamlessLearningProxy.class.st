@@ -9,20 +9,22 @@ Internal Representation and Key Implementation Points.
 	learning:		<GHLearning>
 "
 Class {
-	#name : #SeamlessLearningProxy,
-	#superclass : #SeamlessProxy,
+	#name : 'SeamlessLearningProxy',
+	#superclass : 'SeamlessProxy',
 	#instVars : [
 		'learning'
 	],
-	#category : 'Seamless-Proxy'
+	#category : 'Seamless-Proxy',
+	#package : 'Seamless',
+	#tag : 'Proxy'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SeamlessLearningProxy >> ghostBehaviour [
 	^learning
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 SeamlessLearningProxy >> seamlessReference: aSeamlessObjectReference [
 	super seamlessReference: aSeamlessObjectReference.
 	

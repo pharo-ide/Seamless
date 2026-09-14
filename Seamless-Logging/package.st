@@ -1,1 +1,1 @@
-Package { #name : #'Seamless-Logging' }
+Package { #name : 'Seamless-Logging' }

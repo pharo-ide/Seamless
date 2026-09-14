@@ -1,15 +1,16 @@
 Class {
-	#name : #SeamlessEvaluationRequestTests,
-	#superclass : #SeamlessRequestTestCase,
-	#category : #'Seamless-Tests'
+	#name : 'SeamlessEvaluationRequestTests',
+	#superclass : 'SeamlessRequestTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessEvaluationRequestTests >> requestClass [
 	^SeamlessMessageSendRequest 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithHaltRaised [
 
 	request valuable: [ Halt now ].
@@ -17,7 +18,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithHaltRaised [
 	[request executeFor: #senderPeer]	should raise: Halt  
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithNonLocalReturn [
 
 	| nonLocalReturn |
@@ -32,7 +33,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithNonLocalReturn [
 	Arg result where homeContext should be: #context
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithNormalResult [
 
 	request valuable: [ #result ].
@@ -44,7 +45,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithNormalResult [
 	Arg result where returnValue should be: #result
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithNotificationRaised [
 
 	request valuable: [ Notification signal ].
@@ -52,7 +53,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithNotificationRaised [
 	[request executeFor: #senderPeer] should raise: Notification
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithRaisedError [
 
 	| error |
@@ -67,7 +68,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithRaisedError [
 	Arg result where exception messageText should equal: error printString
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testExecutionWithRaisedSeamlessRemoteException [
 
 	| error |
@@ -82,7 +83,7 @@ SeamlessEvaluationRequestTests >> testExecutionWithRaisedSeamlessRemoteException
 	"Arg result where exception messageText should equal: error messageText."
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testShouldSaveTransferredExceptionBytes [
 
 	request valuable: [ Error signal ].
@@ -94,7 +95,7 @@ SeamlessEvaluationRequestTests >> testShouldSaveTransferredExceptionBytes [
 	request resultBytes should be: #exceptionBytes
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessEvaluationRequestTests >> testShouldSaveTransferredResultBytes [
 
 	(context stub return: Any to: Any)

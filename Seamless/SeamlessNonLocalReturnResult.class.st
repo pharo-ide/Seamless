@@ -12,33 +12,35 @@ Internal Representation and Key Implementation Points.
 	value:		<Object>
 "
 Class {
-	#name : #SeamlessNonLocalReturnResult,
-	#superclass : #SeamlessRequestResult,
+	#name : 'SeamlessNonLocalReturnResult',
+	#superclass : 'SeamlessRequestResult',
 	#instVars : [
 		'homeContext',
 		'value'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessNonLocalReturnResult class >> with: anObject homeContext: aContext [
 	^self new 
 		value: anObject;
 		homeContext: aContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNonLocalReturnResult >> homeContext [
 	^ homeContext
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNonLocalReturnResult >> homeContext: anObject [
 	homeContext := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNonLocalReturnResult >> returnValue [
 	homeContext isSeamlessProxy ifTrue: [ 
 		^BlockCannotReturn result: value from: homeContext].
@@ -46,12 +48,12 @@ SeamlessNonLocalReturnResult >> returnValue [
 	homeContext return: value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNonLocalReturnResult >> value [
 	^value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessNonLocalReturnResult >> value: anObject [
 	value := anObject
 ]

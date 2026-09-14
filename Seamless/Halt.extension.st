@@ -1,6 +1,6 @@
-Extension { #name : #Halt }
+Extension { #name : 'Halt' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Halt >> handleSeamlessRequest: anEvaluationRequest receivedFrom: senderPeer [
 	self pass
 ]

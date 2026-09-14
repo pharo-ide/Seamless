@@ -10,15 +10,17 @@ Internal Representation and Key Implementation Points.
 	name:		<String>
 "
 Class {
-	#name : #SeamlessWellKnownObject,
-	#superclass : #SeamlessTransferObject,
+	#name : 'SeamlessWellKnownObject',
+	#superclass : 'SeamlessTransferObject',
 	#instVars : [
 		'name'
 	],
-	#category : 'Seamless-Core'
+	#category : 'Seamless-Core',
+	#package : 'Seamless',
+	#tag : 'Core'
 }
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessWellKnownObject class >> createTostInstanceWith: aSeamlessTransporter [
 	| instance |
 	instance := super createTostInstanceWith: aSeamlessTransporter.
@@ -26,23 +28,23 @@ SeamlessWellKnownObject class >> createTostInstanceWith: aSeamlessTransporter [
 	^instance
 ]
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessWellKnownObject class >> named: aString [
 	^self new 
 		name: aString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessWellKnownObject >> name [
 	^ name
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessWellKnownObject >> name: anObject [
 	name := anObject
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aSeamlessTransporter [
 
 	| global  |
@@ -51,14 +53,14 @@ SeamlessWellKnownObject >> prepareLocalSubstitutionIn: aSeamlessNetwork with: aS
 	^global 
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessWellKnownObject >> travelGuide [
 	"I override normal objects serialization to provide more compact binary format.
 	So I implement custom writeTostBodyWith: method instead of walking by my state by travel guide"
 	^ EmptyObjectTravelGuide 
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessWellKnownObject >> writeTostBodyWith: aSeamlessTransporter [
 	
 	aSeamlessTransporter writeString: name

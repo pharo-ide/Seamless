@@ -5,39 +5,41 @@ I have default instance:
 	SeamlessTransferStrategy defaultByReference
 "
 Class {
-	#name : #SeamlessTransferByReferenceStrategy,
-	#superclass : #SeamlessTransferStrategy,
+	#name : 'SeamlessTransferByReferenceStrategy',
+	#superclass : 'SeamlessTransferStrategy',
 	#instVars : [
 		'cachePolicy',
 		'cachedMessages'
 	],
-	#category : 'Seamless-Transport'
+	#category : 'Seamless-Transport',
+	#package : 'Seamless',
+	#tag : 'Transport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessTransferByReferenceStrategy class >> for: criteria withCacheFor: selectors [ 
 	^(self for: criteria) 
 		cachedMessages: selectors
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferByReferenceStrategy >> cachedMessages [
 	^cachedMessages
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessTransferByReferenceStrategy >> cachedMessages: selectors [
 	cachedMessages := selectors
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessTransferByReferenceStrategy >> initialize [
 	super initialize.
 	
 	cachedMessages := Array empty
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessTransferByReferenceStrategy >> prepareTransferObjectFor: anObject by: anObjectTransporter [
  
 	| reference |

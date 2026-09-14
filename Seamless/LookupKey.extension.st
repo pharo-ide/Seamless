@@ -1,11 +1,11 @@
-Extension { #name : #LookupKey }
+Extension { #name : 'LookupKey' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 LookupKey class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 LookupKey >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

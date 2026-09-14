@@ -1,21 +1,22 @@
 Class {
-	#name : #SeamlessDefaultRequestContextTests,
-	#superclass : #SeamlessRequestContextTestCase,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessDefaultRequestContextTests',
+	#superclass : 'SeamlessRequestContextTestCase',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessDefaultRequestContextTests >> contextClass [
 	^SeamlessDefaultRequestContext 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDefaultRequestContextTests >> testDefaultTransferStrategy [
 
 	context seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessDefaultRequestContextTests >> testReturningResultShouldDoNothing [
 	
 	context return: Any to: Any

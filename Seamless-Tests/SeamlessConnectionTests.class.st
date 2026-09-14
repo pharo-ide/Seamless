@@ -1,10 +1,11 @@
 Class {
-	#name : #SeamlessConnectionTests,
-	#superclass : #BasysConnectionTests,
-	#category : 'Seamless-Tests'
+	#name : 'SeamlessConnectionTests',
+	#superclass : 'BasysConnectionTests',
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessConnectionTests >> testCreationIdentificationContext [
 
 	| context |

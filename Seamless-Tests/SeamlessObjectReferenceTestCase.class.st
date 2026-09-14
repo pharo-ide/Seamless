@@ -1,24 +1,25 @@
 Class {
-	#name : #SeamlessObjectReferenceTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessObjectReferenceTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'reference',
 		'peer'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessObjectReferenceTestCase class >> isAbstract [
 	^self == SeamlessObjectReferenceTestCase
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessObjectReferenceTestCase >> referenceClass [
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessObjectReferenceTestCase >> setUp [
 	super setUp.
 	
@@ -28,19 +29,19 @@ SeamlessObjectReferenceTestCase >> setUp [
 	reference := self referenceClass id: #referenceId peer: peer
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTestCase >> testDefaultTransferStrategy [
 
 	reference seamlessDefaultTransferStrategy should be: SeamlessTransferStrategy defaultByValue 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTestCase >> testHasNilMessagesCacheByDefault [
 
 	reference messagesCache should be: nil
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessObjectReferenceTestCase >> testShouldAllowOnlyDefaultTransferStrategy [
 
 	reference should be isOnlyDefaultTransferStrategyAllowed

@@ -16,21 +16,23 @@ Internal Representation and Key Implementation Points.
 	objectProxy:		<SeamlessProxy>
 "
 Class {
-	#name : #SeamlessLoadObjectRequest,
-	#superclass : #SeamlessRequest,
+	#name : 'SeamlessLoadObjectRequest',
+	#superclass : 'SeamlessRequest',
 	#instVars : [
 		'objectProxy'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessLoadObjectRequest class >> proxy: aSeamlessProxy [
 	^self new 
 		objectProxy: aSeamlessProxy
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessLoadObjectRequest >> executeFor: senderPeer [
 	"On sender peer my objectProxy is SeamlessProxy which points to requested remote object.
 	But on receiver peer my objectProxy will contain real distributed object. 
@@ -41,12 +43,12 @@ SeamlessLoadObjectRequest >> executeFor: senderPeer [
 	context returnValue: referenceOrLoadedRemoteObject asTransferredByValue to: senderPeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLoadObjectRequest >> objectProxy [
 	^ objectProxy
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessLoadObjectRequest >> objectProxy: anObject [
 	objectProxy := anObject
 ]

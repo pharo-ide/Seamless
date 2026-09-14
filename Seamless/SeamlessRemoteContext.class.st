@@ -4,12 +4,14 @@ On local side requests contain SeamlessRequestSendingContext. This contexts can 
 As proxy I can resend my messages to my remote sender peer.  I use it to implement return method. I just send new SeamlessMessageSendRequest with me as receiver of #return: message
 "
 Class {
-	#name : #SeamlessRemoteContext,
-	#superclass : #SeamlessRequestContext,
-	#category : 'Seamless-Requests'
+	#name : 'SeamlessRemoteContext',
+	#superclass : 'SeamlessRequestContext',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessRemoteContext >> return: aSeamlessRequestResult to: senderPeer [
 	
 	| deliveryRequest |

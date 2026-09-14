@@ -1,6 +1,6 @@
-Extension { #name : #Slot }
+Extension { #name : 'Slot' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Slot >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

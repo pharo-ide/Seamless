@@ -1,19 +1,20 @@
 Class {
-	#name : #SeamlessObjectVariablesBrowser,
-	#superclass : #GTObjectVariablesBrowser,
+	#name : 'SeamlessObjectVariablesBrowser',
+	#superclass : 'GTObjectVariablesBrowser',
 	#instVars : [
 		'remotePeer'
 	],
-	#category : 'Seamless-GTSupport'
+	#category : 'Seamless-GTSupport',
+	#package : 'Seamless-GTSupport'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessObjectVariablesBrowser class >> from: aRemotePeer [
 	^self new 
 		remotePeer: aRemotePeer
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> basicVariableValuePairsFor: aSeamlessProxy [
 	
 	aSeamlessProxy isSeamlessProxy ifFalse: [ 
@@ -26,7 +27,7 @@ SeamlessObjectVariablesBrowser >> basicVariableValuePairsFor: aSeamlessProxy [
 			
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> evaluatorIn: composite [
 	^ (composite custom: (SeamlessRemoteScriptPresentation remotePeer: remotePeer))
 		doItReceiver: [ :object | object ];
@@ -45,13 +46,13 @@ SeamlessObjectVariablesBrowser >> evaluatorIn: composite [
 		installDefaultSelectionActions
 ]
 
-{ #category : #'private-building' }
+{ #category : 'private-building' }
 SeamlessObjectVariablesBrowser >> localObjectVariableValuePairsFor: anObject [
 
 	^ anObject gtInspectorVariableValuePairs asOrderedCollection 
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> printStringOf: aSeamlessProxy [
 
 	aSeamlessProxy isSeamlessProxy ifFalse: [ ^super printStringOf: aSeamlessProxy ].
@@ -59,17 +60,17 @@ SeamlessObjectVariablesBrowser >> printStringOf: aSeamlessProxy [
 	^aSeamlessProxy remotePrintString asComment
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectVariablesBrowser >> remotePeer [
 	^ remotePeer
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessObjectVariablesBrowser >> remotePeer: anObject [
 	remotePeer := anObject
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> updateInstanceVariable: aSymbol from: anObject basedOn: aString [
 	|result|
 
@@ -86,7 +87,7 @@ SeamlessObjectVariablesBrowser >> updateInstanceVariable: aSymbol from: anObject
 	
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> variableValuePairsFor: anObject [
 
 	^ (self basicVariableValuePairsFor: anObject) asOrderedCollection 
@@ -94,7 +95,7 @@ SeamlessObjectVariablesBrowser >> variableValuePairsFor: anObject [
 		yourself
 ]
 
-{ #category : #'private building' }
+{ #category : 'private building' }
 SeamlessObjectVariablesBrowser >> variablesIn: composite [
 	^ composite table
 		showOnly: 50;

@@ -1,11 +1,11 @@
-Extension { #name : #BlockClosure }
+Extension { #name : 'BlockClosure' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockClosure class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockClosure >> prepareValueTransferBy: aSeamlessTransporter [
 	"For me transfer by values means that I could be evaluated directly on remote side"
 	| mostOuterContext |

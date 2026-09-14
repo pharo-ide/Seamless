@@ -1,16 +1,16 @@
-Extension { #name : #Number }
+Extension { #name : 'Number' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Number class >> definesWellKnownSeamlessClass [ 
 	^self package = Number package
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Number class >> definesWellKnownSeamlessClassHierarchy [ 
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 Number >> seamlessDefaultTransferStrategy [
 	^SeamlessTransferStrategy defaultByValue
 ]

@@ -9,32 +9,34 @@ Internal Representation and Key Implementation Points.
 	exception:		<Exception>
 "
 Class {
-	#name : #SeamlessThrowExceptionResult,
-	#superclass : #SeamlessRequestResult,
+	#name : 'SeamlessThrowExceptionResult',
+	#superclass : 'SeamlessRequestResult',
 	#instVars : [
 		'exception'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessThrowExceptionResult class >> with: anException [
 
 	^self new 
 		exception: anException
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessThrowExceptionResult >> exception [
 	^ exception
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessThrowExceptionResult >> exception: anObject [
 	exception := anObject
 ]
 
-{ #category : #evaluating }
+{ #category : 'evaluating' }
 SeamlessThrowExceptionResult >> returnValue [
 
 	exception signal

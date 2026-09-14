@@ -17,51 +17,53 @@ Internal Representation and Key Implementation Points.
 	transferredBytes:		<Integer>
 "
 Class {
-	#name : #SeamlessRequestResult,
-	#superclass : #Object,
+	#name : 'SeamlessRequestResult',
+	#superclass : 'Object',
 	#instVars : [
 		'transferredBytes'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestResult class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestResult class >> definesWellKnownSeamlessClassHierarchy [ 
 	^true
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 SeamlessRequestResult >> initialize [
 	super initialize.
 	transferredBytes := 0
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResult >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResult >> returnValue [ 
 	self subclassResponsibility 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResult >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResult >> transferredBytes [
 	^ transferredBytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessRequestResult >> transferredBytes: anObject [
 	transferredBytes := anObject
 ]

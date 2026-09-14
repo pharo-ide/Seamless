@@ -8,83 +8,85 @@ My behaviour delegates all messages to my reference object which resend all them
 	reference:		<SeamlessObjectReference>
 "
 Class {
-	#name : #SeamlessProxy,
-	#superclass : #GHObjectGhost,
+	#name : 'SeamlessProxy',
+	#superclass : 'GHObjectGhost',
 	#traits : 'GHTNotNilGhost + GHTIdentifiedGhost',
 	#classTraits : 'GHTNotNilGhost classTrait + GHTIdentifiedGhost classTrait',
 	#instVars : [
 		'reference'
 	],
-	#category : #'Seamless-Proxy'
+	#category : 'Seamless-Proxy',
+	#package : 'Seamless',
+	#tag : 'Proxy'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessProxy class >> for: aSeamlessObjectReference [ 
 
 	^self basicNew 
 		seamlessReference: aSeamlessObjectReference 
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessProxy >> asLocalDeepCopy [
 
 	^reference loadDeepCopy: self
 ]
 
-{ #category : #operations }
+{ #category : 'operations' }
 SeamlessProxy >> asLocalObject [
 
 	^reference loadObject: self
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessProxy >> asTransferredByDeepCopy [ 
 	^self
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessProxy >> asTransferredByValue [ 
 	^self
 ]
 
-{ #category : #'fuel support' }
+{ #category : 'fuel support' }
 SeamlessProxy >> fuelReplacement [
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxy >> ghostBehaviour [
 	^SeamlessProxyBehaviour default
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessProxy >> ghostPrintString [
 
 	^(GHMetaMessages printObject: self), '(', reference id asString, ')'
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessProxy >> isConnectedToRemotePeer [
 
 	^reference isConnectedToRemotePeer
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessProxy >> isOnlyDefaultTransferStrategyAllowed [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessProxy >> isSeamlessProxy [
 	^true
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessProxy >> isTostValueObject [
 	^false
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> nameForSeamlessStatistics [
 
 	| remoteName |
@@ -93,7 +95,7 @@ SeamlessProxy >> nameForSeamlessStatistics [
 	^'Remote ', remoteName
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> performAndCacheRemoteMessage: aMessage [
 	| messageSend |
 	messageSend := 	MessageSend 
@@ -102,7 +104,7 @@ SeamlessProxy >> performAndCacheRemoteMessage: aMessage [
 	^reference performAndCacheRemoteMessage: messageSend
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> performRemoteMessage: aMessage [
 	| messageSend |
 	messageSend := 	MessageSend 
@@ -111,19 +113,19 @@ SeamlessProxy >> performRemoteMessage: aMessage [
 	^reference performRemoteMessage: messageSend
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessProxy >> prepareValueForTransferBy: aSeamlessTransporter [
  	"proxies are always transferred as reference"
 	
 	^reference
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessProxy >> printForSeamlessLog [
 	^reference printForSeamlessLog 
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> readRemoteSlot: aSlot [
 
 	| messageSend |
@@ -131,55 +133,55 @@ SeamlessProxy >> readRemoteSlot: aSlot [
 	^reference performRemoteMessageWithoutCache: messageSend
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> remoteClass [
 
 	^self performAndCacheRemoteMessage: (Message selector: #class)
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> remoteInstVarAt: index [
 
 	^self performRemoteMessage: (Message selector: #instVarAt: argument: index)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxy >> remotePeer [
 	^reference senderPeer
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> remotePrintString [
 
 	^self performRemoteMessage: (Message selector: #printString)
 ]
 
-{ #category : #transfer }
+{ #category : 'transfer' }
 SeamlessProxy >> seamlessDefaultTransferStrategy [ 
 	^SeamlessTransferStrategy defaultByValue
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxy >> seamlessReference [
 	^ reference
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxy >> seamlessReference: aSeamlessObjectReference [
 	reference := aSeamlessObjectReference
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessProxy >> stDisplayString [
 	^self remotePrintString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessProxy >> travelGuide [
 	^EmptyObjectTravelGuide 
 ]
 
-{ #category : #'remote reflection' }
+{ #category : 'remote reflection' }
 SeamlessProxy >> writeRemoteSlot: aSlot value: anObject [
 
 	| messageSend |

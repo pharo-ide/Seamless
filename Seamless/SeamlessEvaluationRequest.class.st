@@ -12,21 +12,23 @@ Look it comments.
 	evaluable:		<MessageSend or: BlockClosure>
 "
 Class {
-	#name : #SeamlessEvaluationRequest,
-	#superclass : #SeamlessRequest,
+	#name : 'SeamlessEvaluationRequest',
+	#superclass : 'SeamlessRequest',
 	#instVars : [
 		'valuable'
 	],
-	#category : 'Seamless-Requests'
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 SeamlessEvaluationRequest class >> with: aBlockOrMessageSend [
 	^self new 
 		valuable: aBlockOrMessageSend
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessEvaluationRequest >> executeFor: senderPeer [
 	| result |	 
 	[
@@ -38,13 +40,13 @@ SeamlessEvaluationRequest >> executeFor: senderPeer [
 		err handleSeamlessRequest: self receivedFrom: senderPeer ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessEvaluationRequest >> prepareValueTransferBy: aSeamlessTransporter [
 
 	aSeamlessTransporter transferByValue: valuable
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessEvaluationRequest >> processMethodExecutePrimitiveFailure: aPrimitiveFailed [
 
 	| args failedContext primitiveArguments result method |
@@ -66,7 +68,7 @@ SeamlessEvaluationRequest >> processMethodExecutePrimitiveFailure: aPrimitiveFai
 	failedContext return: result
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessEvaluationRequest >> processPerformPrimitiveFailure: aPrimitiveFailed [
 
 	| args failedContext primitiveArguments result |
@@ -86,7 +88,7 @@ SeamlessEvaluationRequest >> processPerformPrimitiveFailure: aPrimitiveFailed [
 	failedContext return: result
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessEvaluationRequest >> processPrimitiveFailure: aPrimitiveFailed [
 
 	aPrimitiveFailed selector == #perform:withArguments:inSuperclass: 
@@ -98,7 +100,7 @@ SeamlessEvaluationRequest >> processPrimitiveFailure: aPrimitiveFailed [
 	aPrimitiveFailed pass 
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 SeamlessEvaluationRequest >> returnResult: aSeamlessRequestResult to: senderPeer [
 
 	context return: aSeamlessRequestResult to: senderPeer.
@@ -106,12 +108,12 @@ SeamlessEvaluationRequest >> returnResult: aSeamlessRequestResult to: senderPeer
 	resultBytes := aSeamlessRequestResult transferredBytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessEvaluationRequest >> valuable [
 	^valuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessEvaluationRequest >> valuable: anObject [
 	valuable := anObject
 ]

@@ -2,17 +2,19 @@
 I am request to execute remote message send (my valuable variable is MessageSend instance)
 "
 Class {
-	#name : #SeamlessMessageSendRequest,
-	#superclass : #SeamlessEvaluationRequest,
-	#category : #'Seamless-Requests'
+	#name : 'SeamlessMessageSendRequest',
+	#superclass : 'SeamlessEvaluationRequest',
+	#category : 'Seamless-Requests',
+	#package : 'Seamless',
+	#tag : 'Requests'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMessageSendRequest >> messageSend [
 	^ valuable
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessMessageSendRequest >> printMessageForLog [
 
 	^String streamContents: [ :s | 
@@ -23,7 +25,7 @@ SeamlessMessageSendRequest >> printMessageForLog [
 	]
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 SeamlessMessageSendRequest >> printOn: aStream [
 
 	super printOn: aStream.
@@ -35,12 +37,12 @@ SeamlessMessageSendRequest >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMessageSendRequest >> receiver [
 	^self messageSend receiver
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 SeamlessMessageSendRequest >> selector [
 	^self messageSend selector
 ]

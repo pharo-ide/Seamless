@@ -1,30 +1,31 @@
 Class {
-	#name : #SeamlessRequestContextTestCase,
-	#superclass : #TestCase,
+	#name : 'SeamlessRequestContextTestCase',
+	#superclass : 'TestCase',
 	#instVars : [
 		'context'
 	],
-	#category : 'Seamless-Tests'
+	#category : 'Seamless-Tests',
+	#package : 'Seamless-Tests'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 SeamlessRequestContextTestCase class >> isAbstract [
 	^self == SeamlessRequestContextTestCase 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestContextTestCase >> contextClass [
 	self subclassResponsibility 
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 SeamlessRequestContextTestCase >> setUp [
 	super setUp.
 		
 	context := self contextClass new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 SeamlessRequestContextTestCase >> testShouldOnlyAllowDefaultTransferStrategy [
 
 	context should be isOnlyDefaultTransferStrategyAllowed

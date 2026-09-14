@@ -1,5 +1,5 @@
-Extension { #name : #SeamlessObjectVariablesBrowser }
+Extension { #name : 'SeamlessObjectVariablesBrowser' }
 
-{ #category : #'*Seamless-Pharo5Support' }
+{ #category : '*Seamless-Pharo5Support' }
 SeamlessObjectVariablesBrowser >> rebuildCacheFor: anObject [
 ]
