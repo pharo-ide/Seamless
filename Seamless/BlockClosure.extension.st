@@ -1,17 +1,17 @@
-Extension { #name : #BlockClosure }
+Extension { #name : 'BlockClosure' }
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockClosure class >> definesWellKnownSeamlessClass [
 	^true
 ]
 
-{ #category : #'*Seamless' }
+{ #category : '*Seamless' }
 BlockClosure >> prepareValueTransferBy: aSeamlessTransporter [
 	"For me transfer by values means that I could be evaluated directly on remote side"
 	| mostOuterContext |
 	
 	mostOuterContext := self outerContext.
-	[mostOuterContext closure notNil ] whileTrue: [ 
+	[ mostOuterContext notNil and: [ mostOuterContext closure notNil ] ] whileTrue: [
 		aSeamlessTransporter transferByValue: mostOuterContext. 
 		aSeamlessTransporter transferByValue: mostOuterContext closure.
 		aSeamlessTransporter transferByValue: mostOuterContext method.
@@ -19,13 +19,14 @@ BlockClosure >> prepareValueTransferBy: aSeamlessTransporter [
  
 	mostOuterContext == self home ifFalse: [ self error: [ 'It should not happen' ] ].
 	
-	self hasMethodReturn 
+	self method hasMethodReturn 
 		ifTrue: [ 
 			aSeamlessTransporter transfer: mostOuterContext byReference: [ 
 				SeamlessObjectCopyReference to: mostOuterContext ]] 
 		ifFalse: [ aSeamlessTransporter transferByValue: mostOuterContext ].
 
-	aSeamlessTransporter transferByValue: mostOuterContext method.
+	mostOuterContext ifNotNil: [
+		aSeamlessTransporter transferByValue: mostOuterContext method ]
 	"following commented line is required to evaluate blocks which are referenced inst vars of home receiver"
 	"anObjectTransporter transferAsValue: mostOuterContext receiver"
 ]
